@@ -1,6 +1,6 @@
 import unittest
 
-from base import OSHAPolicyTestCase
+from base import OshaAdaptationTestCase
 
 from osha.adaptation.config import DEFAULT_FIELDS
 
@@ -23,21 +23,14 @@ EXTENDED_TYPES = [
     'File',
     'Document',
     'Event',
+    'PressRelease',
     'CaseStudy',
     'RALink',
-    "PressRelease"
     ]
 
-def startZServer(browser=None):
-    host, port = utils.startZServer()
-    if browser:
-        print browser.url.replace('nohost', '%s:%s' % (host, port))
-
-
-class TestSchemaExtender(OSHAPolicyTestCase):
+class TestSchemaExtender(OshaAdaptationTestCase):
 
     def afterSetUp(self):
-        import pdb; pdb.set_trace()
         self.loginAsPortalOwner()
 
     def populate_site(self):

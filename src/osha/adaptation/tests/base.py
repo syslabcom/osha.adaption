@@ -9,40 +9,51 @@ from Products.PloneTestCase import layer
 
 SiteLayer = layer.PloneSite
 
+ztc.installProduct('ATVocabularyManager')
+ztc.installProduct('TextIndexNG3')
+ztc.installProduct('CaseStudy')
+ztc.installProduct('DataGridField')
+ztc.installProduct('LinguaPlone')
+ztc.installProduct('PressRoom')
+ztc.installProduct('RALink')
+ztc.installProduct('OSHATranslations')
+ztc.installProduct('RichDocument')
+ztc.installProduct('VocabularyPickerWidget')
+
 class OshaAdaptationLayer(SiteLayer):
 
     @classmethod
     def setUp(cls):
-        ptc.setupPloneSite(products=(
+        PRODUCTS = [
+            'ATVocabularyManager',
+            'TextIndexNG3',
+            'CaseStudy',
+            'DataGridField',
+            'LinguaPlone',
+            'PressRoom',
+            'RALink',
+            'OSHATranslations',
+            'RichDocument',
+            'VocabularyPickerWidget',
+            'p4a.subtyper',
+            'slc.treecategories',
             'osha.adaptation',
-            ))
+            ]
 
-        ztc.installProduct('ATVocabularyManager')
-        ztc.installProduct('DataGridField')
-        ztc.installProduct('LinguaPlone')
-        ztc.installProduct('OSHATranslations')
-        ztc.installProduct('VocabularyPickerWidget')
-        ztc.installProduct('slc.subtyper')
-        ztc.installProduct('slc.treecategories')
+        ptc.setupPloneSite(products=PRODUCTS)
 
         import osha.adaptation
-        zcml.load_config('configure.zcml', osha.policy)
+        zcml.load_config('configure.zcml', osha.adaptation)
 
         component.provideAdapter(instanceSchemaFactory)
         SiteLayer.setUp()
 
 
-class OSHAPolicyTestCase(ptc.PloneTestCase):
+class OshaAdaptationTestCase(ptc.PloneTestCase):
     """We use this base class for all the tests in this package. If necessary,
     we can put common utility or setup code in here.
     """
     layer = OshaAdaptationLayer
 
 
-class OSHAPolicyFunctionalTestCase(ptc.FunctionalTestCase):
-    """We use this base class for all the tests in this package. If necessary,
-    we can put common utility or setup code in here.
-    """
-    layer = OshaAdaptationLayer
-    
 
