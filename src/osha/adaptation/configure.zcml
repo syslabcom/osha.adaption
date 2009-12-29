@@ -45,6 +45,12 @@
         />
 
     <adapter
+        for="Products.ATContentTypes.interface.file.IATFile"
+        factory=".schemaextender.FileContentExtender" 
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        />
+
+    <adapter
         for="Products.ATContentTypes.interface.IATLink"
         factory=".schemaextender.FileContentExtender" 
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
