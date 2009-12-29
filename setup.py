@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 import os
 
 version = '0.1'
@@ -28,8 +28,13 @@ setup(name='osha.adaptation',
       zip_safe=False,
       install_requires=[
             'setuptools',
+            'archetypes.schemaextender',
             'Products.ATVocabularyManager',
+            'Products.DataGridField',
+            'Products.LinguaPlone',
             'Products.OSHATranslations',
+            'Products.VocabularyPickerWidget',
+            'p4a.subtyper',
             'slc.treecategories',
       ],
       entry_points="""
