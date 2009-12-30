@@ -10,6 +10,7 @@ import logging
 import zope.interface
 
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
+from archetypes.schemaextender.interfaces import ISchemaModifier
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
 
@@ -323,13 +324,14 @@ class OSHASchemaExtender(object):
 
     def getOrder(self, original):
         """ Try to set the fields order according to the ordering provided in
-            osha.policy/config.py
+            osha.adaptation/config.py
 
             If no such ordering was provided, then return the original.
         """
         portal_type = self.context.portal_type
         original_fields = original['default']
-        ordered_fields = config.DEFAULT_FIELDS.get(portal_type, [])
+        ordered_fields = \
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
 
         if len(ordered_fields) == len(original['default']):
             original['default'] = ordered_fields
@@ -567,5 +569,54 @@ class LinkListExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('annotatedlinklist').copy(),
         ]
+
+
+class ProviderModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+    zope.interface.implements(ISchemaModifier)
+    
+    def __init__(self, context):
+        self.context = context
+    
+    def fiddle(self, schema):
+        unwantedFields = (
+                'subject', 
+                'allowDiscussion', 
+                'creation_date', 
+                'modification_date', 
+                'language', 
+                'sme', 
+                'provider'
+                )
+
+        moveToDefault = (
+                'remoteLanguage', 
+                'location', 
+                'effectiveDate', 
+                'expirationDate'
+                )
+
+        moveToBottom = (
+                'creators', 
+                'contributors', 
+                'rights', 
+                )
+
+        for name in unwantedFields:
+            if schema.get(name):
+                schema[name].widget.visible['edit'] = 'invisible'
+                schema[name].widget.visible['view'] = 'invisible'
+                schema.changeSchemataForField(name, 'default')
+
+        for name in moveToDefault:
+            if schema.get(name):
+                schema.changeSchemataForField(name, 'default')
+
+        for name in moveToBottom:
+            if schema.get(name):
+                schema.moveField(name, pos='bottom')
+
+        schema['providerCategory'].required = True
 
 

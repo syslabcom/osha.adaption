@@ -102,13 +102,19 @@
         name="osha-resource"
         />
 
-    <adapter
-        zcml:condition="installed Products.RemoteProvider"
-        factory=".schemaextender.OSHContentExtender" 
-        for="Products.RemoteProvider.content.Provider.Provider"
-        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-        name="osha-provider"
-        />
+    <configure zcml:condition="installed Products.RemoteProvider">>
+        <adapter
+            factory=".schemaextender.OSHContentExtender" 
+            for="Products.RemoteProvider.content.Provider.Provider"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            />
+
+        <adapter
+            factory=".schemaextender.ProviderModifier" 
+            for="Products.RemoteProvider.content.Provider.Provider"
+            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+            />
+    </configure>
 
     <configure zcml:condition="installed Products.PressRoom">
         <!-- It's important that we give the same name 'osha-document-extended'
