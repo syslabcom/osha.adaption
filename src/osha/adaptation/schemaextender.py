@@ -597,25 +597,22 @@ class ProviderModifier(object):
                 'expirationDate'
                 )
 
-        moveToBottom = (
-                'creators', 
-                'contributors', 
-                'rights', 
-                )
-
         for name in unwantedFields:
             if schema.get(name):
                 schema[name].widget.visible['edit'] = 'invisible'
                 schema[name].widget.visible['view'] = 'invisible'
-                schema.changeSchemataForField(name, 'default')
 
+        portal_type = self.context.portal_type
+        ordered_fields = \
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
         for name in moveToDefault:
             if schema.get(name):
                 schema.changeSchemataForField(name, 'default')
 
-        for name in moveToBottom:
-            if schema.get(name):
-                schema.moveField(name, pos='bottom')
+                # Make sure that the new fields added to the 'default'
+                # schemata maintain the desired ordering.
+                position = ordered_fields.index(name)
+                schema.moveField(name, pos=position)
 
         schema['providerCategory'].required = True
 

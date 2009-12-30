@@ -216,7 +216,6 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'isNews',
         'reindexTranslations',
     ],
-
     }
 
     # "SPSpeaker" : [
