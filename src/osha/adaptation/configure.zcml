@@ -104,15 +104,15 @@
 
     <configure zcml:condition="installed Products.RemoteProvider">>
         <adapter
-            factory=".schemaextender.OSHContentExtender" 
-            for="Products.RemoteProvider.content.Provider.Provider"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            />
-
-        <adapter
             factory=".schemaextender.ProviderModifier" 
             for="Products.RemoteProvider.content.Provider.Provider"
             provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+            />
+
+        <adapter
+            factory=".schemaextender.OSHContentExtender" 
+            for="Products.RemoteProvider.content.Provider.Provider"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             />
     </configure>
 

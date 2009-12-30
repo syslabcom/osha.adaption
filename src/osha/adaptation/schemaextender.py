@@ -580,6 +580,8 @@ class ProviderModifier(object):
         self.context = context
     
     def fiddle(self, schema):
+        schema['providerCategory'].required = True
+
         unwantedFields = (
                 'subject', 
                 'allowDiscussion', 
@@ -613,7 +615,5 @@ class ProviderModifier(object):
                 # schemata maintain the desired ordering.
                 position = ordered_fields.index(name)
                 schema.moveField(name, pos=position)
-
-        schema['providerCategory'].required = True
 
 
