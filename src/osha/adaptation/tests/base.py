@@ -16,9 +16,12 @@ ztc.installProduct('DataGridField')
 ztc.installProduct('LinguaPlone')
 ztc.installProduct('PressRoom')
 ztc.installProduct('RALink')
+ztc.installProduct('RemoteProvider')
 ztc.installProduct('OSHATranslations')
+ztc.installProduct('OSHContentLink')
 ztc.installProduct('RichDocument')
 ztc.installProduct('VocabularyPickerWidget')
+ztc.installProduct('PloneHelpCenter')
 
 class OshaAdaptationLayer(SiteLayer):
 
@@ -32,11 +35,16 @@ class OshaAdaptationLayer(SiteLayer):
             'LinguaPlone',
             'PressRoom',
             'RALink',
+            'OSHContentLink',
             'OSHATranslations',
             'RichDocument',
+            'RemoteProvider',
+            'PloneHelpCenter',
             'VocabularyPickerWidget',
             'p4a.subtyper',
+            'plone.app.blob',
             'slc.treecategories',
+            'slc.seminarportal',
             'osha.adaptation',
             ]
 
