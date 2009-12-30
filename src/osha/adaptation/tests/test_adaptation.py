@@ -3,7 +3,9 @@ import unittest
 from zope.component import getAdapters
 
 from archetypes.schemaextender.interfaces import ISchemaExtender
+from archetypes.schemaextender.interfaces import ISchemaModifier
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
+from archetypes.schemaextender.extender import set_schema_order
 
 from Products.Archetypes.utils import OrderedDict
 from Products.CMFCore.utils import getToolByName
@@ -52,39 +54,37 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             obj = self.portal.get(type)
 
             schema = obj.Schema()
-            default_schema = schema.getSchemataFields("default")
-            fields = [i.__name__ for i in default_schema]
 
-            sorted_returned_fields = list(fields)
-            sorted_returned_fields.sort()
-
-            sorted_default_fields = list(types_dict[type])
-            sorted_default_fields.sort()
-
-            self.assertEquals(
-                sorted_default_fields,
-                sorted_returned_fields,
-                "The sorted fields of %s: %s do not match the sorted default "
-                "fields: %s" \
-                % (type, sorted_returned_fields, sorted_default_fields))
-
+            # Get the correct ordering of the fields by calling the modifiers
+            # and extenders registered for the object, as is done in 
+            # archetypes.schemaextender/schemaextender/extender.py
             original = OrderedDict()
             for name in schema.getSchemataNames():
                 schemata_fields = schema.getSchemataFields(name)
                 original[name] = list(x.getName() for x in schemata_fields)
 
             extenders = list(getAdapters((obj,), ISchemaExtender))
+            modifiers = list(getAdapters((obj,), ISchemaModifier))
             for name, extender in extenders:
                 if IOrderableSchemaExtender.providedBy(extender):
-                    ordered_returned_fields = extender.getOrder(original)
+                    order = extender.getOrder(original)
 
+            if order is not None:
+                set_schema_order(schema, order)
+
+
+            if len(modifiers) > 0:
+                for name, modifier in modifiers:
+                    modifier.fiddle(schema)
+
+            fields = [f.__name__ for f in schema.getSchemataFields('default')]
             self.assertEquals(
                 types_dict[type],
-                ordered_returned_fields['default'],
+                fields,
                     "%s has the following Default fields: %s but should " \
                     "have %s" % \
                     (   type, 
-                        ordered_returned_fields['default'], 
+                        fields,
                         types_dict[type]
                     )
                 )
