@@ -9,7 +9,12 @@ tests_require=[
             'Products.CaseStudy',
             'Products.RichDocument',
             'Products.RALink',
+            'Products.RemoteProvider',
             'Products.PressRoom',
+            'Products.PloneHelpCenter',
+            'Products.OSHContentLink',
+            'plone.app.blob',
+            'slc.seminarportal',
             ]
 
 setup(
