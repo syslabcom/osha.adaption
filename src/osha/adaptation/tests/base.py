@@ -4,6 +4,7 @@ from Testing import ZopeTestCase as ztc
 
 from Products.Archetypes.Schema.factory import instanceSchemaFactory
 from Products.Five import zcml
+from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase import layer
 
@@ -50,8 +51,12 @@ class OshaAdaptationLayer(SiteLayer):
 
         ptc.setupPloneSite(products=PRODUCTS)
 
+        fiveconfigure.debug_mode = True
         import osha.adaptation
         zcml.load_config('configure.zcml', osha.adaptation)
+        fiveconfigure.debug_mode = False
+
+        ztc.installPackage('slc.seminarportal');
 
         component.provideAdapter(instanceSchemaFactory)
         SiteLayer.setUp()
