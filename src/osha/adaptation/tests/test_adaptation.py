@@ -1,6 +1,6 @@
 import unittest
 
-from zope.component import getAdapters
+from zope import component
 
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
@@ -9,6 +9,8 @@ from archetypes.schemaextender.extender import set_schema_order
 
 from Products.Archetypes.utils import OrderedDict
 from Products.CMFCore.utils import getToolByName
+
+from p4a.subtyper.interfaces import ISubtyper
 
 from base import OshaAdaptationTestCase
 
@@ -21,8 +23,9 @@ class TestSchemaExtender(OshaAdaptationTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
 
-    def test_default_fields(self):
-        """ Test the extended schema of a document
+    def test_schema_modifications(self):
+        """ Test that the extended types have the right fields in the correct
+            order.
         """
         for type_name in types_dict:
             pt = getToolByName(self.portal, 'portal_types')
@@ -38,8 +41,8 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                 schemata_fields = schema.getSchemataFields(name)
                 original[name] = list(x.getName() for x in schemata_fields)
 
-            extenders = list(getAdapters((obj,), ISchemaExtender))
-            modifiers = list(getAdapters((obj,), ISchemaModifier))
+            extenders = list(component.getAdapters((obj,), ISchemaExtender))
+            modifiers = list(component.getAdapters((obj,), ISchemaModifier))
             for name, extender in extenders:
                 if IOrderableSchemaExtender.providedBy(extender):
                     order = extender.getOrder(original)
@@ -63,6 +66,31 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                         types_dict[type_name]
                     )
                 )
+
+
+    def is_subtyped(self, obj):
+        subtyper = component.getUtility(ISubtyper)
+        type = subtyper.existing_type(obj)
+        if type:
+            return type.name == 'annotatedlinks'
+        else:
+            return False
+
+
+    def test_subtyping(self):
+        self.portal.invokeFactory('Document', 'Document')
+        obj = self.portal._getOb('Document')
+
+        subtyper = component.getUtility(ISubtyper)
+        subtyper.change_type(obj, 'annotatedlinks')
+
+        self.assertEquals(self.is_subtyped(obj), True)
+
+        subtyper = component.getUtility(ISubtyper)
+        subtyper.remove_type(obj)
+
+        self.assertEquals(self.is_subtyped(obj), False)
+
 
 def test_suite():
     suite = unittest.TestSuite()
