@@ -16,43 +16,18 @@ from osha.adaptation.config import EXTENDED_TYPES_DEFAULT_FIELDS
 
 types_dict = EXTENDED_TYPES_DEFAULT_FIELDS.copy()
 
-
-#    'Blob', no content type
-#    'RichDocument', ua
-#    'NewsItem', no content type
-
-# (Pdb) self.portal.invokeFactory("SPSpeaker", "asdf")
-# *** ValueError: No such content type: SPSpeaker
-# (Pdb) self.portal.invokeFactory("SPSpeechVenue", "asdf")
-# *** ValueError: No such content type: SPSpeechVenue
-#slc.seminarportal
-# (Pdb) self.portal.invokeFactory("HelpCenterFAQ", "asdf")
-# *** ValueError: No such content type: HelpCenterFAQ
-#PloneHelpCenter
-
 class TestSchemaExtender(OshaAdaptationTestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
 
-    def populate_site(self):
-        """ Populate the test instance with content.
-        """
-        for type in types_dict.keys():
-            # Create an object for each portal_type which is extended
-            # The id is the same as the type
-            pt = getToolByName(self.portal, 'portal_types')
-            self.portal.invokeFactory(type, type)
-
     def test_default_fields(self):
+        """ Test the extended schema of a document
         """
-        Test the extended schema of a document
-        """
-        self.populate_site()
-
-        for type in types_dict:
-            obj = self.portal.get(type)
-
+        for type_name in types_dict:
+            pt = getToolByName(self.portal, 'portal_types')
+            info = pt.getTypeInfo(type_name)
+            obj = info.constructInstance(self.portal, type_name)
             schema = obj.Schema()
 
             # Get the correct ordering of the fields by calling the modifiers
@@ -79,13 +54,13 @@ class TestSchemaExtender(OshaAdaptationTestCase):
 
             fields = [f.__name__ for f in schema.getSchemataFields('default')]
             self.assertEquals(
-                types_dict[type],
+                types_dict[type_name],
                 fields,
                     "%s has the following Default fields: %s but should " \
                     "have %s" % \
-                    (   type, 
+                    (   type_name, 
                         fields,
-                        types_dict[type]
+                        types_dict[type_name]
                     )
                 )
 
