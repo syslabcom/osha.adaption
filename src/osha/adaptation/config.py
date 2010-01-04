@@ -36,10 +36,6 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'file',
         ],
 
-    # In osha.policy/patches/event_patch.py, finalizeATCTSchema
-    # is called which moveѕ the location field away from the
-    # default schemata to categorization. While testing though,
-    # this is not the case, and we have to include location.
     'Event': [
         'id',
         'title',
