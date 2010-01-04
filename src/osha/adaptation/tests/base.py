@@ -8,6 +8,13 @@ from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase import layer
 
+from plone import browserlayer
+
+try:
+    from osha.policy.interfaces import IOSHACommentsLayer
+except ImportError:
+    IOSHACommentsLayer = None
+
 SiteLayer = layer.PloneSite
 
 ztc.installProduct('ATVocabularyManager')
@@ -60,6 +67,9 @@ class OshaAdaptationLayer(SiteLayer):
         fiveconfigure.debug_mode = False
 
         ztc.installPackage('slc.seminarportal');
+
+        if IOSHACommentsLayer:
+            browserlayer.utils.register_layer(IOSHACommentsLayer, name='osha.policy')
 
         component.provideAdapter(instanceSchemaFactory)
         SiteLayer.setUp()
