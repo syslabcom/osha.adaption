@@ -57,7 +57,7 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'reindexTranslations',
         ],
 
-    "File" : [
+    "ATFile" : [
         'id',
         'title',
         'description',

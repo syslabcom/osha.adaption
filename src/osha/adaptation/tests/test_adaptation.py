@@ -30,6 +30,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
         for type_name in types_dict:
             order = None
             pt = getToolByName(self.portal, 'portal_types')
+
             info = pt.getTypeInfo(type_name)
             obj = info.constructInstance(self.portal, type_name)
             schema = obj.Schema()
