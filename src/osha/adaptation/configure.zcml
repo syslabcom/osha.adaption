@@ -70,6 +70,12 @@
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
         name="osha-event"
         />
+        
+    <adapter
+        factory=".schema.EventModifier" 
+        for="Products.ATContentTypes.interface.IATEvent"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
 
     <adapter
         zcml:condition="installed osha.whoswho"

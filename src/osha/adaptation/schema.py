@@ -628,7 +628,6 @@ class EventModifier(object):
         self.context = context
     
     def fiddle(self, schema):
-        import pdb; pdb.set_trace()
         schema['eventType'].widget.visible['edit'] = 'invisible'
         schema['eventType'].mode = 'r'
 
