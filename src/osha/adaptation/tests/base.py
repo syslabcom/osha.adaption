@@ -59,6 +59,9 @@ class OshaAdaptationLayer(SiteLayer):
         ptc.setupPloneSite(products=PRODUCTS)
 
         fiveconfigure.debug_mode = True
+        import plone.app.blob
+        zcml.load_config('configure.zcml', plone.app.blob)
+
         import p4a.subtyper
         zcml.load_config('configure.zcml', p4a.subtyper)
 
