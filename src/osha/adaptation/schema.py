@@ -619,3 +619,50 @@ class ProviderModifier(object):
 
 
 
+class EventModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+    zope.interface.implements(ISchemaModifier)
+    
+    def __init__(self, context):
+        self.context = context
+    
+    def fiddle(self, schema):
+        schema['eventType'].widget.visible['edit'] = 'invisible'
+        schema['eventType'].mode = 'r'
+
+        schema['subject'].widget.visible['edit'] = 'invisible'
+        schema['subject'].mode = 'rw'
+
+        schema.moveField('relatedItems', pos='bottom')
+        schema['relatedItems'].widget.visible['edit'] = 'invisible'
+        schema.moveField('excludeFromNav', after='allowDiscussion')
+        schema.moveField('allowDiscussion', after='relatedItems')
+
+        schema.changeSchemataForField('subject', 'categorization')
+        schema.changeSchemataForField('relatedItems', 'categorization')
+        schema.changeSchemataForField('location', 'categorization')
+        schema.changeSchemataForField('language', 'categorization')
+
+        schema.changeSchemataForField('effectiveDate', 'dates')
+        schema.changeSchemataForField('expirationDate', 'dates')    
+        schema.changeSchemataForField('creation_date', 'dates')    
+        schema.changeSchemataForField('modification_date', 'dates')    
+
+        schema.changeSchemataForField('creators', 'ownership')
+        schema.changeSchemataForField('contributors', 'ownership')
+        schema.changeSchemataForField('rights', 'ownership')
+
+        schema.changeSchemataForField('allowDiscussion', 'settings')
+        schema.changeSchemataForField('excludeFromNav', 'settings')
+                
+        # Make sure that the desired ordering is achieved
+        portal_type = self.context.portal_type
+        ordered_fields = \
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
+        for name in ordered_fields:
+            position = ordered_fields.index(name)
+            schema.moveField(name, pos=position)
+
+
+

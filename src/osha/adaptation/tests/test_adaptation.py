@@ -28,6 +28,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             order.
         """
         for type_name in types_dict:
+            order = None
             pt = getToolByName(self.portal, 'portal_types')
             info = pt.getTypeInfo(type_name)
             obj = info.constructInstance(self.portal, type_name)
@@ -49,7 +50,6 @@ class TestSchemaExtender(OshaAdaptationTestCase):
 
             if order is not None:
                 set_schema_order(schema, order)
-
 
             if len(modifiers) > 0:
                 for name, modifier in modifiers:

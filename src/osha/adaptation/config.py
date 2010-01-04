@@ -59,7 +59,6 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'osha_metadata',
         'attachment',
         'reindexTranslations',
-        'location', 
         ],
 
     "Link" : [
