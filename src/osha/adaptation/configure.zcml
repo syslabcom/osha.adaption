@@ -39,9 +39,10 @@
     </configure>
 
     <adapter
-        for="Products.ATContentTypes.interface.image.IATImage"
+        for="Products.ATContentTypes.content.image.ATImage"
         factory=".schema.FileContentExtender" 
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-image"
         />
 
     <adapter
@@ -68,12 +69,6 @@
         for="Products.ATContentTypes.interface.IATEvent"
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
         name="osha-event"
-        />
-
-    <adapter
-        factory=".schema.EventModifier" 
-        for="Products.ATContentTypes.interface.IATEvent"
-        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
         />
 
     <adapter

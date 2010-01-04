@@ -23,19 +23,6 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'reindexTranslations', 
         ],
 
-    "File" : [
-        'id',
-        'title',
-        'description',
-        'isNews',
-        'country',
-        'subcategory',
-        'multilingual_thesaurus',
-        'nace',
-        'reindexTranslations',
-        'file',
-        ],
-
     'Event': [
         'id',
         'title',
@@ -68,6 +55,19 @@ EXTENDED_TYPES_DEFAULT_FIELDS = {
         'multilingual_thesaurus',
         'nace',
         'reindexTranslations',
+        ],
+
+    "File" : [
+        'id',
+        'title',
+        'description',
+        'isNews',
+        'country',
+        'subcategory',
+        'multilingual_thesaurus',
+        'nace',
+        'reindexTranslations',
+        'file',
         ],
 
     "Image" : [
