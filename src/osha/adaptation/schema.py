@@ -534,7 +534,7 @@ class FileContentExtender(OSHASchemaExtender):
                 for arg in ('label', 'description', 'label_msgid', 
                             'description_msgid, i18n_domain'):
                     widget_args[arg] = getattr(field.widget, arg, '')
-                widget_args['vocabulary'] = vocabulary
+                widget_args['vocabulary'] = field.widget.vocabulary
                 field.vocabulary = vocabulary
                 if InlineTreeWidget:
                     field.widget = InlineTreeWidget(**widget_args)
