@@ -38,7 +38,7 @@ from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
 from osha.adaptation.subtyper import IAnnotatedLinkList
 from osha.adaptation import config
 
-log = logging.getLogger('osha.policy/adapter/schemaextender.py')
+log = logging.getLogger('osha.adaptation/schemaextender.py')
 
 LANGUAGE_INDEPENDENT_INITIALIZED = '_languageIndependent_initialized_oshapolicy'
 

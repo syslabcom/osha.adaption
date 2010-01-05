@@ -35,7 +35,6 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             obj = info.constructInstance(self.portal, type_name)
             schema = obj.Schema()
 
-
             # Get the correct ordering of the fields by calling the modifiers
             # and extenders registered for the object, as is done in 
             # archetypes.schemaextender/schemaextender/extender.py
