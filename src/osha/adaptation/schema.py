@@ -574,7 +574,14 @@ class LinkListExtender(OSHASchemaExtender):
 class ProviderModifier(object):
     """ This is a schema modifier, not extender.
     """
-    zope.interface.implements(ISchemaModifier)
+    if IOSHACommentsLayer:
+        zope.interface.implements(
+                            ISchemaModifier, 
+                            IBrowserLayerAwareExtender
+                            )
+        layer = IOSHACommentsLayer
+    else:
+        zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
@@ -622,7 +629,14 @@ class ProviderModifier(object):
 class EventModifier(object):
     """ This is a schema modifier, not extender.
     """
-    zope.interface.implements(ISchemaModifier)
+    if IOSHACommentsLayer:
+        zope.interface.implements(
+                            ISchemaModifier, 
+                            IBrowserLayerAwareExtender
+                            )
+        layer = IOSHACommentsLayer
+    else:
+        zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
