@@ -619,7 +619,7 @@ class ProviderModifier(object):
         # Make sure that the desired ordering is achieved
         portal_type = self.context.portal_type
         ordered_fields = \
-            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
         for name in ordered_fields:
             position = ordered_fields.index(name)
             schema.moveField(name, pos=position)
@@ -673,7 +673,7 @@ class EventModifier(object):
         # Make sure that the desired ordering is achieved
         portal_type = self.context.portal_type
         ordered_fields = \
-            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
         for name in ordered_fields:
             position = ordered_fields.index(name)
             schema.moveField(name, pos=position)
