@@ -331,7 +331,7 @@ class OSHASchemaExtender(object):
         portal_type = self.context.portal_type
         original_fields = original['default']
         ordered_fields = \
-            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, [])
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
 
         if len(ordered_fields) == len(original['default']):
             original['default'] = ordered_fields
@@ -587,6 +587,21 @@ class ProviderModifier(object):
         self.context = context
     
     def fiddle(self, schema):
+        """Fiddle the schema.
+
+        This is a copy of the class' schema, with any ISchemaExtender-provided
+        fields added. The schema may be modified in-place: there is no
+        need to return a value.
+
+        In general, it will be a bad idea to delete or materially change
+        fields, since other components may depend on these ones.
+
+        If you change any fields, then you are responsible for making a copy of
+        them first and place the copy in the schema.
+        """
+        if self.context.portal_type != 'Provider':
+            return 
+
         unwantedFields = (
                 'subject', 
                 'allowDiscussion', 
@@ -606,15 +621,17 @@ class ProviderModifier(object):
 
         for name in unwantedFields:
             if schema.get(name):
-                schema[name].widget.visible['edit'] = 'invisible'
-                schema[name].widget.visible['view'] = 'invisible'
-
+                field = schema[name].copy()
+                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+                schema[name] = field
 
         for name in moveToDefault:
             if schema.get(name):
                 schema.changeSchemataForField(name, 'default')
 
-        schema['providerCategory'].required = True
+        field = schema['providerCategory'].copy()
+        field.required = True
+        schema['providerCategory'] = field
                 
         # Make sure that the desired ordering is achieved
         portal_type = self.context.portal_type
@@ -642,41 +659,58 @@ class EventModifier(object):
         self.context = context
     
     def fiddle(self, schema):
-        schema['eventType'].widget.visible['edit'] = 'invisible'
-        schema['eventType'].mode = 'r'
+        """Fiddle the schema.
 
-        schema['subject'].widget.visible['edit'] = 'invisible'
-        schema['subject'].mode = 'rw'
+        This is a copy of the class' schema, with any ISchemaExtender-provided
+        fields added. The schema may be modified in-place: there is no
+        need to return a value.
 
-        schema.moveField('relatedItems', pos='bottom')
-        schema['relatedItems'].widget.visible['edit'] = 'invisible'
-        schema.moveField('excludeFromNav', after='allowDiscussion')
-        schema.moveField('allowDiscussion', after='relatedItems')
+        In general, it will be a bad idea to delete or materially change
+        fields, since other components may depend on these ones.
 
-        schema.changeSchemataForField('subject', 'categorization')
-        schema.changeSchemataForField('relatedItems', 'categorization')
+        If you change any fields, then you are responsible for making a copy of
+        them first and place the copy in the schema.
+        """
+        if self.context.portal_type != 'Event':
+            return 
+
+        eventType = schema['eventType'].copy()
+        eventType.widget.visible['edit'] = 'invisible'
+        schema['eventType'] = eventType
+
         schema.changeSchemataForField('location', 'categorization')
-        schema.changeSchemataForField('language', 'categorization')
-
-        schema.changeSchemataForField('effectiveDate', 'dates')
-        schema.changeSchemataForField('expirationDate', 'dates')    
-        schema.changeSchemataForField('creation_date', 'dates')    
-        schema.changeSchemataForField('modification_date', 'dates')    
-
-        schema.changeSchemataForField('creators', 'ownership')
-        schema.changeSchemataForField('contributors', 'ownership')
-        schema.changeSchemataForField('rights', 'ownership')
-
-        schema.changeSchemataForField('allowDiscussion', 'settings')
-        schema.changeSchemataForField('excludeFromNav', 'settings')
-                
-        # Make sure that the desired ordering is achieved
         portal_type = self.context.portal_type
         ordered_fields = \
             config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
+
         for name in ordered_fields:
             position = ordered_fields.index(name)
             schema.moveField(name, pos=position)
+
+        # schema['subject'].widget.visible['edit'] = 'invisible'
+
+        # schema.moveField('relatedItems', pos='bottom')
+        # schema['relatedItems'].widget.visible['edit'] = 'invisible'
+        # schema.moveField('excludeFromNav', after='allowDiscussion')
+        # schema.moveField('allowDiscussion', after='relatedItems')
+
+        # schema.changeSchemataForField('subject', 'categorization')
+        # schema.changeSchemataForField('relatedItems', 'categorization')
+        # schema.changeSchemataForField('language', 'categorization')
+
+        # schema.changeSchemataForField('effectiveDate', 'dates')
+        # schema.changeSchemataForField('expirationDate', 'dates')    
+        # schema.changeSchemataForField('creation_date', 'dates')    
+        # schema.changeSchemataForField('modification_date', 'dates')    
+
+        # schema.changeSchemataForField('creators', 'ownership')
+        # schema.changeSchemataForField('contributors', 'ownership')
+        # schema.changeSchemataForField('rights', 'ownership')
+
+        # schema.changeSchemataForField('allowDiscussion', 'settings')
+        # schema.changeSchemataForField('excludeFromNav', 'settings')
+                
+        # Make sure that the desired ordering is achieved
 
 
 

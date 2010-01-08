@@ -57,21 +57,32 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                 for name, modifier in modifiers:
                     modifier.fiddle(schema)
 
-            fields = [f.__name__ for f in schema.getSchemataFields('default')]
+            field_obs = schema.getSchemataFields('default')
+            fields = [f.__name__ for f in field_obs]
             config_fields = types_dict[type_name].keys()
             self.assertEquals(
                 config_fields,
                 fields,
-                    "%s has the following Default fields: %s but should " \
-                    "have %s" % \
+                "%s has the following Default fields: %s but should " \
+                "have %s" % \
+                (   type_name, 
+                    fields,
+                    config_fields, 
+                )
+            )
+            
+            for i in range(0, len(fields)):
+                self.assertEquals(
+                    field_obs[i].widget.visible,
+                    types_dict[type_name][fields[i]],
+                    "%s has field %s with widget visibility: %s but it should " \
+                    "be %s" % \
                     (   type_name, 
-                        fields,
-                        config_fields, 
+                        fields[i],
+                        field_obs[i].widget.visible,
+                        types_dict[type_name][fields[i]], 
                     )
                 )
-
-            # XXX: We also want to test that the correct fields are visible/invisible
-
 
 
     def is_subtyped(self, obj):
