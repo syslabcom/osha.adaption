@@ -1,11 +1,10 @@
 Changelog
 =========
 
-0.0.2 (unreleased)
+0.0.2 (2010-01-19)
 ------------------
 
-- Nothing changed yet.
-
+- First released version (jcbrand)
 
 0.0.1 (unreleased)
 ------------------
