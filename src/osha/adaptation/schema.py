@@ -345,6 +345,10 @@ class OSHASchemaExtender(object):
             # then to return the order for all the fields that *have* been
             # extended.
             actual_fields = [f for f in ordered_fields if f in original_fields]
+            if len(actual_fields) < len(original_fields):
+                actual_fields += \
+                        [f for f in original_fields if f not in ordered_fields]
+
             original['default'] = actual_fields 
 
         return original
@@ -564,8 +568,6 @@ class LinkListExtender(OSHASchemaExtender):
         For more info on the mechanism, see 
         five.localsitemanager.localsitemaqnager.txt
     """
-    # XXX: Please note: This Extender is not yet in use!
-
     _fields = [
         extended_fields_dict.get('annotatedlinklist').copy(),
         ]
@@ -709,8 +711,6 @@ class EventModifier(object):
 
         # schema.changeSchemataForField('allowDiscussion', 'settings')
         # schema.changeSchemataForField('excludeFromNav', 'settings')
-                
-        # Make sure that the desired ordering is achieved
 
 
 
