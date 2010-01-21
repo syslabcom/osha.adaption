@@ -1,21 +1,9 @@
 import unittest
-
 from zope import component
-
-from archetypes.schemaextender.interfaces import ISchemaExtender
-from archetypes.schemaextender.interfaces import ISchemaModifier
-from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
-from archetypes.schemaextender.extender import set_schema_order
-
-from Products.Archetypes.utils import OrderedDict
 from Products.CMFCore.utils import getToolByName
-
 from p4a.subtyper.interfaces import ISubtyper
-
 from base import OshaAdaptationTestCase
-
 from osha.adaptation.config import EXTENDED_TYPES_DEFAULT_FIELDS
-
 types_dict = EXTENDED_TYPES_DEFAULT_FIELDS.copy()
 
 class TestSchemaExtender(OshaAdaptationTestCase):
@@ -33,31 +21,9 @@ class TestSchemaExtender(OshaAdaptationTestCase):
 
             info = pt.getTypeInfo(type_name)
             obj = info.constructInstance(self.portal, type_name)
-            schema = obj.Schema()
 
-            # Get the correct ordering of the fields by calling the modifiers
-            # and extenders registered for the object, as is done in 
-            # archetypes.schemaextender/schemaextender/extender.py
-            original = OrderedDict()
-            for name in schema.getSchemataNames():
-                schemata_fields = schema.getSchemataFields(name)
-                original[name] = list(x.getName() for x in schemata_fields)
+            field_obs = obj.Schema().getSchemataFields('default')
 
-            extenders = list(component.getAdapters((obj,), ISchemaExtender))
-            modifiers = list(component.getAdapters((obj,), ISchemaModifier))
-
-            for name, extender in extenders:
-                if IOrderableSchemaExtender.providedBy(extender):
-                    order = extender.getOrder(original)
-
-            if order is not None:
-                set_schema_order(schema, order)
-
-            if len(modifiers) > 0:
-                for name, modifier in modifiers:
-                    modifier.fiddle(schema)
-
-            field_obs = schema.getSchemataFields('default')
             fields = [f.__name__ for f in field_obs]
             config_fields = types_dict[type_name].keys()
             self.assertEquals(

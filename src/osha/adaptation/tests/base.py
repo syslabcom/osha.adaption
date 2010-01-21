@@ -3,8 +3,8 @@ from zope import component
 from Testing import ZopeTestCase as ztc
 
 from Products.Archetypes.Schema.factory import instanceSchemaFactory
-from Products.Five import zcml
 from Products.Five import fiveconfigure
+from Products.Five import zcml
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase import layer
 
@@ -14,7 +14,7 @@ try:
     from osha.policy.interfaces import IOSHACommentsLayer
 except ImportError:
     IOSHACommentsLayer = None
-
+     
 SiteLayer = layer.PloneSite
 
 ztc.installProduct('ATVocabularyManager')
