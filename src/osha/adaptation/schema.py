@@ -333,7 +333,7 @@ class OSHASchemaExtender(object):
         ordered_fields = \
             config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
 
-        if len(ordered_fields) == len(original['default']):
+        if ordered_fields == original['default']:
             original['default'] = ordered_fields
             
         elif len(ordered_fields) >= len(original['default']):
