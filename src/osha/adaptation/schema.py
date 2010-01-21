@@ -375,7 +375,6 @@ class OSHContentExtender(OSHASchemaExtender):
 
 class DocumentExtender(OSHASchemaExtender):
     _fields = [
-        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
@@ -420,7 +419,6 @@ class CaseStudyExtender(OSHASchemaExtender):
 
 class EventExtender(OSHASchemaExtender):
     _fields = [
-        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('isNews').copy(),
@@ -493,7 +491,6 @@ class RALinkExtender(OSHASchemaExtender):
 
 class PressReleaseExtender(OSHASchemaExtender):
     _fields = [
-        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('isNews').copy(),
@@ -570,6 +567,16 @@ class LinkListExtender(OSHASchemaExtender):
     """
     _fields = [
         extended_fields_dict.get('annotatedlinklist').copy(),
+        ]
+
+
+class OshaMetadataExtender(OSHASchemaExtender):
+    """ This is a general content agnostic extender.
+        
+        For details, please see the description in the LinkListExtender.
+    """
+    _fields = [
+        extended_fields_dict.get('osha_metadata').copy(),
         ]
 
 
