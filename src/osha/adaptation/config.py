@@ -35,7 +35,6 @@ fdict['CaseStudy']['displayAttachments']            = {'edit': 'visible',   'vie
 fdict['CaseStudy']['subject']                       = {'edit': 'visible',   'view': 'visible'}    
 fdict['CaseStudy']['relatedItems']                  = {'edit': 'invisible', 'view': 'invisible'}    
 fdict['CaseStudy']['location']                      = {'edit': 'invisible', 'view': 'invisible'}    
-fdict['CaseStudy']['osha_metadata']                 = {'edit': 'visible',   'view': 'visible'}    
 fdict['CaseStudy']['nace']                          = {'edit': 'visible',   'view': 'visible'}    
 fdict['CaseStudy']['country']                       = {'edit': 'visible',   'view': 'visible'}    
 fdict['CaseStudy']['multilingual_thesaurus']        = {'edit': 'visible',   'view': 'visible'}    
@@ -56,7 +55,6 @@ fdict['Event']['contactEmail']                      = {'edit': 'visible',   'vie
 fdict['Event']['contactPhone']                      = {'edit': 'visible',   'view': 'visible'}                                        
 fdict['Event']['subcategory']                       = {'edit': 'visible',   'view': 'visible'}                                       
 fdict['Event']['multilingual_thesaurus']            = {'edit': 'visible',   'view': 'visible'}                                                  
-fdict['Event']['osha_metadata']                     = {'edit': 'visible',   'view': 'visible'}                                         
 fdict['Event']['attachment']                        = {'edit': 'visible',   'view': 'visible'}                                      
 fdict['Event']['reindexTranslations']               = {'edit': 'visible',   'view': 'invisible'}                                               
 
@@ -100,7 +98,6 @@ fdict['Document']['text']                           = {'edit': 'visible',   'vie
 fdict['Document']['country']                        = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['Document']['multilingual_thesaurus']         = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['Document']['nace']                           = {'edit': 'visible',   'view': 'visible'}                                                
-fdict['Document']['osha_metadata']                  = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['Document']['reindexTranslations']            = {'edit': 'visible',   'view': 'invisible'}                                                
 
 fdict['RichDocument']['id']                         = {'view': 'invisible'}                                                
@@ -112,7 +109,6 @@ fdict['RichDocument']['displayAttachments']         = {'edit': 'visible',   'vie
 fdict['RichDocument']['country']                    = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['RichDocument']['multilingual_thesaurus']     = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['RichDocument']['nace']                       = {'edit': 'visible',   'view': 'visible'}                                                
-fdict['RichDocument']['osha_metadata']              = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['RichDocument']['reindexTranslations']        = {'edit': 'visible',   'view': 'invisible'}                                                
 
 fdict['News Item']['id']                            = {'view': 'invisible'} 
@@ -124,7 +120,6 @@ fdict['News Item']['imageCaption']                  = {'edit': 'visible',   'vie
 fdict['News Item']['country']                       = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['News Item']['multilingual_thesaurus']        = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['News Item']['nace']                          = {'edit': 'visible',   'view': 'visible'}                                                
-fdict['News Item']['osha_metadata']                 = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['News Item']['reindexTranslations']           = {'edit': 'visible',   'view': 'invisible'}                                                
 
 fdict['RALink']['id']                               = {'view': 'invisible'}                                                 
@@ -149,7 +144,6 @@ fdict['RALink']['tableContents']                    = {'edit': 'invisible', 'vie
 fdict['RALink']['presentation']                     = {'edit': 'invisible', 'view': 'invisible'}                                                
 fdict['RALink']['relatedItems']                     = {'edit': 'invisible', 'view': 'invisible'}                                                
 fdict['RALink']['location']                         = {'edit': 'invisible', 'view': 'invisible'}                                                
-fdict['RALink']['osha_metadata']                    = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['RALink']['reindexTranslations']              = {'edit': 'visible',   'view': 'invisible'}                                                
 
 fdict['OSH_Link']['id']                             = {'view': 'invisible'}                                                 
@@ -194,7 +188,6 @@ fdict['PressRelease']['text']                       = {'edit': 'visible',   'vie
 fdict['PressRelease']['image']                      = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['PressRelease']['imageCaption']               = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['PressRelease']['releaseContacts']            = {'edit': 'visible',   'view': 'visible'}                                                
-fdict['PressRelease']['osha_metadata']              = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['PressRelease']['referenced_content']         = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['PressRelease']['isNews']                     = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['PressRelease']['country']                    = {'edit': 'visible',   'view': 'visible'}                                                
