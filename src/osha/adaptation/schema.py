@@ -306,21 +306,21 @@ class OSHASchemaExtender(object):
         self.context = context
         self._generateMethods(context, self._fields)
 
-    def _generateMethods(self, context, fields, initialized=True):
+    def _generateMethods(self, context, fields, initialized=True, marker=LANGUAGE_INDEPENDENT_INITIALIZED):
         """ Call LinguaPlone's generateMethods method to generate accessors 
             which automatically update the values of languageIndependent 
             fields on all translations.
         """
         klass = context.__class__
-        if not getattr(klass, LANGUAGE_INDEPENDENT_INITIALIZED, False) \
-                                                        or not initialized:
+        if not getattr(klass, marker, False) \
+                          or not initialized:
 
             fields = [field for field in fields if field.languageIndependent]
             generateMethods(klass, fields)
             log.info("called generateMethods on %s (%s) " \
                                     % (klass, self.__class__.__name__))
 
-            setattr(klass, LANGUAGE_INDEPENDENT_INITIALIZED, True)
+            setattr(klass, marker, True)
 
     def getOrder(self, original):
         """ Try to set the fields order according to the ordering provided in
@@ -578,6 +578,11 @@ class OshaMetadataExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('osha_metadata').copy(),
         ]
+
+    def __init__(self, context):
+        self.context = context
+        self._generateMethods(context, self._fields,
+            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
 
 class ProviderModifier(object):
