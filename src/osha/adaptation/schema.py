@@ -581,7 +581,15 @@ class OshaMetadataExtender(OSHASchemaExtender):
 
     def __init__(self, context):
         self.context = context
-        self._generateMethods(context, self._fields,
+        # make sure _generateMethods is also called on derived content types
+        initialized = True
+        fields = [field for field in self._fields if field.languageIndependent]
+        for field in fields:
+            if not getattr(context, field.accessor, None):
+                initialized = False
+                break
+
+        self._generateMethods(context, self._fields, initialized,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
 
