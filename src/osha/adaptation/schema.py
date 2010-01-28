@@ -446,13 +446,14 @@ class FAQExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
-        extended_fields_dict.get('subcategory').copy(),
 
         BaseLinesField(
             name='subject',
             multiValued=1,
-            accessor="Subject",
             searchable=True,
+            languageIndependent=True,
+            mutator="setSubject",
+            accessor="Subject",
             widget=atapi.KeywordWidget(
                 label=_(u'label_categories', default=u'Categories'),
                 description=_(u'help_categories',
@@ -461,6 +462,10 @@ class FAQExtender(OSHASchemaExtender):
                 ),
             ),
         ]
+
+    def __init__(self, context):
+        self.context = context
+        self._generateMethods(context, self._fields)
 
 
 class RALinkExtender(OSHASchemaExtender):
