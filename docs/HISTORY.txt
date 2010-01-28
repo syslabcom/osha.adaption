@@ -1,10 +1,12 @@
 Changelog
 =========
 
-0.1.1 (unreleased)
+0.1.1 (2010-01-28)
 ------------------
 
-- Nothing changed yet.
+- removed Subcategory (not possible in conjunction with schemaextended
+  Subject field); made Subject languageIndependent; called
+  _generateMothods (thomasw)
 
 
 0.1.0 (2010-01-28)
