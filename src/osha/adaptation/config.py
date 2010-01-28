@@ -219,7 +219,6 @@ fdict['HelpCenterFAQ']['contributors']              = {'edit': 'visible',   'vie
 fdict['HelpCenterFAQ']['startHere']                 = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['HelpCenterFAQ']['subject']                   = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['HelpCenterFAQ']['relatedItems']              = {'edit': 'visible',   'view': 'visible'}                                                
-fdict['HelpCenterFAQ']['subcategory']               = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['HelpCenterFAQ']['nace']                      = {'edit': 'visible',   'view': 'visible'}                                                
 fdict['HelpCenterFAQ']['multilingual_thesaurus']    = {'edit': 'visible',   'view': 'visible'}                                                
 
