@@ -1,10 +1,19 @@
 Changelog
 =========
 
-0.0.3 (unreleased)
+0.1.0 (2010-01-28)
 ------------------
 
-- Nothing changed yet.
+- Fixes ValueError: The number of fields in the new order differs from the
+  number of fields in the schema (jcbrand)
+- added OshaMetadataExtender that works like LinkListExtender. Removed all
+  occurences of osha_metadata in the other extenders (thomasw)
+- updated tests (jcbrand)
+- the possibility to trigger calling _generateMethods more flexible by
+  allowing a custom marker to be passed. Needed for extender registered via local
+  SiteManagers, such as for osha_metadata (thomasw)
+- made sure _generateMethods is also called on derived content types in the
+  OshaMetadataExtender (thomasw)
 
 
 0.0.2 (2010-01-19)
