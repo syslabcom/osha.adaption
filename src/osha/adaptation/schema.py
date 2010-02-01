@@ -364,7 +364,6 @@ class OSHContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('isNews').copy(),
-        extended_fields_dict.get('reindexTranslations').copy(),
         ]
 
     def __init__(self, context):
