@@ -578,6 +578,14 @@ class OshaMetadataExtender(OSHASchemaExtender):
     """ This is a general content agnostic extender.
         
         For details, please see the description in the LinkListExtender.
+        
+        NB!!!
+        The OshaMetadataExtender used to be in use, set via a local site manager.
+        This made indexing the osha_metadata field impossible, since in the context
+        of the catalog, no object has this field (= the catalog is outside of
+        the LSM's context).
+        Therefore, this field is being set via o global extender again,
+        but we use CSS to hide it eveywhery we don't want it
     """
     _fields = [
         extended_fields_dict.get('osha_metadata').copy(),
@@ -596,6 +604,27 @@ class OshaMetadataExtender(OSHASchemaExtender):
         self._generateMethods(context, self._fields, initialized,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
+
+class OshaMetadataExtenderGlobal(OSHASchemaExtender):
+    _fields = [
+        extended_fields_dict.get('osha_metadata').copy(),
+        ]
+
+    def __init__(self, context):
+        self.context = context
+
+        # Some of out extended content Link inherits from ATDocument. 
+        # We might get a false positive, so check that the
+        # accessors are really there
+        initialized = True
+        fields = [field for field in self._fields if field.languageIndependent]
+        for field in fields:
+            if not getattr(context, field.accessor, None):
+                initialized = False
+                break
+
+        self._generateMethods(context, self._fields, initialized,
+            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata_global')
 
 class ProviderModifier(object):
     """ This is a schema modifier, not extender.
