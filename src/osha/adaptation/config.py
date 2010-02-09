@@ -70,6 +70,7 @@ fdict['Link']['subcategory']                        = {'edit': 'visible', 'view'
 fdict['Link']['multilingual_thesaurus']             = {'edit': 'visible', 'view': 'visible'}
 fdict['Link']['nace']                               = {'edit': 'visible', 'view': 'visible'}
 fdict['Link']['reindexTranslations']                = {'edit': 'visible',   'view': 'invisible'}
+fdict['Link']['osha_metadata']                      = {'edit': 'visible',   'view': 'visible'}
 
 fdict['ATFile']['id']                               = {'view': 'invisible'}
 fdict['ATFile']['title']                            = {'view': 'invisible'}
@@ -81,6 +82,7 @@ fdict['ATFile']['multilingual_thesaurus']           = {'edit': 'visible',   'vie
 fdict['ATFile']['nace']                             = {'edit': 'visible',   'view': 'visible'}
 fdict['ATFile']['reindexTranslations']              = {'edit': 'visible',   'view': 'invisible'}
 fdict['ATFile']['file']                             = {'edit': 'visible',   'view': 'visible'}
+fdict['ATFile']['osha_metadata']                    = {'edit': 'visible',   'view': 'visible'}
 
 fdict['Image']['id']                                = {'view': 'invisible'}
 fdict['Image']['title']                             = {'view': 'invisible'}
@@ -92,6 +94,7 @@ fdict['Image']['multilingual_thesaurus']            = {'edit': 'visible',   'vie
 fdict['Image']['nace']                              = {'edit': 'visible',   'view': 'visible'}
 fdict['Image']['reindexTranslations']               = {'edit': 'visible',   'view': 'invisible'}
 fdict['Image']['image']                             = {'edit': 'visible',   'view': 'visible'}
+fdict['Image']['osha_metadata']                    = {'edit': 'visible',   'view': 'visible'}
 
 fdict['Document']['id']                             = {'view': 'invisible'}
 fdict['Document']['title']                          = {'view': 'invisible'}
@@ -182,6 +185,7 @@ fdict['OSH_Link']['presentation']                   = {'edit': 'invisible', 'vie
 fdict['OSH_Link']['allowDiscussion']                = {'edit': 'invisible', 'view': 'invisible'}
 fdict['OSH_Link']['effectiveDate']                  = {'edit': 'invisible', 'view': 'invisible'}
 fdict['OSH_Link']['expirationDate']                 = {'edit': 'visible',   'view': 'visible'}
+fdict['OSH_Link']['osha_metadata']                  = {'edit': 'visible',   'view': 'visible'}
 
 fdict['PressRelease']['id']                         = {'view': 'invisible'}
 fdict['PressRelease']['releaseTiming']              = {'edit': 'visible',   'view': 'visible'}
@@ -197,7 +201,6 @@ fdict['PressRelease']['referenced_content']         = {'edit': 'visible',   'vie
 fdict['PressRelease']['isNews']                     = {'edit': 'visible',   'view': 'visible'}
 fdict['PressRelease']['country']                    = {'edit': 'visible',   'view': 'visible'}
 fdict['PressRelease']['reindexTranslations']        = {'edit': 'visible',   'view': 'invisible'}
-fdict['PressRelease']['osha_metadata']              = {'edit': 'visible',   'view': 'visible'}
 
 fdict['Provider']['id']                             = {'view': 'invisible'}
 fdict['Provider']['title']                          = {'edit': 'visible',   'view': 'visible'}
@@ -213,6 +216,7 @@ fdict['Provider']['subcategory']                    = {'edit': 'visible',   'vie
 fdict['Provider']['multilingual_thesaurus']         = {'edit': 'visible',   'view': 'visible'}
 fdict['Provider']['nace']                           = {'edit': 'visible',   'view': 'visible'}
 fdict['Provider']['isNews']                         = {'edit': 'visible',   'view': 'visible'}
+fdict['Provider']['osha_metadata']                  = {'edit': 'visible',   'view': 'visible'}
 
 fdict['HelpCenterFAQ']['id']                        = {'view': 'invisible'}
 fdict['HelpCenterFAQ']['title']                     = {'view': 'invisible'}
@@ -238,6 +242,7 @@ fdict['SPSpeechVenue']['country']                   = {'edit': 'visible',   'vie
 fdict['SPSpeechVenue']['subcategory']               = {'edit': 'visible',   'view': 'visible'}
 fdict['SPSpeechVenue']['multilingual_thesaurus']    = {'edit': 'visible',   'view': 'visible'}
 fdict['SPSpeechVenue']['nace']                      = {'edit': 'visible',   'view': 'visible'}
+fdict['SPSpeechVenue']['osha_metadata']             = {'edit': 'visible',   'view': 'visible'}
 
 fdict['SPSpeaker']['id']                            = {'view': 'invisible'}
 fdict['SPSpeaker']['title']                         = {'edit': 'invisible', 'view': 'visible'}
@@ -266,6 +271,7 @@ fdict['SPSpeaker']['subcategory']                   = {'edit': 'visible',   'vie
 fdict['SPSpeaker']['multilingual_thesaurus']        = {'edit': 'visible',   'view': 'visible'}
 fdict['SPSpeaker']['nace']                          = {'edit': 'visible',   'view': 'visible'}
 fdict['SPSpeaker']['isNews']                        = {'edit': 'visible',   'view': 'visible'}
+fdict['SPSpeaker']['osha_metadata']                 = {'edit': 'visible',   'view': 'visible'}
 
 EXTENDED_TYPES_DEFAULT_FIELDS = fdict.copy()
 

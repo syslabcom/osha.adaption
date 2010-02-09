@@ -364,6 +364,7 @@ class OSHContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('isNews').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         ]
 
     def __init__(self, context):
@@ -378,6 +379,7 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         ]
 
     def __init__(self, context):
@@ -423,6 +425,7 @@ class EventExtender(OSHASchemaExtender):
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('attachment').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         ]
 
     def __init__(self, context):
@@ -528,6 +531,7 @@ class FileContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         ]
  
     def __init__(self, context):
@@ -604,27 +608,6 @@ class OshaMetadataExtender(OSHASchemaExtender):
         self._generateMethods(context, self._fields, initialized,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
-
-class OshaMetadataExtenderGlobal(OSHASchemaExtender):
-    _fields = [
-        extended_fields_dict.get('osha_metadata').copy(),
-        ]
-
-    def __init__(self, context):
-        self.context = context
-
-        # Some of out extended content Link inherits from ATDocument. 
-        # We might get a false positive, so check that the
-        # accessors are really there
-        initialized = True
-        fields = [field for field in self._fields if field.languageIndependent]
-        for field in fields:
-            if not getattr(context, field.accessor, None):
-                initialized = False
-                break
-
-        self._generateMethods(context, self._fields, initialized,
-            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata_global')
 
 class ProviderModifier(object):
     """ This is a schema modifier, not extender.
