@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-version = '0.1.2dev'
+version = '0.1.2'
 
 tests_require=[
             'zope.testing',

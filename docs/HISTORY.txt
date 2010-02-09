@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.2 (unreleased)
+0.1.2 (2010-02-09)
 ------------------
 
 - Removed the field reindexTranslations from the OSHContentExtender, since
