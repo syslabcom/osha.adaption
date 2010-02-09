@@ -6,7 +6,7 @@ Changelog
 
 - Removed the field reindexTranslations from the OSHContentExtender, since
   it is not needed there #613 (thomasw)
-- Re-added a globally registered Extender for osha_metadata on several
+- Re-added globally the field osha_metadata for most 
   content types. The catalog was not able to index this field when it
   was made available via a local Site Manager, the catalog being outside
   of the LSM's context. We use CSS now to hide the field where we don't
