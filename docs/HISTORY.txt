@@ -4,7 +4,10 @@ Changelog
 0.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- The 'language' field is no longer hidden for Provider, but appears now on the
+  settings tab. For the OSH Link, the same applies.
+  Hiding it seemed to have the effect that the site default (neutral) was some-
+  times not working. This seems to fix #774 and #776 (thomasw)
 
 
 0.1.2 (2010-02-09)

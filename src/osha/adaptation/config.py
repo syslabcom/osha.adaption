@@ -177,7 +177,6 @@ fdict['OSH_Link']['organisation_name']              = {'edit': 'visible',   'vie
 fdict['OSH_Link']['isbn_d']                         = {'edit': 'visible',   'view': 'visible'}
 fdict['OSH_Link']['publication_date']               = {'edit': 'visible',   'view': 'visible'}
 fdict['OSH_Link']['relatedItems']                   = {'edit': 'invisible', 'view': 'invisible'}
-fdict['OSH_Link']['language']                       = {'edit': 'invisible', 'view': 'invisible'}
 fdict['OSH_Link']['location']                       = {'edit': 'invisible', 'view': 'invisible'}
 fdict['OSH_Link']['excludeFromNav']                 = {'edit': 'invisible', 'view': 'invisible'}
 fdict['OSH_Link']['tableContents']                  = {'edit': 'invisible', 'view': 'invisible'}

@@ -644,8 +644,7 @@ class ProviderModifier(object):
                 'subject', 
                 'allowDiscussion', 
                 'creation_date', 
-                'modification_date', 
-                'language', 
+                'modification_date',
                 'sme', 
                 'provider'
                 )
@@ -666,6 +665,10 @@ class ProviderModifier(object):
         for name in moveToDefault:
             if schema.get(name):
                 schema.changeSchemataForField(name, 'default')
+        
+        # we used to hide the language field (unwanted), now we just move
+        # it the settings tab
+        schema.changeSchemataForField('language', 'settings')
 
         field = schema['providerCategory'].copy()
         field.required = True
