@@ -16,6 +16,7 @@ fdict = {
     'HelpCenterFAQ': OrderedDict(),
     'SPSpeechVenue': OrderedDict(),
     'SPSpeaker': OrderedDict(),
+    'whoswho': OrderedDict()
 }
 # See Products/Archetypes/BaseObject.py for default 'id' and 'title'
 
@@ -117,6 +118,27 @@ fdict['RichDocument']['multilingual_thesaurus']     = {'edit': 'visible',   'vie
 fdict['RichDocument']['nace']                       = {'edit': 'visible',   'view': 'visible'}
 fdict['RichDocument']['reindexTranslations']        = {'edit': 'visible',   'view': 'invisible'}
 fdict['RichDocument']['osha_metadata']              = {'edit': 'visible',   'view': 'visible'}
+
+fdict['whoswho']['id'] = {'view': 'invisible'}
+fdict['whoswho']['title'] = {'view': 'invisible'}
+fdict['whoswho']['description'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['url'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['email'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['tel'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['fax'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['address'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['targets'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['activities'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['sponsorUrl'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['sponsorName'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['relatedOrgUrl'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['relatedOrgName'] = {'edit': 'visible', 'view': 'visible'}
+fdict['whoswho']['description'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['text'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['country'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['osha_metadata'] = {'edit': 'visible',   'view': 'visible'}
+fdict['whoswho']['reindexTranslations'] = {'edit': 'visible',   'view': 'invisible'}
+
 
 fdict['News Item']['id']                            = {'view': 'invisible'}
 fdict['News Item']['title']                         = {'view': 'invisible'}
