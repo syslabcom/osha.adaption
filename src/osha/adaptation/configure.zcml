@@ -79,7 +79,7 @@
 
     <adapter
         zcml:condition="installed osha.whoswho"
-        factory=".schema.DocumentExtender" 
+        factory=".schema.WhoswhoExtender" 
         for="osha.whoswho.content.whoswho.whoswho"
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
         name="osha-whoswho"

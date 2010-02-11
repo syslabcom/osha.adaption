@@ -496,6 +496,28 @@ class RALinkExtender(OSHASchemaExtender):
         self._generateMethods(context, fields, initialized)
 
 
+class WhoswhoExtender(OSHASchemaExtender):
+    """ Add required fields for whoswho
+    """
+    _fields = [
+        extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('reindexTranslations').copy(),
+        ]
+
+    def __init__(self, context):
+        self.context = context
+
+        initialized = True
+        fields = [field for field in self._fields if field.languageIndependent]
+        for field in fields:
+            if not getattr(context, field.accessor, None):
+                initialized = False
+                break
+
+        self._generateMethods(context, fields, initialized)
+
+
 class PressReleaseExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('country').copy(),
