@@ -47,6 +47,7 @@ class OshaAdaptationLayer(SiteLayer):
             'OSHATranslations',
             'RichDocument',
             'RemoteProvider',
+            'osha.whoswho',
             'PloneHelpCenter',
             'VocabularyPickerWidget',
             'p4a.subtyper',
@@ -69,7 +70,8 @@ class OshaAdaptationLayer(SiteLayer):
         zcml.load_config('configure.zcml', osha.adaptation)
         fiveconfigure.debug_mode = False
 
-        ztc.installPackage('slc.seminarportal');
+        ztc.installPackage('slc.seminarportal')
+        ztc.installPackage('osha.whoswho')
 
         if IOSHACommentsLayer:
             browserlayer.utils.register_layer(IOSHACommentsLayer, name='osha.policy')

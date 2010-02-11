@@ -13,6 +13,7 @@ tests_require=[
             'Products.PressRoom',
             'Products.PloneHelpCenter',
             'Products.OSHContentLink',
+            'osha.whoswho',
             'plone.app.blob',
             'slc.seminarportal',
             ]
