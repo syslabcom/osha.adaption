@@ -4,7 +4,10 @@ Changelog
 0.1.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Updated the extenders for content types that inherit from ATDocument (RA Link
+  and Case Study) to include ALL required fields. Otherwise, if such an extender
+  is called before the Document-extender, only the explicitly defined fields
+  are set #808 (thomasw)
 
 
 0.1.4 (2010-02-11)

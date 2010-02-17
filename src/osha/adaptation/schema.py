@@ -317,8 +317,9 @@ class OSHASchemaExtender(object):
 
             fields = [field for field in fields if field.languageIndependent]
             generateMethods(klass, fields)
-            log.info("called generateMethods on %s (%s) " \
-                                    % (klass, self.__class__.__name__))
+            log.info("called generateMethods on %s (%s) for these fields: %s " \
+                                    % (klass, self.__class__.__name__, str([x.getName() for x in fields]))
+                    )
 
             setattr(klass, marker, True)
 
@@ -393,10 +394,21 @@ class DocumentExtender(OSHASchemaExtender):
 
 
 class CaseStudyExtender(OSHASchemaExtender):
-    """ CaseStudy inherits from RichDocument, therefore the DocumentExtender is
-        already being applied. We add here only CaseStudy specific fields.
+    """ The following assupmtion turned out to be WRONG:
+        <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is
+        already being applied. We add here only CaseStudy specific fields.>>
+
+        Only if the document extender is initialised first does this work. Otherwise
+        we only get the fields defined here explicitly.
+        Therefore ALL required fields are defined now. For those fields which do not
+        yet have generated methods, _generateMethods is called
     """
     _fields = [
+        extended_fields_dict.get('nace').copy(),
+        extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('multilingual_thesaurus').copy(),
+        extended_fields_dict.get('reindexTranslations').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
         ]
 
@@ -408,14 +420,15 @@ class CaseStudyExtender(OSHASchemaExtender):
 
         # Case Study inherits from ATDocument. We might get a false positive, 
         # so check that the accessors are really there
-        initialized = True
+
         fields = [field for field in self._fields if field.languageIndependent]
+        not_yet_initialised = list()
         for field in fields:
             if not getattr(context, field.accessor, None):
-                initialized = False
-                break
+                not_yet_initialised.append(field)
 
-        self._generateMethods(context, fields, initialized)
+        if not_yet_initialised:
+            self._generateMethods(context, fields=not_yet_initialised, initialized=False)
 
 
 class EventExtender(OSHASchemaExtender):
@@ -471,10 +484,21 @@ class FAQExtender(OSHASchemaExtender):
 
 
 class RALinkExtender(OSHASchemaExtender):
-    """ RALinks are already extended by DocumentExtender because they subtype 
-        ATDocument. Here we add only the extra fields.
+    """ The following assupmtion turned out to be WRONG:
+        <<RALinks are already extended by DocumentExtender because they subtype 
+        ATDocument. Here we add only the extra fields.>>
+
+        Only if the document extender is initialised first does this work. Otherwise
+        we only get the fields defined here explicitly.
+        Therefore ALL required fields are defined now. For those fields which do not
+        yet have generated methods, _generateMethods is called
     """
     _fields = [
+        extended_fields_dict.get('nace').copy(),
+        extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('multilingual_thesaurus').copy(),
+        extended_fields_dict.get('reindexTranslations').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
         ]
 
@@ -486,14 +510,15 @@ class RALinkExtender(OSHASchemaExtender):
 
         # RA Link inherits from ATDocument. We might get a false positive, so check that the
         # accessors are really there
-        initialized = True
+        
         fields = [field for field in self._fields if field.languageIndependent]
+        not_yet_initialised = list()
         for field in fields:
             if not getattr(context, field.accessor, None):
-                initialized = False
-                break
+                not_yet_initialised.append(field)
 
-        self._generateMethods(context, fields, initialized)
+        if not_yet_initialised:
+            self._generateMethods(context, fields=not_yet_initialised, initialized=False)
 
 
 class WhoswhoExtender(OSHASchemaExtender):
