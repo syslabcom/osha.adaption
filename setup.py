@@ -23,7 +23,8 @@ setup(
     version=version,
     description="OSHA specific adaptors, schemaextensions and subtypes",
     long_description=open("README.txt").read() + "\n" +
-                    open(os.path.join("docs", "HISTORY.txt")).read(),
+                    open(os.path.join("docs", "HISTORY.txt")).read() +"\n" +
+                    open(os.path.join("docs", "TODO.txt")).read(),
     # Get more strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
     "Framework :: Plone",

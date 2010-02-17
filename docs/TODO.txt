@@ -1,0 +1,20 @@
+TODO
+====
+
+In version 0.1.5, the extenders for RA Links and CaseStudies were updated.
+
+The tests now fail with
+
+AssertionError: CaseStudy has the following Default fields: 
+['id', 'title', 'description', 'text', 'displayImages', 'action', 'results', 'publication_year', 'organisation', 'remoteLanguage', 'remoteUrl', 'displayAttachments', 'subject', 'relatedItems', 'location', 'nace', 'country', 'multilingual_thesaurus', 'reindexTranslations', 'osha_metadata', 'isNews']
+but should have 
+['id', 'title', 'description', 'isNews', 'text', 'displayImages', 'action', 'results', 'publication_year', 'organisation', 'remoteLanguage', 'remoteUrl', 'displayAttachments', 'subject', 'relatedItems', 'location', 'nace', 'country', 'multilingual_thesaurus', 'reindexTranslations', 'osha_metadata']
+
+
+i.e. the "isNews" field is not in the correct order.
+
+Reason: the getOrder method in the schema-extender for RA Links is called with the extended schema of ATDocument, which doesn't have the "isNews" field. Therefore it gets inserted in the wrong place.
+
+In real life however, the isNews field DOES have the correct order on RA Link and CaseStudy, and it doesn't matter if the extender for Document is called before the RA Link- or CaseStudy-extender.
+
+==> Fixme, potentially in the test
