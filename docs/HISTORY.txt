@@ -1,11 +1,11 @@
 Changelog
 =========
 
-0.1.6 (unreleased)
+0.1.6 (2010-02-28)
 ------------------
 
-- Nothing changed yet.
-
+- RALink and CaseStudy: don't show subject field any more, but rather
+  subcategory #733 (thomasw)
 
 0.1.5 (2010-02-17)
 ------------------
