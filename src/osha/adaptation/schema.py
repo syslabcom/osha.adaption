@@ -361,9 +361,9 @@ class OSHASchemaExtender(object):
 class OSHContentExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
-        extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         ]
@@ -406,6 +406,7 @@ class CaseStudyExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
@@ -496,6 +497,7 @@ class RALinkExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
