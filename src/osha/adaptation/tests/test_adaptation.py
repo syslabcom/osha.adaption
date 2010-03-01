@@ -27,13 +27,13 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             fields = [f.__name__ for f in field_obs]
             config_fields = types_dict[type_name].keys()
             self.assertEquals(
-                config_fields,
-                fields,
+                set(config_fields),
+                set(fields),
                 "%s has the following Default fields: %s but should " \
                 "have %s" % \
-                (   type_name, 
-                    fields,
-                    config_fields, 
+                (   type_name,
+                    set(fields),
+                    set(config_fields),
                 )
             )
             
