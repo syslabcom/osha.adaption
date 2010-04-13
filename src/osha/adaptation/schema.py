@@ -627,35 +627,35 @@ class LinkListExtender(OSHASchemaExtender):
         ]
 
 
-class OshaMetadataExtender(OSHASchemaExtender):
-    """ This is a general content agnostic extender.
-        
-        For details, please see the description in the LinkListExtender.
-        
-        NB!!!
-        The OshaMetadataExtender used to be in use, set via a local site manager.
-        This made indexing the osha_metadata field impossible, since in the context
-        of the catalog, no object has this field (= the catalog is outside of
-        the LSM's context).
-        Therefore, this field is being set via o global extender again,
-        but we use CSS to hide it eveywhery we don't want it
-    """
-    _fields = [
-        extended_fields_dict.get('osha_metadata').copy(),
-        ]
-
-    def __init__(self, context):
-        self.context = context
-        # make sure _generateMethods is also called on derived content types
-        initialized = True
-        fields = [field for field in self._fields if field.languageIndependent]
-        for field in fields:
-            if not getattr(context, field.accessor, None):
-                initialized = False
-                break
-
-        self._generateMethods(context, self._fields, initialized,
-            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
+# class OshaMetadataExtender(OSHASchemaExtender):
+#     """ This is a general content agnostic extender.
+#         
+#         For details, please see the description in the LinkListExtender.
+#         
+#         NB!!!
+#         The OshaMetadataExtender used to be in use, set via a local site manager.
+#         This made indexing the osha_metadata field impossible, since in the context
+#         of the catalog, no object has this field (= the catalog is outside of
+#         the LSM's context).
+#         Therefore, this field is being set via o global extender again,
+#         but we use CSS to hide it eveywhery we don't want it
+#     """
+#     _fields = [
+#         extended_fields_dict.get('osha_metadata').copy(),
+#         ]
+# 
+#     def __init__(self, context):
+#         self.context = context
+#         # make sure _generateMethods is also called on derived content types
+#         initialized = True
+#         fields = [field for field in self._fields if field.languageIndependent]
+#         for field in fields:
+#             if not getattr(context, field.accessor, None):
+#                 initialized = False
+#                 break
+# 
+#         self._generateMethods(context, self._fields, initialized,
+#             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
 
 class ProviderModifier(object):
