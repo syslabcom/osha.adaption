@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.7 (unreleased)
+0.1.7 (2010-04-18)
 ------------------
 
 - completely commented the no longer used OshaMetadataExtender; maybe this
