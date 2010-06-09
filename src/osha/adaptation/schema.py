@@ -585,17 +585,23 @@ class FileContentExtender(OSHASchemaExtender):
  
     def __init__(self, context):
         super(FileContentExtender, self).__init__(context)
-        for field in self._fields:
-            if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
-                vocabulary = NamedVocabulary(field.widget.vocabulary)
-                widget_args = {}
-                for arg in ('label', 'description', 'label_msgid', 
-                            'description_msgid, i18n_domain'):
-                    widget_args[arg] = getattr(field.widget, arg, '')
-                widget_args['vocabulary'] = field.widget.vocabulary
-                field.vocabulary = vocabulary
-                if InlineTreeWidget:
-                    field.widget = InlineTreeWidget(**widget_args)
+
+        # NOTE!
+        # The inline tree widget for FileContent is disabled for the moment.
+        # Gorka requires the quick-search function, which this widget does
+        # not have. See https://syslab.com/proj/issues/show/1293
+
+#        for field in self._fields:
+#            if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
+#                vocabulary = NamedVocabulary(field.widget.vocabulary)
+#                widget_args = {}
+#                for arg in ('label', 'description', 'label_msgid', 
+#                            'description_msgid, i18n_domain'):
+#                    widget_args[arg] = getattr(field.widget, arg, '')
+#                widget_args['vocabulary'] = field.widget.vocabulary
+#                field.vocabulary = vocabulary
+#                if InlineTreeWidget:
+#                    field.widget = InlineTreeWidget(**widget_args)
 
         self._generateMethods(context, self._fields)
 
