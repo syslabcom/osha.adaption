@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.8 (unreleased)
+0.1.8 (2010-06-09)
 ------------------
 
 - The inline tree widget for FileContent is disabled for the moment.
