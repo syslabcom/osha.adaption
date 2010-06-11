@@ -459,24 +459,28 @@ class FAQExtender(OSHASchemaExtender):
     to provide translations for the keywords, here we subtype HelpCenterFAQ
     so that it also uses the standard 'subject' widget.
     """
+    # We don't want the Subject field on FAQs any more. Instead, we use the
+    # Subcategory field. #1195
+
     _fields = [
+        extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
 
-        BaseLinesField(
-            name='subject',
-            multiValued=1,
-            searchable=True,
-            languageIndependent=True,
-            mutator="setSubject",
-            accessor="Subject",
-            widget=atapi.KeywordWidget(
-                label=_(u'label_categories', default=u'Categories'),
-                description=_(u'help_categories',
-                              default=u'Also known as keywords, tags or labels, '
-                                      'these help you categorize your content.'),
-                ),
-            ),
+        # BaseLinesField(
+        #     name='subject',
+        #     multiValued=1,
+        #     searchable=True,
+        #     languageIndependent=True,
+        #     mutator="setSubject",
+        #     accessor="Subject",
+        #     widget=atapi.KeywordWidget(
+        #         label=_(u'label_categories', default=u'Categories'),
+        #         description=_(u'help_categories',
+        #                       default=u'Also known as keywords, tags or labels, '
+        #                               'these help you categorize your content.'),
+        #         ),
+        #     ),
         ]
 
     def __init__(self, context):
