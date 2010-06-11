@@ -160,5 +160,11 @@
         name="osha-faq"
         />
 
+    <adapter
+        zcml:condition="installed Products.PloneHelpCenter"
+        factory=".schema.FAQModifier" 
+        for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
 
 </configure>

@@ -811,4 +811,27 @@ class EventModifier(object):
         # schema.changeSchemataForField('excludeFromNav', 'settings')
 
 
+class FAQModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+    if IOSHACommentsLayer:
+        zope.interface.implements(
+                            ISchemaModifier, 
+                            IBrowserLayerAwareExtender
+                            )
+        layer = IOSHACommentsLayer
+    else:
+        zope.interface.implements(ISchemaModifier)
+    
+    def __init__(self, context):
+        self.context = context
+    
+    def fiddle(self, schema):
+        """Fiddle the schema.
+        """
+        if self.context.portal_type != 'HelpCenterFAQ':
+            return 
 
+        subject = schema['subject'].copy()
+        subject.widget.visible['edit'] = 'invisible'
+        schema['subject'] = subject
