@@ -293,14 +293,14 @@ class OSHASchemaExtender(object):
         layer, the interfaces being implemented and provides a helper method 
         that generates accessors and mutators for language independent fields.
     """
-    if IOSHACommentsLayer:
-        zope.interface.implements(
-                            IOrderableSchemaExtender, 
-                            IBrowserLayerAwareExtender
-                            )
-        layer = IOSHACommentsLayer
-    else:
-        zope.interface.implements(IOrderableSchemaExtender)
+    # if IOSHACommentsLayer:
+    #     zope.interface.implements(
+    #                         IOrderableSchemaExtender, 
+    #                         IBrowserLayerAwareExtender
+    #                         )
+    #     layer = IOSHACommentsLayer
+    # else:
+    zope.interface.implements(IOrderableSchemaExtender)
 
     def __init__(self, context):
         self.context = context
@@ -814,14 +814,14 @@ class EventModifier(object):
 class FAQModifier(object):
     """ This is a schema modifier, not extender.
     """
-    if IOSHACommentsLayer:
-        zope.interface.implements(
-                            ISchemaModifier, 
-                            IBrowserLayerAwareExtender
-                            )
-        layer = IOSHACommentsLayer
-    else:
-        zope.interface.implements(ISchemaModifier)
+    # if IOSHACommentsLayer:
+    #     zope.interface.implements(
+    #                         ISchemaModifier, 
+    #                         IBrowserLayerAwareExtender
+    #                         )
+    #     layer = IOSHACommentsLayer
+    # else:
+    zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
