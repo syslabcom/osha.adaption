@@ -45,6 +45,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'setuptools',
+        'Products.ATCountryWidget',
         'archetypes.schemaextender',
         'Products.ATVocabularyManager',
         'Products.DataGridField',
