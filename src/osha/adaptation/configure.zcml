@@ -167,4 +167,18 @@
         provides="archetypes.schemaextender.interfaces.ISchemaModifier"
         />
 
+    <adapter
+        zcml:condition="installed slc.seminarportal"
+        factory=".schema.SeminarModifier" 
+        for="slc.seminarportal.content.seminar.SPSeminar"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
+
+    <adapter
+        zcml:condition="installed slc.seminarportal"
+        factory=".schema.SeminarModifier" 
+        for="slc.seminarportal.content.speech.SPSpeech"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
+
 </configure>

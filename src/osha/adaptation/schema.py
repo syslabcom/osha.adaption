@@ -835,3 +835,23 @@ class FAQModifier(object):
         subject = schema['subject'].copy()
         subject.widget.visible['edit'] = 'invisible'
         schema['subject'] = subject
+
+
+class SeminarModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+
+    zope.interface.implements(ISchemaModifier)
+    
+    def __init__(self, context):
+        self.context = context
+    
+    def fiddle(self, schema):
+        """Fiddle the schema.
+        """
+        if self.context.portal_type not in ('SPSeminar', 'SPSpeech'):
+            return
+
+        attachment = schema['attachment'].copy()
+        attachment.widget.visible['edit'] = 'invisible'
+        schema['attachment'] = attachment
