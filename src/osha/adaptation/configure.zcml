@@ -139,13 +139,6 @@
     <configure zcml:condition="installed slc.seminarportal">
         <adapter
             factory=".schema.OSHContentExtender" 
-            for="slc.seminarportal.content.speaker.SPSpeaker"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-speaker"
-            />
-
-        <adapter
-            factory=".schema.OSHContentExtender" 
             for="slc.seminarportal.content.speechvenue.SPSpeechVenue"
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             name="osha-speechvenue"
