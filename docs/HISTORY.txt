@@ -1,11 +1,10 @@
 Changelog
 =========
 
-0.1.10 (unreleased)
+0.1.10 (2010-09-12)
 -------------------
 
-- Nothing changed yet.
-
+- Hide the Attachement field for SPSpeech and SPSeminar #1506 [thomasw]
 
 0.1.9 (2010-06-13)
 ------------------
