@@ -855,3 +855,7 @@ class SeminarModifier(object):
         attachment = schema['attachment'].copy()
         attachment.widget.visible['edit'] = 'invisible'
         schema['attachment'] = attachment
+
+        eventType = schema['eventType'].copy()
+        eventType.widget.visible['edit'] = 'invisible'
+        schema['eventType'] = eventType
