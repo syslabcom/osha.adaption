@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.11 (unreleased)
+0.1.11 (2010-10-16)
 -------------------
 
 - Hide the field eventType on SPSeminar, since we have Subcategories
