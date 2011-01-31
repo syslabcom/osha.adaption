@@ -50,7 +50,6 @@ setup(
         'Products.ATVocabularyManager',
         'Products.DataGridField',
         'Products.LinguaPlone',
-        'Products.OSHATranslations',
         'Products.VocabularyPickerWidget',
         'p4a.subtyper',
         'slc.treecategories',
