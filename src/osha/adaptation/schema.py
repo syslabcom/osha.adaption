@@ -24,7 +24,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.LinguaPlone.utils import generateMethods
-from Products.OSHATranslations import OSHAMessageFactory as _
+from osha.theme import OSHAMessageFactory as _
 from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
 
 from slc.treecategories.widgets.widgets import InlineTreeWidget
