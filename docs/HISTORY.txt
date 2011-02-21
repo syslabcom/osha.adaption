@@ -1,11 +1,11 @@
 Changelog
 =========
 
-0.1.12 (unreleased)
+0.1.12 (2011-02-21)
 -------------------
 
-- Nothing changed yet.
-
+- removing Products.OSHATranslations as dependeny, translations are now in osha.theme
+  [thomasw]
 
 0.1.11 (2010-10-16)
 -------------------
