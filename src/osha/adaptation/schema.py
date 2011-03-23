@@ -3,7 +3,6 @@
 # except:
 #   - Keywords, which will be handled by the plone subject
 #   - html_meta_keywords, which are used to optimize the SEO Keywords
-#   -
 
 import logging
 
@@ -11,12 +10,10 @@ import zope.interface
 
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
-from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
 
 from Products.ATCountryWidget.Widget import MultiCountryWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.Archetypes.utils import DisplayList
 from Products.CMFCore.utils import getToolByName
@@ -24,16 +21,9 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.LinguaPlone.utils import generateMethods
-from osha.theme import OSHAMessageFactory as _
 from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
 
-from slc.treecategories.widgets.widgets import InlineTreeWidget
-
-try:
-    from osha.policy.interfaces import IOSHACommentsLayer
-except ImportError:
-    IOSHACommentsLayer = None
-
+from osha.theme import OSHAMessageFactory as _
 from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
 from osha.adaptation.subtyper import IAnnotatedLinkList
 from osha.adaptation import config
@@ -100,10 +90,6 @@ class OSHAMetadataField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'OSHAMetadata')
 
-
-class AttachmentField(ExtensionField, atapi.FileField):
-    """ additional file field for attachments """
-
 class ReferencedContentField(ExtensionFieldMixin, ExtensionField, atapi.ReferenceField):
     """ Possibility to reference content objects, the text of which """
     """ can be used to display inside the current object. """
@@ -111,14 +97,20 @@ class ReferencedContentField(ExtensionFieldMixin, ExtensionField, atapi.Referenc
 class NewsMarkerField(ExtensionFieldMixin, ExtensionField, atapi.BooleanField):
     """ Marker field to have object appear in news portlet """
 
+class SELinesField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
+    """ A schema-extender aware LinesField """
+
+class SEBooleanField(ExtensionField, atapi.BooleanField):
+    """ A schema-extender aware BooleanField """
+
 class SEDataGridField(ExtensionFieldMixin, ExtensionField, DataGridField):
-    """ Marker field to have object appear in news portlet """
+    """ A schema-extender aware DataGridWidget """
+    
+class SEFileField(ExtensionField, atapi.FileField):
+    """ A schema-extender aware FileField """
 
-class BaseLinesField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
-    """ """
-
-class ReindexTranslationsField(ExtensionField, atapi.BooleanField):
-    """ Indicate whether translations should be reindexd upon saving """
+class SETextField(ExtensionFieldMixin, ExtensionField, atapi.TextField):
+    """ A schema-extender aware TextField """
 
 description_reindexTranslations = \
     u"Check this box to have all translated versions reindexed. This is " \
@@ -241,8 +233,8 @@ extended_fields_dict = {
                 i18n_domain='osha',
             ),
         ),
-    'reindexTranslations':
-        ReindexTranslationsField('reindexTranslations',
+    'reindexTranslations':  
+        SEBooleanField('reindexTranslations',
             schemata='default',
             default=False,
             languageIndependent=False,
@@ -276,14 +268,32 @@ extended_fields_dict = {
             ),
         ),
     'attachment':
-        AttachmentField('attachment',
+        SEFileField('attachment',
             schemata='default',
             widget=atapi.FileWidget(
                 label= _(u'osha_event_attachment_label', default=u'Attachment'),
-                description= _(u'osha_event_attachment_label',
+                description= _(u'osha_event_attachment_description',
                     default= \
                         u"You can upload an optional attachment that will "
                         u"be displayed with the event."),
+            ),
+        ),
+    'seoDescription':
+        SETextField('seoDescription',
+            schemata='default',
+            widget=atapi.TextAreaWidget(
+                label= _(
+                    u'osha_seo_description_label', 
+                    default=u'SEO Description'
+                    ),
+                description= _(u'osha_seo_description_description',
+                    default= \
+                        u"Provide here a description that is purely for SEO "
+                        "(Search Engine Optimisation) purposes. It will "
+                        "appear in the <meta> tag in the "
+                        "<head> section of the HTML document, but nowhere "
+                        "in the actual website content."
+                        ),
             ),
         ),
     }
@@ -293,13 +303,6 @@ class OSHASchemaExtender(object):
         layer, the interfaces being implemented and provides a helper method 
         that generates accessors and mutators for language independent fields.
     """
-    # if IOSHACommentsLayer:
-    #     zope.interface.implements(
-    #                         IOrderableSchemaExtender, 
-    #                         IBrowserLayerAwareExtender
-    #                         )
-    #     layer = IOSHACommentsLayer
-    # else:
     zope.interface.implements(IOrderableSchemaExtender)
 
     def __init__(self, context):
@@ -366,6 +369,7 @@ class OSHContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -381,6 +385,7 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -411,6 +416,7 @@ class CaseStudyExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -440,6 +446,7 @@ class EventExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('attachment').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -459,15 +466,17 @@ class FAQExtender(OSHASchemaExtender):
     to provide translations for the keywords, here we subtype HelpCenterFAQ
     so that it also uses the standard 'subject' widget.
     """
-    # We don't want the Subject field on FAQs any more. Instead, we use the
-    # Subcategory field. #1195
 
     _fields = [
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
 
-        # BaseLinesField(
+        # We don't want the Subject field on FAQs any more. Instead, we use the
+        # Subcategory field. #1195
+        #
+        # SELinesField(
         #     name='subject',
         #     multiValued=1,
         #     searchable=True,
@@ -506,6 +515,7 @@ class RALinkExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -534,6 +544,7 @@ class WhoswhoExtender(OSHASchemaExtender):
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
@@ -554,6 +565,7 @@ class PressReleaseExtender(OSHASchemaExtender):
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('isNews').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
 
         ReferencedContentField('referenced_content',
             languageIndependent=True,
@@ -585,6 +597,7 @@ class FileContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('seoDescription').copy(),
         ]
  
     def __init__(self, context):
@@ -595,17 +608,20 @@ class FileContentExtender(OSHASchemaExtender):
         # Gorka requires the quick-search function, which this widget does
         # not have. See https://syslab.com/proj/issues/show/1293
 
-#        for field in self._fields:
-#            if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
-#                vocabulary = NamedVocabulary(field.widget.vocabulary)
-#                widget_args = {}
-#                for arg in ('label', 'description', 'label_msgid', 
-#                            'description_msgid, i18n_domain'):
-#                    widget_args[arg] = getattr(field.widget, arg, '')
-#                widget_args['vocabulary'] = field.widget.vocabulary
-#                field.vocabulary = vocabulary
-#                if InlineTreeWidget:
-#                    field.widget = InlineTreeWidget(**widget_args)
+        # from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+        # from slc.treecategories.widgets.widgets import InlineTreeWidget
+
+        # for field in self._fields:
+        #     if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
+        #         vocabulary = NamedVocabulary(field.widget.vocabulary)
+        #         widget_args = {}
+        #         for arg in ('label', 'description', 'label_msgid', 
+        #                     'description_msgid, i18n_domain'):
+        #             widget_args[arg] = getattr(field.widget, arg, '')
+        #         widget_args['vocabulary'] = field.widget.vocabulary
+        #         field.vocabulary = vocabulary
+        #         if InlineTreeWidget:
+        #             field.widget = InlineTreeWidget(**widget_args)
 
         self._generateMethods(context, self._fields)
 
@@ -671,14 +687,7 @@ class LinkListExtender(OSHASchemaExtender):
 class ProviderModifier(object):
     """ This is a schema modifier, not extender.
     """
-    if IOSHACommentsLayer:
-        zope.interface.implements(
-                            ISchemaModifier, 
-                            IBrowserLayerAwareExtender
-                            )
-        layer = IOSHACommentsLayer
-    else:
-        zope.interface.implements(ISchemaModifier)
+    zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
@@ -746,14 +755,7 @@ class ProviderModifier(object):
 class EventModifier(object):
     """ This is a schema modifier, not extender.
     """
-    if IOSHACommentsLayer:
-        zope.interface.implements(
-                            ISchemaModifier, 
-                            IBrowserLayerAwareExtender
-                            )
-        layer = IOSHACommentsLayer
-    else:
-        zope.interface.implements(ISchemaModifier)
+    zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
@@ -787,40 +789,10 @@ class EventModifier(object):
             position = ordered_fields.index(name)
             schema.moveField(name, pos=position)
 
-        # schema['subject'].widget.visible['edit'] = 'invisible'
-
-        # schema.moveField('relatedItems', pos='bottom')
-        # schema['relatedItems'].widget.visible['edit'] = 'invisible'
-        # schema.moveField('excludeFromNav', after='allowDiscussion')
-        # schema.moveField('allowDiscussion', after='relatedItems')
-
-        # schema.changeSchemataForField('subject', 'categorization')
-        # schema.changeSchemataForField('relatedItems', 'categorization')
-        # schema.changeSchemataForField('language', 'categorization')
-
-        # schema.changeSchemataForField('effectiveDate', 'dates')
-        # schema.changeSchemataForField('expirationDate', 'dates')    
-        # schema.changeSchemataForField('creation_date', 'dates')    
-        # schema.changeSchemataForField('modification_date', 'dates')    
-
-        # schema.changeSchemataForField('creators', 'ownership')
-        # schema.changeSchemataForField('contributors', 'ownership')
-        # schema.changeSchemataForField('rights', 'ownership')
-
-        # schema.changeSchemataForField('allowDiscussion', 'settings')
-        # schema.changeSchemataForField('excludeFromNav', 'settings')
-
 
 class FAQModifier(object):
     """ This is a schema modifier, not extender.
     """
-    # if IOSHACommentsLayer:
-    #     zope.interface.implements(
-    #                         ISchemaModifier, 
-    #                         IBrowserLayerAwareExtender
-    #                         )
-    #     layer = IOSHACommentsLayer
-    # else:
     zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
@@ -840,7 +812,6 @@ class FAQModifier(object):
 class SeminarModifier(object):
     """ This is a schema modifier, not extender.
     """
-
     zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
@@ -859,3 +830,4 @@ class SeminarModifier(object):
         eventType = schema['eventType'].copy()
         eventType.widget.visible['edit'] = 'invisible'
         schema['eventType'] = eventType
+
