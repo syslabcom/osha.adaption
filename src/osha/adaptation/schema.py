@@ -294,6 +294,7 @@ extended_fields_dict = {
                         "<head> section of the HTML document, but nowhere "
                         "in the actual website content."
                         ),
+                visible={'edit': 'visible', 'view': 'invisible'},
             ),
         ),
     }
@@ -333,14 +334,26 @@ class OSHASchemaExtender(object):
             If no such ordering was provided, then return the original.
         """
         portal_type = self.context.portal_type
-        original_fields = original['default']
-        ordered_fields = \
-            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type, {}).keys()
+        ordered_fields_dict = \
+            config.EXTENDED_TYPES_DEFAULT_FIELDS.get(portal_type)
 
-        if ordered_fields == original['default']:
-            original['default'] = ordered_fields
-            
-        elif len(ordered_fields) >= len(original['default']):
+        if ordered_fields_dict is None:
+            # Ticket 999:
+            # seoDescription must be directly below description
+            if 'seoDescription' not in original['default']:
+                return original
+
+            of = original['default']
+            i = of.index('description')
+            of.remove('seoDescription')
+            of = of[:i+1] + ['seoDescription'] + of[i+1:]
+            original['default'] = of
+            return original
+
+        ordered_fields = ordered_fields_dict.keys()
+        original_fields = original['default']
+
+        if len(ordered_fields) <> original_fields:
             # The ordered_fields defined in config, contains all the
             # schemaextended fields, not just the ones of the particular
             # extender on which this method is being called. Since the 
@@ -354,6 +367,8 @@ class OSHASchemaExtender(object):
                         [f for f in original_fields if f not in ordered_fields]
 
             original['default'] = actual_fields 
+        else:
+            original['default'] = ordered_fields
 
         return original
 
@@ -416,7 +431,6 @@ class CaseStudyExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
-        extended_fields_dict.get('seoDescription').copy(),
         ]
 
     def __init__(self, context):
