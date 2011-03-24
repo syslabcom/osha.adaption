@@ -1,15 +1,72 @@
 import unittest
+import logging
+from zExceptions import Unauthorized
 from zope import component
+from zope.interface import implementedBy, providedBy
+from Products.Archetypes.interfaces._base import IBaseContent
+from Products.ATContentTypes.interface.topic import IATTopicCriterion
 from Products.CMFCore.utils import getToolByName
 from p4a.subtyper.interfaces import ISubtyper
 from base import OshaAdaptationTestCase
 from osha.adaptation.config import EXTENDED_TYPES_DEFAULT_FIELDS
 types_dict = EXTENDED_TYPES_DEFAULT_FIELDS.copy()
 
+log = logging.getLogger('test_adaptation.py')
+
 class TestSchemaExtender(OshaAdaptationTestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
+
+    def test_seo_description(self):
+        """ Ticket #999:
+            All content types should be extended with a new field
+            called seoDescription.
+
+            This field should appear directly underneath the normal description
+            field.
+        """ 
+        # import sys; sys.sdtout = file('/dev/stdout', 'w')
+        ttool = getToolByName(self.portal, 'portal_types')
+        not_extended = open("not_extended.txt", 'w')
+        extended_properly = open("extended_properly", "w")
+        wrong_order = open("wrong_order.txt", 'w')
+        for type_name in ttool.listContentTypes():
+            info = ttool.getTypeInfo(type_name)
+            try:
+                obj = info.constructInstance(self.portal, type_name)
+            except Unauthorized:
+                continue 
+            except:
+                continue
+
+            if not IBaseContent.providedBy(obj):
+                continue
+            if IATTopicCriterion.providedBy(obj):
+                continue
+
+            field_obs = obj.Schema().getSchemataFields('default')
+            fields = [f.__name__ for f in field_obs]
+            # assert('seoDescription' in fields)
+            # self.assertEquals(
+            #             fields.index('seoDescription'), 
+            #             fields.index('description')+1
+            #             )
+
+            if "seoDescription" not in fields:
+                not_extended.write("Not extended: %s \n" % type_name)
+
+            elif fields.index('seoDescription') != fields.index('description')+1:
+                wrong_order.write("Wrong order: %s \n" % type_name)
+
+            else:
+                extended_properly.write("%s \n" % type_name)
+
+        not_extended.close()
+        wrong_order.close()
+        extended_properly.close()
+
+
 
     def test_schema_modifications(self):
         """ Test that the extended types have the right fields in the correct
@@ -23,7 +80,6 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             obj = info.constructInstance(self.portal, type_name)
 
             field_obs = obj.Schema().getSchemataFields('default')
-
             fields = [f.__name__ for f in field_obs]
             config_fields = types_dict[type_name].keys()
             self.assertEquals(
@@ -36,7 +92,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                     set(config_fields),
                 )
             )
-            
+
             for i in range(0, len(fields)):
                 self.assertEquals(
                     field_obs[i].widget.visible,

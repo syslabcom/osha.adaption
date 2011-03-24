@@ -9,14 +9,12 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase import layer
 
 from plone import browserlayer
-
-try:
-    from osha.policy.interfaces import IOSHACommentsLayer
-except ImportError:
-    IOSHACommentsLayer = None
+from osha.policy.interfaces import IOSHACommentsLayer
      
 SiteLayer = layer.PloneSite
 
+ztc.installProduct('Relations')
+ztc.installProduct('ATReferenceBrowserWidget')
 ztc.installProduct('ATVocabularyManager')
 ztc.installProduct('TextIndexNG3')
 ztc.installProduct('CaseStudy')
@@ -36,24 +34,73 @@ class OshaAdaptationLayer(SiteLayer):
     @classmethod
     def setUp(cls):
         PRODUCTS = [
+            'ATCountryWidget',
+            'ATReferenceBrowserWidget',
             'ATVocabularyManager',
-            'TextIndexNG3',
+            'BlueLinguaLink',
+            'CMFPlacefulWorkflow',
+            'CMFSin',
+            'Calendaring',
             'CaseStudy',
+            'Clouseau',
             'DataGridField',
+            'FCKeditor',
             'LinguaPlone',
-            'PressRoom',
-            'RALink',
-            'OSHContentLink',
+            'Marshall',
             'OSHATranslations',
-            'RichDocument',
-            'RemoteProvider',
-            'osha.whoswho',
+            'OSHContentLink',
+            'PloneFormGen',
             'PloneHelpCenter',
+            'PloneSoftwareCenter',
+            'PressRoom',
+            'Products.CallForContractors',
+            'Products.CaseStudy',
+            'Products.OSHContentLink',
+            'Products.PloneFlashUpload',
+            'Products.RALink',
+            'Products.RemoteProvider',
+            'Products.VocabularyPickerWidget',
+            'PublicJobVacancy',
+            'RALink',
+            'RedirectionTool',
+            'Relations',
+            'RemoteProvider',
+            'RichDocument',
+            'Scrawl',
+            'TextIndexNG3',
+            'UserAndGroupSelectionWidget',
             'VocabularyPickerWidget',
+            'collective.orderedmultiselectwidget',
+            'collective.portlet.feedmixer',
+            'collective.portlet.tal',
+            'osha.aggregation',
+            'osha.theme',
+            'osha.whoswho',
+            'p4a.plonevideo',
+            'p4a.plonevideoembed',
             'p4a.subtyper',
             'plone.app.blob',
-            'slc.treecategories',
+            'plone.app.imaging',
+            'plone.app.iterate',
+            'plone.app.ldap',
+            'plone.browserlayer',
+            'plone.portlet.collection',
+            'plone.portlet.static',
+            'qPloneCaptchas',
+            'qPloneComments',
+            'slc.aggregation',
+            'slc.autotranslate',
+            'slc.calendarfetcher',
+            'slc.clicksearch',
+            'slc.editonpro',
+            'slc.foldercontentsfilter',
+            'slc.publications',
             'slc.seminarportal',
+            'slc.shoppinglist',
+            'slc.subsite',
+            'slc.treecategories',
+            'slc.xliff',
+            'syslabcom.filter',
             'osha.adaptation',
             ]
 
