@@ -413,6 +413,16 @@ class DocumentExtender(OSHASchemaExtender):
         self._generateMethods(context, self._fields)
 
 
+class SEOExtender(OSHASchemaExtender):
+    _fields = [
+        extended_fields_dict.get('seoDescription').copy(),
+        ]
+
+    def __init__(self, context):
+        self.context = context
+        self._generateMethods(context, self._fields)
+
+
 class CaseStudyExtender(OSHASchemaExtender):
     """ The following assupmtion turned out to be WRONG:
         <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is

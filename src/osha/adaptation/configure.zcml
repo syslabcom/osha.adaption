@@ -65,6 +65,13 @@
         />
 
     <adapter
+        factory=".schema.SEOExtender" 
+        for="Products.ATContentTypes.interface.IATTopic"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-topic-extended"
+        />
+
+    <adapter
         factory=".schema.EventExtender" 
         for="Products.ATContentTypes.interface.IATEvent"
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
@@ -133,6 +140,13 @@
             for="Products.PressRoom.interfaces.content.IPressRelease"
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             name="osha-document-extended"
+            />
+
+        <adapter
+            factory=".schema.SEOExtender" 
+            for="Products.PressRoom.interfaces.content.IPressRoom"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            name="osha-pressroom-extended"
             />
     </configure>
 
