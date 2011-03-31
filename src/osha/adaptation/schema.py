@@ -10,6 +10,7 @@ import zope.interface
 
 from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
+from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
 
 from Products.ATCountryWidget.Widget import MultiCountryWidget
@@ -27,6 +28,12 @@ from osha.theme import OSHAMessageFactory as _
 from osha.adaptation.vocabulary import AnnotatableLinkListVocabulary
 from osha.adaptation.subtyper import IAnnotatedLinkList
 from osha.adaptation import config
+
+try:
+    from osha.policy.interfaces import IOSHACommentsLayer
+    IOSHACommentsLayer = IOSHACommentsLayer #Pyflakes
+except ImportError:
+    IOSHACommentsLayer = None
 
 log = logging.getLogger('osha.adaptation/schemaextender.py')
 
@@ -711,7 +718,14 @@ class LinkListExtender(OSHASchemaExtender):
 class ProviderModifier(object):
     """ This is a schema modifier, not extender.
     """
-    zope.interface.implements(ISchemaModifier)
+    if IOSHACommentsLayer:
+        zope.interface.implements(
+                            ISchemaModifier, 
+                            IBrowserLayerAwareExtender
+                            )
+        layer = IOSHACommentsLayer
+    else:
+        zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
@@ -779,7 +793,14 @@ class ProviderModifier(object):
 class EventModifier(object):
     """ This is a schema modifier, not extender.
     """
-    zope.interface.implements(ISchemaModifier)
+    if IOSHACommentsLayer:
+        zope.interface.implements(
+                            ISchemaModifier, 
+                            IBrowserLayerAwareExtender
+                            )
+        layer = IOSHACommentsLayer
+    else:
+        zope.interface.implements(ISchemaModifier)
     
     def __init__(self, context):
         self.context = context
