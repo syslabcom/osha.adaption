@@ -18,177 +18,175 @@
         provides="Products.Archetypes.interfaces._vocabulary.IVocabulary"
         /> 
 
-    <configure zcml:condition="installed osha.policy">
 
-        <configure zcml:condition="installed plone.app.blob">
-            <adapter
-                for="plone.app.blob.interfaces.IATBlob"
-                factory=".schema.FileContentExtender" 
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                />
-
-            <adapter
-                for="plone.app.blob.interfaces.IATBlobImage"
-                factory=".schema.FileContentExtender" 
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                />
-
-            <adapter
-                for="plone.app.blob.interfaces.IATBlobFile"
-                factory=".schema.FileContentExtender" 
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                />
-        </configure>
-
+    <configure zcml:condition="installed plone.app.blob">
         <adapter
-            for="Products.ATContentTypes.content.image.ATImage"
-            factory=".schema.FileContentExtender" 
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-image"
-            />
-
-        <adapter
-            for="Products.ATContentTypes.interface.file.IATFile"
+            for="plone.app.blob.interfaces.IATBlob"
             factory=".schema.FileContentExtender" 
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             />
 
         <adapter
-            for="Products.ATContentTypes.interface.IATLink"
+            for="plone.app.blob.interfaces.IATBlobImage"
             factory=".schema.FileContentExtender" 
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             />
 
         <adapter
-            factory=".schema.DocumentExtender" 
-            for="Products.ATContentTypes.interface.IATDocument"
+            for="plone.app.blob.interfaces.IATBlobFile"
+            factory=".schema.FileContentExtender" 
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            />
+    </configure>
+
+    <adapter
+        for="Products.ATContentTypes.content.image.ATImage"
+        factory=".schema.FileContentExtender" 
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-image"
+        />
+
+    <adapter
+        for="Products.ATContentTypes.interface.file.IATFile"
+        factory=".schema.FileContentExtender" 
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        />
+
+    <adapter
+        for="Products.ATContentTypes.interface.IATLink"
+        factory=".schema.FileContentExtender" 
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        />
+
+    <adapter
+        factory=".schema.DocumentExtender" 
+        for="Products.ATContentTypes.interface.IATDocument"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-document-extended"
+        />
+
+    <adapter
+        factory=".schema.SEOExtender" 
+        for="Products.ATContentTypes.interface.IATTopic"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-topic-extended"
+        />
+
+    <adapter
+        factory=".schema.EventExtender" 
+        for="Products.ATContentTypes.interface.IATEvent"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-event"
+        />
+        
+    <adapter
+        factory=".schema.EventModifier" 
+        for="Products.ATContentTypes.interface.IATEvent"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
+
+    <adapter
+        zcml:condition="installed osha.whoswho"
+        factory=".schema.WhoswhoExtender" 
+        for="osha.whoswho.content.whoswho.whoswho"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-whoswho"
+        />
+
+    <adapter
+        zcml:condition="installed Products.RALink"
+        factory=".schema.RALinkExtender" 
+        for="Products.RALink.content.interfaces.IRALink"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-ralink"
+        />
+
+    <adapter
+        zcml:condition="installed Products.CaseStudy"
+        factory=".schema.CaseStudyExtender" 
+        for="Products.CaseStudy.interfaces.ICaseStudy"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-case-study"
+        />
+
+    <adapter
+        zcml:condition="installed Products.OSHContentLink"
+        factory=".schema.OSHContentExtender" 
+        for="Products.OSHContentLink.OSH_Link.OSH_Link"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-resource"
+        />
+
+    <configure zcml:condition="installed Products.RemoteProvider">>
+        <adapter
+            factory=".schema.ProviderModifier" 
+            for="Products.RemoteProvider.content.Provider.Provider"
+            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+            />
+
+        <adapter
+            factory=".schema.OSHContentExtender" 
+            for="Products.RemoteProvider.content.Provider.Provider"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            />
+    </configure>
+
+    <configure zcml:condition="installed Products.PressRoom">
+        <!-- It's important that we give the same name 'osha-document-extended'
+            as the adapter for IATDocument, otherwise both adapters are
+            applied.
+        -->
+        <adapter
+            factory=".schema.PressReleaseExtender" 
+            for="Products.PressRoom.interfaces.content.IPressRelease"
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             name="osha-document-extended"
             />
 
         <adapter
             factory=".schema.SEOExtender" 
-            for="Products.ATContentTypes.interface.IATTopic"
+            for="Products.PressRoom.interfaces.content.IPressRoom"
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-topic-extended"
-            />
-
-        <adapter
-            factory=".schema.EventExtender" 
-            for="Products.ATContentTypes.interface.IATEvent"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-event"
-            />
-            
-        <adapter
-            factory=".schema.EventModifier" 
-            for="Products.ATContentTypes.interface.IATEvent"
-            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
-            />
-
-        <adapter
-            zcml:condition="installed osha.whoswho"
-            factory=".schema.WhoswhoExtender" 
-            for="osha.whoswho.content.whoswho.whoswho"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-whoswho"
-            />
-
-        <adapter
-            zcml:condition="installed Products.RALink"
-            factory=".schema.RALinkExtender" 
-            for="Products.RALink.content.interfaces.IRALink"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-ralink"
-            />
-
-        <adapter
-            zcml:condition="installed Products.CaseStudy"
-            factory=".schema.CaseStudyExtender" 
-            for="Products.CaseStudy.interfaces.ICaseStudy"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-case-study"
-            />
-
-        <adapter
-            zcml:condition="installed Products.OSHContentLink"
-            factory=".schema.OSHContentExtender" 
-            for="Products.OSHContentLink.OSH_Link.OSH_Link"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-resource"
-            />
-
-        <configure zcml:condition="installed Products.RemoteProvider">>
-            <adapter
-                factory=".schema.ProviderModifier" 
-                for="Products.RemoteProvider.content.Provider.Provider"
-                provides="archetypes.schemaextender.interfaces.ISchemaModifier"
-                />
-
-            <adapter
-                factory=".schema.OSHContentExtender" 
-                for="Products.RemoteProvider.content.Provider.Provider"
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                />
-        </configure>
-
-        <configure zcml:condition="installed Products.PressRoom">
-            <!-- It's important that we give the same name 'osha-document-extended'
-                as the adapter for IATDocument, otherwise both adapters are
-                applied.
-            -->
-            <adapter
-                factory=".schema.PressReleaseExtender" 
-                for="Products.PressRoom.interfaces.content.IPressRelease"
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                name="osha-document-extended"
-                />
-
-            <adapter
-                factory=".schema.SEOExtender" 
-                for="Products.PressRoom.interfaces.content.IPressRoom"
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                name="osha-pressroom-extended"
-                />
-        </configure>
-
-        <configure zcml:condition="installed slc.seminarportal">
-            <adapter
-                factory=".schema.OSHContentExtender" 
-                for="slc.seminarportal.content.speechvenue.SPSpeechVenue"
-                provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-                name="osha-speechvenue"
-                />
-        </configure>
-
-        <adapter
-            zcml:condition="installed Products.PloneHelpCenter"
-            factory=".schema.FAQExtender" 
-            for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-faq"
-            />
-
-        <adapter
-            zcml:condition="installed Products.PloneHelpCenter"
-            factory=".schema.FAQModifier" 
-            for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
-            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
-            />
-
-        <adapter
-            zcml:condition="installed slc.seminarportal"
-            factory=".schema.SeminarModifier" 
-            for="slc.seminarportal.content.seminar.SPSeminar"
-            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
-            />
-
-        <adapter
-            zcml:condition="installed slc.seminarportal"
-            factory=".schema.SeminarModifier" 
-            for="slc.seminarportal.content.speech.SPSpeech"
-            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+            name="osha-pressroom-extended"
             />
     </configure>
+
+    <configure zcml:condition="installed slc.seminarportal">
+        <adapter
+            factory=".schema.OSHContentExtender" 
+            for="slc.seminarportal.content.speechvenue.SPSpeechVenue"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            name="osha-speechvenue"
+            />
+    </configure>
+
+    <adapter
+        zcml:condition="installed Products.PloneHelpCenter"
+        factory=".schema.FAQExtender" 
+        for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
+        provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+        name="osha-faq"
+        />
+
+    <adapter
+        zcml:condition="installed Products.PloneHelpCenter"
+        factory=".schema.FAQModifier" 
+        for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
+
+    <adapter
+        zcml:condition="installed slc.seminarportal"
+        factory=".schema.SeminarModifier" 
+        for="slc.seminarportal.content.seminar.SPSeminar"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
+
+    <adapter
+        zcml:condition="installed slc.seminarportal"
+        factory=".schema.SeminarModifier" 
+        for="slc.seminarportal.content.speech.SPSpeech"
+        provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+        />
 
 </configure>
