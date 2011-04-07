@@ -65,7 +65,7 @@ class ExtensionFieldMixin:
         methodName = getattr(self, 'mutator', None)
         if methodName is None:  # Use default setter
             return mutator
-        
+
         method = getattr(instance, methodName, None)
         if method is None:   # Use default setter
             return mutator
@@ -112,7 +112,7 @@ class SEBooleanField(ExtensionField, atapi.BooleanField):
 
 class SEDataGridField(ExtensionFieldMixin, ExtensionField, DataGridField):
     """ A schema-extender aware DataGridWidget """
-    
+
 class SEFileField(ExtensionField, atapi.FileField):
     """ A schema-extender aware FileField """
 
@@ -240,7 +240,7 @@ extended_fields_dict = {
                 i18n_domain='osha',
             ),
         ),
-    'reindexTranslations':  
+    'reindexTranslations':
         SEBooleanField('reindexTranslations',
             schemata='default',
             default=False,
@@ -290,7 +290,7 @@ extended_fields_dict = {
             schemata='default',
             widget=atapi.TextAreaWidget(
                 label= _(
-                    u'osha_seo_description_label', 
+                    u'osha_seo_description_label',
                     default=u'SEO Description'
                     ),
                 description= _(u'osha_seo_description_description',
@@ -304,11 +304,28 @@ extended_fields_dict = {
                 visible={'edit': 'visible', 'view': 'invisible'},
             ),
         ),
+    'dateToBeConfirmed':
+        SEBooleanField('dateToBeConfirmed',
+            schemata='default',
+            default=False,
+            languageIndependent=False,
+            widget=atapi.BooleanWidget(
+                label=_(u'Date to be confirmed'),
+                description=_(
+                    u'label_date_to_be_confirmed',
+                    default=(
+                        u"Check this box if the date has not yet been "
+                        "confirmed.")
+                    ),
+                visible={'edit': 'visible', 'view': 'invisible'},
+                condition="python:object.isCanonical()",
+            ),
+        ),
     }
 
 class OSHASchemaExtender(object):
-    """ This is the base class for all other schema extenders. It sets the 
-        layer, the interfaces being implemented and provides a helper method 
+    """ This is the base class for all other schema extenders. It sets the
+        layer, the interfaces being implemented and provides a helper method
         that generates accessors and mutators for language independent fields.
     """
     zope.interface.implements(IOrderableSchemaExtender)
@@ -318,8 +335,8 @@ class OSHASchemaExtender(object):
         self._generateMethods(context, self._fields)
 
     def _generateMethods(self, context, fields, initialized=True, marker=LANGUAGE_INDEPENDENT_INITIALIZED):
-        """ Call LinguaPlone's generateMethods method to generate accessors 
-            which automatically update the values of languageIndependent 
+        """ Call LinguaPlone's generateMethods method to generate accessors
+            which automatically update the values of languageIndependent
             fields on all translations.
         """
         klass = context.__class__
@@ -363,8 +380,8 @@ class OSHASchemaExtender(object):
         if len(ordered_fields) <> original_fields:
             # The ordered_fields defined in config, contains all the
             # schemaextended fields, not just the ones of the particular
-            # extender on which this method is being called. Since the 
-            # extenders are being called on after another, the case will arise 
+            # extender on which this method is being called. Since the
+            # extenders are being called on after another, the case will arise
             # where not all the extension fields have been added. We attempt
             # then to return the order for all the fields that *have* been
             # extended.
@@ -373,7 +390,7 @@ class OSHASchemaExtender(object):
                 actual_fields += \
                         [f for f in original_fields if f not in ordered_fields]
 
-            original['default'] = actual_fields 
+            original['default'] = actual_fields
         else:
             original['default'] = ordered_fields
 
@@ -456,7 +473,7 @@ class CaseStudyExtender(OSHASchemaExtender):
             if f.getName() in ('country', 'multilingual_thesaurus'):
                 f.required = True
 
-        # Case Study inherits from ATDocument. We might get a false positive, 
+        # Case Study inherits from ATDocument. We might get a false positive,
         # so check that the accessors are really there
 
         fields = [field for field in self._fields if field.languageIndependent]
@@ -478,6 +495,7 @@ class EventExtender(OSHASchemaExtender):
         extended_fields_dict.get('attachment').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('seoDescription').copy(),
+        extended_fields_dict.get('dateToBeConfirmed').copy(),
         ]
 
     def __init__(self, context):
@@ -490,10 +508,10 @@ class EventExtender(OSHASchemaExtender):
 
 
 class FAQExtender(OSHASchemaExtender):
-    """ 
+    """
     HelpCenterFAQ uses the AddRemoveWidget 'subject' widget instead of
     the standard one. Since we have override the standard keyword.pt
-    template in osha/theme/skins/osha_theme_custom_templates/widgets/keyword.pt 
+    template in osha/theme/skins/osha_theme_custom_templates/widgets/keyword.pt
     to provide translations for the keywords, here we subtype HelpCenterFAQ
     so that it also uses the standard 'subject' widget.
     """
@@ -530,7 +548,7 @@ class FAQExtender(OSHASchemaExtender):
 
 class RALinkExtender(OSHASchemaExtender):
     """ The following assupmtion turned out to be WRONG:
-        <<RALinks are already extended by DocumentExtender because they subtype 
+        <<RALinks are already extended by DocumentExtender because they subtype
         ATDocument. Here we add only the extra fields.>>
 
         Only if the document extender is initialised first does this work. Otherwise
@@ -552,12 +570,12 @@ class RALinkExtender(OSHASchemaExtender):
     def __init__(self, context):
         self.context = context
         for f in self._fields:
-            if f.getName() in ('country',): 
+            if f.getName() in ('country',):
                 f.required = True
 
         # RA Link inherits from ATDocument. We might get a false positive, so check that the
         # accessors are really there
-        
+
         fields = [field for field in self._fields if field.languageIndependent]
         not_yet_initialised = list()
         for field in fields:
@@ -630,7 +648,7 @@ class FileContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('seoDescription').copy(),
         ]
- 
+
     def __init__(self, context):
         super(FileContentExtender, self).__init__(context)
 
@@ -646,7 +664,7 @@ class FileContentExtender(OSHASchemaExtender):
         #     if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
         #         vocabulary = NamedVocabulary(field.widget.vocabulary)
         #         widget_args = {}
-        #         for arg in ('label', 'description', 'label_msgid', 
+        #         for arg in ('label', 'description', 'label_msgid',
         #                     'description_msgid, i18n_domain'):
         #             widget_args[arg] = getattr(field.widget, arg, '')
         #         widget_args['vocabulary'] = field.widget.vocabulary
@@ -664,7 +682,7 @@ class LinkListExtender(OSHASchemaExtender):
         area. Luckily OSHNetwork is in its own subsite and thus has its own
         sitemanager.
 
-        So we should be able to register the extender locally, by just doing 
+        So we should be able to register the extender locally, by just doing
         this:
             sm = portal.getSiteManager()
             sm.registerAdapter(
@@ -675,8 +693,8 @@ class LinkListExtender(OSHASchemaExtender):
 
         We do this in an external method:
             osha.policy/Extensions/setLinkListExtension.py
-        
-        For more info on the mechanism, see 
+
+        For more info on the mechanism, see
         five.localsitemanager.localsitemaqnager.txt
     """
     _fields = [
@@ -686,9 +704,9 @@ class LinkListExtender(OSHASchemaExtender):
 
 # class OshaMetadataExtender(OSHASchemaExtender):
 #     """ This is a general content agnostic extender.
-#         
+#
 #         For details, please see the description in the LinkListExtender.
-#         
+#
 #         NB!!!
 #         The OshaMetadataExtender used to be in use, set via a local site manager.
 #         This made indexing the osha_metadata field impossible, since in the context
@@ -700,7 +718,7 @@ class LinkListExtender(OSHASchemaExtender):
 #     _fields = [
 #         extended_fields_dict.get('osha_metadata').copy(),
 #         ]
-# 
+#
 #     def __init__(self, context):
 #         self.context = context
 #         # make sure _generateMethods is also called on derived content types
@@ -710,7 +728,7 @@ class LinkListExtender(OSHASchemaExtender):
 #             if not getattr(context, field.accessor, None):
 #                 initialized = False
 #                 break
-# 
+#
 #         self._generateMethods(context, self._fields, initialized,
 #             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'osha_metadata')
 
@@ -720,16 +738,16 @@ class ProviderModifier(object):
     """
     if IOSHACommentsLayer:
         zope.interface.implements(
-                            ISchemaModifier, 
+                            ISchemaModifier,
                             IBrowserLayerAwareExtender
                             )
         layer = IOSHACommentsLayer
     else:
         zope.interface.implements(ISchemaModifier)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     def fiddle(self, schema):
         """Fiddle the schema.
 
@@ -744,21 +762,21 @@ class ProviderModifier(object):
         them first and place the copy in the schema.
         """
         if self.context.portal_type != 'Provider':
-            return 
+            return
 
         unwantedFields = (
-                'subject', 
-                'allowDiscussion', 
-                'creation_date', 
+                'subject',
+                'allowDiscussion',
+                'creation_date',
                 'modification_date',
-                'sme', 
+                'sme',
                 'provider'
                 )
 
         moveToDefault = (
-                'remoteLanguage', 
-                'location', 
-                'effectiveDate', 
+                'remoteLanguage',
+                'location',
+                'effectiveDate',
                 'expirationDate'
                 )
 
@@ -771,7 +789,7 @@ class ProviderModifier(object):
         for name in moveToDefault:
             if schema.get(name):
                 schema.changeSchemataForField(name, 'default')
-        
+
         # we used to hide the language field (unwanted), now we just move
         # it the settings tab
         schema.changeSchemataForField('language', 'settings')
@@ -779,7 +797,7 @@ class ProviderModifier(object):
         field = schema['providerCategory'].copy()
         field.required = True
         schema['providerCategory'] = field
-                
+
         # Make sure that the desired ordering is achieved
         portal_type = self.context.portal_type
         ordered_fields = \
@@ -795,16 +813,16 @@ class EventModifier(object):
     """
     if IOSHACommentsLayer:
         zope.interface.implements(
-                            ISchemaModifier, 
+                            ISchemaModifier,
                             IBrowserLayerAwareExtender
                             )
         layer = IOSHACommentsLayer
     else:
         zope.interface.implements(ISchemaModifier)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     def fiddle(self, schema):
         """Fiddle the schema.
 
@@ -819,7 +837,7 @@ class EventModifier(object):
         them first and place the copy in the schema.
         """
         if self.context.portal_type != 'Event':
-            return 
+            return
 
         eventType = schema['eventType'].copy()
         eventType.widget.visible['edit'] = 'invisible'
@@ -839,15 +857,15 @@ class FAQModifier(object):
     """ This is a schema modifier, not extender.
     """
     zope.interface.implements(ISchemaModifier)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     def fiddle(self, schema):
         """Fiddle the schema.
         """
         if self.context.portal_type != 'HelpCenterFAQ':
-            return 
+            return
 
         subject = schema['subject'].copy()
         subject.widget.visible['edit'] = 'invisible'
@@ -858,10 +876,10 @@ class SeminarModifier(object):
     """ This is a schema modifier, not extender.
     """
     zope.interface.implements(ISchemaModifier)
-    
+
     def __init__(self, context):
         self.context = context
-    
+
     def fiddle(self, schema):
         """Fiddle the schema.
         """

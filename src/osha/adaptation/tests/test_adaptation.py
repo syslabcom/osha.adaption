@@ -25,7 +25,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
 
             This field should appear directly underneath the normal description
             field.
-        """ 
+        """
         # import sys; sys.sdtout = file('/dev/stdout', 'w')
         ttool = getToolByName(self.portal, 'portal_types')
         not_extended = open("not_extended.txt", 'w')
@@ -36,7 +36,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             try:
                 obj = info.constructInstance(self.portal, type_name)
             except Unauthorized:
-                continue 
+                continue
             except:
                 continue
 
@@ -49,7 +49,7 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             fields = [f.__name__ for f in field_obs]
             # assert('seoDescription' in fields)
             # self.assertEquals(
-            #             fields.index('seoDescription'), 
+            #             fields.index('seoDescription'),
             #             fields.index('description')+1
             #             )
 
@@ -99,10 +99,10 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                     types_dict[type_name][fields[i]],
                     "%s has field %s with widget visibility: %s but it should " \
                     "be %s" % \
-                    (   type_name, 
+                    (   type_name,
                         fields[i],
                         field_obs[i].widget.visible,
-                        types_dict[type_name][fields[i]], 
+                        types_dict[type_name][fields[i]],
                     )
                 )
 
@@ -130,6 +130,23 @@ class TestSchemaExtender(OshaAdaptationTestCase):
 
         self.assertEquals(self.is_subtyped(obj), False)
 
+    def test_event_date_to_be_confirmed(self):
+        """ Ticket #2341:
+            Events need an extra field to show if the date is
+            provisional and still needs to be confirmed
+
+            This field should appear directly after the date fields
+        """
+        ttool = getToolByName(self.portal, 'portal_types')
+        info = ttool.getTypeInfo("Event")
+        event = info.constructInstance(self.portal, "Event")
+        field_obs = event.Schema().getSchemataFields('default')
+        fields = [f.__name__ for f in field_obs]
+        assert('dateToBeConfirmed' in fields)
+        self.assertEquals(
+                    fields.index('dateToBeConfirmed'),
+                    fields.index('endDate')+1
+                    )
 
 def test_suite():
     suite = unittest.TestSuite()

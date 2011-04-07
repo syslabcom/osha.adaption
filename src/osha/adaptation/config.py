@@ -52,6 +52,7 @@ fdict['Event']['seoDescription']                    = {'edit': 'visible',   'vie
 fdict['Event']['isNews']                            = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['startDate']                         = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['endDate']                           = {'edit': 'visible',   'view': 'visible'}
+fdict['Event']['dateToBeConfirmed']                 = {'edit': 'visible',   'view': 'invisible'}
 fdict['Event']['text']                              = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['attendees']                         = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['eventType']                         = {'edit': 'invisible', 'view': 'visible'}

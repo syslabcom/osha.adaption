@@ -4,13 +4,13 @@ Changelog
 0.1.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Added dateToBeConfirmed to Events #2341 [deroiste]
 
 
 0.1.13 (2011-03-31)
 -------------------
 
-- Added additional field seoDescription #999 [jcbrand] 
+- Added additional field seoDescription #999 [jcbrand]
 
 0.1.12 (2011-02-21)
 -------------------
@@ -88,7 +88,7 @@ Changelog
 
 - Removed the field reindexTranslations from the OSHContentExtender, since
   it is not needed there #613 (thomasw)
-- Re-added globally the field osha_metadata for most 
+- Re-added globally the field osha_metadata for most
   content types. The catalog was not able to index this field when it
   was made available via a local Site Manager, the catalog being outside
   of the LSM's context. We use CSS now to hide the field where we don't
