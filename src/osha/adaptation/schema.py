@@ -317,7 +317,6 @@ extended_fields_dict = {
                         u"Check this box if the date has not yet been "
                         "confirmed.")
                     ),
-                visible={'edit': 'visible', 'view': 'invisible'},
                 condition="python:object.isCanonical()",
             ),
         ),
