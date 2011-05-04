@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.14 (unreleased)
+0.1.14 (2011-05-04)
 -------------------
 
 - Added dateToBeConfirmed to Events #2341 [deroiste]
