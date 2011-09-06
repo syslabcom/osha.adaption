@@ -3,7 +3,7 @@ from zope.interface import implements
 from zope.app.component.hooks import getSite
 
 from Products.Archetypes.atapi import DisplayList
-from Products.Archetypes.interfaces._vocabulary import IVocabulary
+from Products.Archetypes.interfaces import IVocabulary
 
 class AnnotatableLinkListVocabulary(object):
     """Vocabulary factory returning Section names for the AnnotatableLinkList 

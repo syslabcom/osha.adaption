@@ -15,7 +15,7 @@
     <utility
         component=".vocabulary.AnnotatableLinkListVocabulary"
         name="osha.theme.AnnotatableLinkListVocabulary"
-        provides="Products.Archetypes.interfaces._vocabulary.IVocabulary"
+        provides="Products.Archetypes.interfaces.vocabulary.IVocabulary"
         />
 
 
