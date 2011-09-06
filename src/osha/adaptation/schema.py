@@ -22,7 +22,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.LinguaPlone.utils import generateMethods
-from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
+# from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
 
 from osha.adaptation import config
 from osha.adaptation.subtyper import IAnnotatedLinkList
@@ -151,17 +151,17 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setSubcategory',
             accessor='getSubcategory',
-            widget=VocabularyPickerWidget(
-                label="Subcategory (Site position)",
-                description= \
-                    u'Choose the most relevant subcategories. This will '
-                    u'decide where the information is displayed',
-                vocabulary="Subcategory",
-                label_msgid='label_subcategory',
-                description_msgid='help_subcategory',
-                i18n_domain='osha',
-                condition="python:len(object.getField('subcategory').Vocabulary(object))",
-            ),
+            # widget=VocabularyPickerWidget(
+            #     label="Subcategory (Site position)",
+            #     description= \
+            #         u'Choose the most relevant subcategories. This will '
+            #         u'decide where the information is displayed',
+            #     vocabulary="Subcategory",
+            #     label_msgid='label_subcategory',
+            #     description_msgid='help_subcategory',
+            #     i18n_domain='osha',
+            #     condition="python:len(object.getField('subcategory').Vocabulary(object))",
+            # ),
         ),
     'multilingual_thesaurus':
         MTSubjectField('multilingual_thesaurus',
@@ -172,15 +172,15 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setMultilingual_thesaurus',
             accessor='getMultilingual_thesaurus',
-            widget=VocabularyPickerWidget(
-                label='Multilingual Thesaurus Subject',
-                description='Select one or more entries',
-                vocabulary="MultilingualThesaurus",
-                label_msgid='label_multilingual_thesaurus',
-                description_msgid='help_multilingual_thesaurus',
-                i18n_domain='osha',
-                condition="python:len(object.getField('multilingual_thesaurus').Vocabulary(object))",
-            ),
+            # widget=VocabularyPickerWidget(
+            #     label='Multilingual Thesaurus Subject',
+            #     description='Select one or more entries',
+            #     vocabulary="MultilingualThesaurus",
+            #     label_msgid='label_multilingual_thesaurus',
+            #     description_msgid='help_multilingual_thesaurus',
+            #     i18n_domain='osha',
+            #     condition="python:len(object.getField('multilingual_thesaurus').Vocabulary(object))",
+            # ),
         ),
     'nace':
         NACEField('nace',
@@ -189,17 +189,17 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setNace',
             accessor='getNace',
-            widget=VocabularyPickerWidget(
-                label="Sector (NACE Code)",
-                description= \
-                    u"Pick one or more values by clicking the Add button or "
-                    "using the Quicksearch field below.",
-                vocabulary="NACE",
-                label_msgid='label_nace',
-                description_msgid='help_nace',
-                i18n_domain='osha',
-                condition="python:len(object.getField('nace').Vocabulary(object))",
-            ),
+            # widget=VocabularyPickerWidget(
+            #     label="Sector (NACE Code)",
+            #     description= \
+            #         u"Pick one or more values by clicking the Add button or "
+            #         "using the Quicksearch field below.",
+            #     vocabulary="NACE",
+            #     label_msgid='label_nace',
+            #     description_msgid='help_nace',
+            #     i18n_domain='osha',
+            #     condition="python:len(object.getField('nace').Vocabulary(object))",
+            # ),
         ),
     'osha_metadata':
         OSHAMetadataField('osha_metadata',
@@ -209,13 +209,13 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setOsha_metadata',
             accessor='getOsha_metadata',
-            widget=VocabularyPickerWidget(
-                label=_(u'OSHAMetadata_label', default=u"OSHA Metadata"),
-                description=_(u'OSHAMetadata_description', default="Choose the relevant metadata"),
-                vocabulary="OSHAMetadata",
-                i18n_domain='osha',
-                condition="python:len(object.getField('osha_metadata').Vocabulary(object))",
-                ),
+            # widget=VocabularyPickerWidget(
+            #     label=_(u'OSHAMetadata_label', default=u"OSHA Metadata"),
+            #     description=_(u'OSHAMetadata_description', default="Choose the relevant metadata"),
+            #     vocabulary="OSHAMetadata",
+            #     i18n_domain='osha',
+            #     condition="python:len(object.getField('osha_metadata').Vocabulary(object))",
+            #     ),
             vocabulary="OSHAMetadata"
         ),
     'isNews':
