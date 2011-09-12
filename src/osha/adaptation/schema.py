@@ -883,3 +883,51 @@ class SeminarModifier(object):
         eventType.widget.visible['edit'] = 'invisible'
         schema['eventType'] = eventType
 
+
+class PressReleaseModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+    zope.interface.implements(ISchemaModifier)
+
+    def __init__(self, context):
+        self.context = context
+
+    def _generateMethods(self, context, fields, initialized=True, marker=LANGUAGE_INDEPENDENT_INITIALIZED):
+        """ Call LinguaPlone's generateMethods method to generate accessors
+            which automatically update the values of languageIndependent
+            fields on all translations.
+        """
+        klass = context.__class__
+        if not getattr(klass, marker, False) \
+                          or not initialized:
+
+            fields = [field for field in fields if field.languageIndependent]
+            generateMethods(klass, fields)
+            log.info("called generateMethods on %s (%s) for these fields: %s " \
+                                    % (klass, self.__class__.__name__, str([x.getName() for x in fields]))
+                    )
+
+            setattr(klass, marker, True)
+
+    def fiddle(self, schema):
+        """Fiddle the schema.
+        """
+        if self.context.portal_type != 'PressRelease':
+            return
+        # all language independent fields need to be passed to _generateMethods
+        _fields = list()
+        subhead = schema['subhead'].copy()
+        subhead.languageIndependent = False
+
+        releaseDate = schema['releaseDate'].copy()
+        releaseDate.languageIndependent = True
+        _fields.append(releaseDate)
+
+        releaseContacts = schema['releaseContacts'].copy()
+        releaseContacts.languageIndependent = True
+        _fields.append(releaseContacts)
+        self._generateMethods(self.context, _fields, marker="_languageIndependent_initialized_pressrelease")
+
+        schema['subhead'] = subhead
+        schema['releaseDate'] = releaseDate
+        schema['releaseContacts'] = releaseContacts

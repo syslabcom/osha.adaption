@@ -4,8 +4,8 @@ Changelog
 0.1.15 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Added a schema modifier to change the languageIndependent status of some PressRelease
+  fields; generateMethods is called where necessary. Fixes #3446 [thomasw]
 
 0.1.14 (2011-05-04)
 -------------------

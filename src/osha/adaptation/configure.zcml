@@ -150,6 +150,12 @@
             />
 
         <adapter
+            factory=".schema.PressReleaseModifier"
+            for="Products.PressRoom.interfaces.content.IPressRelease"
+            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
+            />
+
+        <adapter
             factory=".schema.SEOExtender"
             for="Products.PressRoom.interfaces.content.IPressRoom"
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
