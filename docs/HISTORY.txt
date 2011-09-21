@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.15 (unreleased)
+0.1.15 (2011-09-21)
 -------------------
 
 - Added a schema modifier to change the languageIndependent status of some PressRelease
