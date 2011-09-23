@@ -828,10 +828,6 @@ class EventModifier(object):
         if self.context.portal_type != 'Event':
             return
 
-        eventType = schema['eventType'].copy()
-        eventType.widget.visible['edit'] = 'invisible'
-        schema['eventType'] = eventType
-
         schema.changeSchemataForField('location', 'categorization')
         portal_type = self.context.portal_type
         ordered_fields = \
@@ -878,8 +874,4 @@ class SeminarModifier(object):
         attachment = schema['attachment'].copy()
         attachment.widget.visible['edit'] = 'invisible'
         schema['attachment'] = attachment
-
-        eventType = schema['eventType'].copy()
-        eventType.widget.visible['edit'] = 'invisible'
-        schema['eventType'] = eventType
 

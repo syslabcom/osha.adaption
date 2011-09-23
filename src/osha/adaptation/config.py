@@ -55,7 +55,6 @@ fdict['Event']['endDate']                           = {'edit': 'visible',   'vie
 fdict['Event']['dateToBeConfirmed']                 = {'edit': 'visible',   'view': 'invisible'}
 fdict['Event']['text']                              = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['attendees']                         = {'edit': 'visible',   'view': 'visible'}
-fdict['Event']['eventType']                         = {'edit': 'invisible', 'view': 'visible'}
 fdict['Event']['eventUrl']                          = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['contactName']                       = {'edit': 'visible',   'view': 'visible'}
 fdict['Event']['contactEmail']                      = {'edit': 'visible',   'view': 'visible'}
