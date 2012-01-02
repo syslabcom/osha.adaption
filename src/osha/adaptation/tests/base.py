@@ -23,7 +23,6 @@ ztc.installProduct('LinguaPlone')
 ztc.installProduct('PressRoom')
 ztc.installProduct('RALink')
 ztc.installProduct('RemoteProvider')
-ztc.installProduct('OSHATranslations')
 ztc.installProduct('OSHContentLink')
 ztc.installProduct('RichDocument')
 ztc.installProduct('VocabularyPickerWidget')
@@ -47,7 +46,6 @@ class OshaAdaptationLayer(SiteLayer):
             'FCKeditor',
             'LinguaPlone',
             'Marshall',
-            'OSHATranslations',
             'OSHContentLink',
             'PloneFormGen',
             'PloneHelpCenter',
