@@ -338,12 +338,12 @@ class OSHASchemaExtender(object):
         if not getattr(klass, marker, False) \
                           or not initialized:
 
-            #fields = [field for field in fields if field.languageIndependent]
+            fields = [field for field in fields if field.languageIndependent]
             #generateMethods(klass, fields)
-            #log.info("called generateMethods on %s (%s) for these fields: %s " \
-                                    #% (klass, self.__class__.__name__, str([x.getName() for x in fields]))
-                    #)
-            log.info('NOT generating any accessors - commented out!')
+            log.info("NOT calling generateMethods on %s (%s) for these fields: %s " \
+                                    % (klass, self.__class__.__name__, str([x.getName() for x in fields]))
+                    )
+            #log.info('NOT generating any accessors - commented out!')
             setattr(klass, marker, True)
 
     def getOrder(self, original):
