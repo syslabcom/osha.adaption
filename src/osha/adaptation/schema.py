@@ -335,8 +335,8 @@ class OSHASchemaExtender(object):
             fields on all translations.
         """
         klass = context.__class__
-        if not getattr(klass, marker, False) \
-                          or not initialized:
+        if not getattr(klass, marker, False):# \
+                          #or not initialized:
 
             fields = [field for field in fields if field.languageIndependent]
             #generateMethods(klass, fields)
