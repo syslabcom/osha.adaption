@@ -345,7 +345,7 @@ class OSHASchemaExtender(object):
                                     #% (klass, self.__class__.__name__, str([x.getName() for x in fields]))
                     #)
 
-            #setattr(klass, marker, True)
+            setattr(klass, marker, True)
 
     def getOrder(self, original):
         """ Try to set the fields order according to the ordering provided in
