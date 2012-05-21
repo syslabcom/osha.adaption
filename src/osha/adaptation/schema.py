@@ -334,17 +334,18 @@ class OSHASchemaExtender(object):
             which automatically update the values of languageIndependent
             fields on all translations.
         """
-        klass = context.__class__
-        if not getattr(klass, marker, False) \
-                          or not initialized:
+        log.info('NOT generating any accessors - commented out!')
+        #klass = context.__class__
+        #if not getattr(klass, marker, False) \
+                          #or not initialized:
 
-            fields = [field for field in fields if field.languageIndependent]
-            generateMethods(klass, fields)
-            log.info("called generateMethods on %s (%s) for these fields: %s " \
-                                    % (klass, self.__class__.__name__, str([x.getName() for x in fields]))
-                    )
+            #fields = [field for field in fields if field.languageIndependent]
+            #generateMethods(klass, fields)
+            #log.info("called generateMethods on %s (%s) for these fields: %s " \
+                                    #% (klass, self.__class__.__name__, str([x.getName() for x in fields]))
+                    #)
 
-            setattr(klass, marker, True)
+            #setattr(klass, marker, True)
 
     def getOrder(self, original):
         """ Try to set the fields order according to the ordering provided in
