@@ -334,7 +334,6 @@ class OSHASchemaExtender(object):
             which automatically update the values of languageIndependent
             fields on all translations.
         """
-        log.info('NOT generating any accessors - commented out!')
         klass = context.__class__
         if not getattr(klass, marker, False) \
                           or not initialized:
@@ -344,7 +343,7 @@ class OSHASchemaExtender(object):
             #log.info("called generateMethods on %s (%s) for these fields: %s " \
                                     #% (klass, self.__class__.__name__, str([x.getName() for x in fields]))
                     #)
-
+            log.info('NOT generating any accessors - commented out!')
             setattr(klass, marker, True)
 
     def getOrder(self, original):
