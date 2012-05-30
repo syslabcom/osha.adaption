@@ -12,16 +12,18 @@ from archetypes.schemaextender.interfaces import IOrderableSchemaExtender
 from archetypes.schemaextender.interfaces import ISchemaModifier
 from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
 from archetypes.schemaextender.field import ExtensionField
+from collective.dynatree.atwidget import DynatreeWidget
 
 from Products.ATCountryWidget.Widget import MultiCountryWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.ATVocabularyManager import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.Archetypes.utils import DisplayList
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
-from Products.LinguaPlone.utils import generateMethods
+# from Products.LinguaPlone.utils import generateMethods
 # from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
 
 from osha.adaptation import config
@@ -92,7 +94,8 @@ class OSHAMetadataField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'OSHAMetadata')
 
-class ReferencedContentField(ExtensionFieldMixin, ExtensionField, atapi.ReferenceField):
+class ReferencedContentField(ExtensionFieldMixin, ExtensionField,
+                             atapi.ReferenceField):
     """ Possibility to reference content objects, the text of which """
     """ can be used to display inside the current object. """
 
@@ -133,9 +136,9 @@ extended_fields_dict = {
             accessor='getCountry',
             widget=MultiCountryWidget(
                 label="Countries",
-                description= \
+                description=(
                     u'Select one or more countries appropriate for this '
-                    u'content',
+                    u'content'),
                 description_msgid='help_country',
                 provideNullValue=1,
                 nullValueTitle="Select...",
@@ -151,7 +154,11 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setSubcategory',
             accessor='getSubcategory',
-            vocabulary="Subcategory",
+            vocabulary=NamedVocabulary("Subcategory"),
+            widget=DynatreeWidget(
+                description="",
+                selectMode=2
+            ),
             # widget=VocabularyPickerWidget(
             #     label="Subcategory (Site position)",
             #     description= \
@@ -161,7 +168,8 @@ extended_fields_dict = {
             #     label_msgid='label_subcategory',
             #     description_msgid='help_subcategory',
             #     i18n_domain='osha',
-            #     condition="python:len(object.getField('subcategory').Vocabulary(object))",
+            #     condition="python:len(object.getField(
+            #             'subcategory').Vocabulary(object))",
             # ),
         ),
     'multilingual_thesaurus':
@@ -173,7 +181,11 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setMultilingual_thesaurus',
             accessor='getMultilingual_thesaurus',
-            vocabulary="MultilingualThesaurus",
+            vocabulary=NamedVocabulary("MultilingualThesaurus"),
+            widget=DynatreeWidget(
+                description="",
+                selectMode=2
+            ),
             # widget=VocabularyPickerWidget(
             #     label='Multilingual Thesaurus Subject',
             #     description='Select one or more entries',
@@ -181,7 +193,8 @@ extended_fields_dict = {
             #     label_msgid='label_multilingual_thesaurus',
             #     description_msgid='help_multilingual_thesaurus',
             #     i18n_domain='osha',
-            #     condition="python:len(object.getField('multilingual_thesaurus').Vocabulary(object))",
+            #     condition="python:len(object.getField(
+            #           'multilingual_thesaurus').Vocabulary(object))",
             # ),
         ),
     'nace':
@@ -191,7 +204,11 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setNace',
             accessor='getNace',
-            vocabulary="NACE",
+            vocabulary=NamedVocabulary("NACE"),
+            widget=DynatreeWidget(
+                description="",
+                selectMode=2
+            ),
             # widget=VocabularyPickerWidget(
             #     label="Sector (NACE Code)",
             #     description= \
@@ -201,7 +218,8 @@ extended_fields_dict = {
             #     label_msgid='label_nace',
             #     description_msgid='help_nace',
             #     i18n_domain='osha',
-            #     condition="python:len(object.getField('nace').Vocabulary(object))",
+            #     condition="python:len(object.getField(
+            #      'nace').Vocabulary(object))",
             # ),
         ),
     'osha_metadata':
@@ -212,14 +230,16 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setOsha_metadata',
             accessor='getOsha_metadata',
+            vocabulary="OSHAMetadata"
             # widget=VocabularyPickerWidget(
             #     label=_(u'OSHAMetadata_label', default=u"OSHA Metadata"),
-            #     description=_(u'OSHAMetadata_description', default="Choose the relevant metadata"),
+            #     description=_(u'OSHAMetadata_description',
+            #              default="Choose the relevant metadata"),
             #     vocabulary="OSHAMetadata",
             #     i18n_domain='osha',
-            #     condition="python:len(object.getField('osha_metadata').Vocabulary(object))",
+            #     condition="python:len(object.getField(
+            #              'osha_metadata').Vocabulary(object))",
             #     ),
-            vocabulary="OSHAMetadata"
         ),
     'isNews':
         NewsMarkerField('isNews',
@@ -232,7 +252,8 @@ extended_fields_dict = {
             accessor='getIsNews',
             widget=atapi.BooleanWidget(
                 label="Mark as News",
-                description="Check to have this appear as News in the portlet.",
+                description=("Check to have this appear as News in the "
+                             "portlet."),
                 label_msgid='label_isnews',
                 description_msgid='help_isnews',
                 i18n_domain='osha',
@@ -258,17 +279,18 @@ extended_fields_dict = {
             required=False,
             multiValued=True,
             columns=("linktext", "title", "url", "section"),
-            widget = DataGridWidget(
+            widget=DataGridWidget(
                 label=u"List of Links",
-                description= \
+                description=(
                     u"Add as many links as you wish by adding new rows on "
                     u"the right. Choose a section from the dropdown to order "
-                    u"the links.",
+                    u"the links."),
                 columns={
-                    'linktext' : Column("Linktext"),
-                    'title' : Column("Title"),
-                    'url' : Column("URL"),
-                    'section' : SelectColumn("Section", vocabulary=AnnotatableLinkListVocabulary()),
+                    'linktext': Column("Linktext"),
+                    'title': Column("Title"),
+                    'url': Column("URL"),
+                    'section': SelectColumn("Section",
+                            vocabulary=AnnotatableLinkListVocabulary()),
                     },
             ),
         ),
@@ -276,28 +298,28 @@ extended_fields_dict = {
         SEFileField('attachment',
             schemata='default',
             widget=atapi.FileWidget(
-                label= _(u'osha_event_attachment_label', default=u'Attachment'),
-                description= _(u'osha_event_attachment_description',
-                    default= \
-                        u"You can upload an optional attachment that will "
-                        u"be displayed with the event."),
+                label=_(u'osha_event_attachment_label',
+                         default=u'Attachment'),
+                description=_(u'osha_event_attachment_description',
+                    default=(u"You can upload an optional attachment that "
+                             u"will be displayed with the event.")),
             ),
         ),
     'seoDescription':
         SETextField('seoDescription',
             schemata='default',
             widget=atapi.TextAreaWidget(
-                label= _(
+                label=_(
                     u'osha_seo_description_label',
                     default=u'SEO Description'
                     ),
-                description= _(u'osha_seo_description_description',
-                    default= \
+                description=_(u'osha_seo_description_description',
+                    default=(
                         u"Provide here a description that is purely for SEO "
                         "(Search Engine Optimisation) purposes. It will "
                         "appear in the <meta> tag in the "
                         "<head> section of the HTML document, but nowhere "
-                        "in the actual website content."
+                        "in the actual website content.")
                         ),
                 visible={'edit': 'visible', 'view': 'invisible'},
             ),
@@ -332,20 +354,22 @@ class OSHASchemaExtender(object):
         self.context = context
         self._generateMethods(context, self._fields)
 
-    def _generateMethods(self, context, fields, initialized=True, marker=LANGUAGE_INDEPENDENT_INITIALIZED):
+    def _generateMethods(self, context, fields, initialized=True,
+                         marker=LANGUAGE_INDEPENDENT_INITIALIZED):
         """ Call LinguaPlone's generateMethods method to generate accessors
             which automatically update the values of languageIndependent
             fields on all translations.
         """
         klass = context.__class__
-        if not getattr(klass, marker, False):# \
+        if not getattr(klass, marker, False):  # \
                           #or not initialized:
 
             fields = [field for field in fields if field.languageIndependent]
             #generateMethods(klass, fields)
-            log.info("NOT calling generateMethods on %s (%s) for these fields: %s " \
-                                    % (klass, self.__class__.__name__, str([x.getName() for x in fields]))
-                    )
+            log.info("NOT calling generateMethods on %s (%s) for these "
+                "fields: %s " % (klass, self.__class__.__name__,
+                                 str([x.getName() for x in fields]))
+                 )
             #log.info('NOT generating any accessors - commented out!')
             setattr(klass, marker, True)
 
@@ -368,14 +392,14 @@ class OSHASchemaExtender(object):
             of = original['default']
             i = of.index('description')
             of.remove('seoDescription')
-            of = of[:i+1] + ['seoDescription'] + of[i+1:]
+            of = of[:i + 1] + ['seoDescription'] + of[i + 1:]
             original['default'] = of
             return original
 
         ordered_fields = ordered_fields_dict.keys()
         original_fields = original['default']
 
-        if len(ordered_fields) <> original_fields:
+        if len(ordered_fields) != original_fields:
             # The ordered_fields defined in config, contains all the
             # schemaextended fields, not just the ones of the particular
             # extender on which this method is being called. Since the
@@ -411,7 +435,7 @@ class OSHContentExtender(OSHASchemaExtender):
 
     def __init__(self, context):
         self.context = context
-        _myfields= list()
+        #_myfields = list()
         self._generateMethods(context, self._fields)
 
 
@@ -447,13 +471,13 @@ class SEOExtender(OSHASchemaExtender):
 
 class CaseStudyExtender(OSHASchemaExtender):
     """ The following assupmtion turned out to be WRONG:
-        <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is
-        already being applied. We add here only CaseStudy specific fields.>>
+    <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is
+    already being applied. We add here only CaseStudy specific fields.>>
 
-        Only if the document extender is initialised first does this work. Otherwise
-        we only get the fields defined here explicitly.
-        Therefore ALL required fields are defined now. For those fields which do not
-        yet have generated methods, _generateMethods is called
+    Only if the document extender is initialised first does this work.
+    Otherwise we only get the fields defined here explicitly.
+    Therefore ALL required fields are defined now. For those fields which do
+    not yet have generated methods, _generateMethods is called.
     """
     _fields = [
         extended_fields_dict.get('nace').copy(),
@@ -481,7 +505,8 @@ class CaseStudyExtender(OSHASchemaExtender):
                 not_yet_initialised.append(field)
 
         if not_yet_initialised:
-            self._generateMethods(context, fields=not_yet_initialised, initialized=False)
+            self._generateMethods(context, fields=not_yet_initialised,
+                                  initialized=False)
 
 
 class EventExtender(OSHASchemaExtender):
@@ -523,7 +548,7 @@ class FAQExtender(OSHASchemaExtender):
         # We don't want the Subject field on FAQs any more. Instead, we use the
         # Subcategory field. #1195
         #
-        # SELinesField(
+        #SELinesField(
         #     name='subject',
         #     multiValued=1,
         #     searchable=True,
@@ -533,8 +558,8 @@ class FAQExtender(OSHASchemaExtender):
         #     widget=atapi.KeywordWidget(
         #         label=_(u'label_categories', default=u'Categories'),
         #         description=_(u'help_categories',
-        #                       default=u'Also known as keywords, tags or labels, '
-        #                               'these help you categorize your content.'),
+        #                default=(u'Also known as keywords, tags or labels, '
+        #                         u'these help you categorize your content.')),
         #         ),
         #     ),
         ]
@@ -546,13 +571,13 @@ class FAQExtender(OSHASchemaExtender):
 
 class RALinkExtender(OSHASchemaExtender):
     """ The following assupmtion turned out to be WRONG:
-        <<RALinks are already extended by DocumentExtender because they subtype
-        ATDocument. Here we add only the extra fields.>>
+    <<RALinks are already extended by DocumentExtender because they subtype
+    ATDocument. Here we add only the extra fields.>>
 
-        Only if the document extender is initialised first does this work. Otherwise
-        we only get the fields defined here explicitly.
-        Therefore ALL required fields are defined now. For those fields which do not
-        yet have generated methods, _generateMethods is called
+    Only if the document extender is initialised first does this work.
+    Otherwise we only get the fields defined here explicitly.
+    Therefore ALL required fields are defined now. For those fields which
+    do not yet have generated methods, _generateMethods is called.
     """
     _fields = [
         extended_fields_dict.get('nace').copy(),
@@ -571,8 +596,8 @@ class RALinkExtender(OSHASchemaExtender):
             if f.getName() in ('country',):
                 f.required = True
 
-        # RA Link inherits from ATDocument. We might get a false positive, so check that the
-        # accessors are really there
+        # RA Link inherits from ATDocument. We might get a false positive,
+        # so check that the accessors are really there
 
         fields = [field for field in self._fields if field.languageIndependent]
         not_yet_initialised = list()
@@ -581,7 +606,8 @@ class RALinkExtender(OSHASchemaExtender):
                 not_yet_initialised.append(field)
 
         if not_yet_initialised:
-            self._generateMethods(context, fields=not_yet_initialised, initialized=False)
+            self._generateMethods(context, fields=not_yet_initialised,
+                                  initialized=False)
 
 
 class WhoswhoExtender(OSHASchemaExtender):
@@ -623,12 +649,14 @@ class PressReleaseExtender(OSHASchemaExtender):
             accessor='getReferenced_content',
             widget=ReferenceBrowserWidget(
                 label=u"Referenced content",
-                description=
+                description=(
                     u"Select one or more content items. Their body text "
-                    u"will be displayed as part of the press release",
+                    u"will be displayed as part of the press release"),
                 allow_search=True,
                 allow_browse=False,
-                base_query=dict(path=dict(query='textpieces', level=-1), Language=['en','']),
+                base_query=dict(path=dict(
+                    query='textpieces', level=-1),
+                    Language=['en', '']),
                 show_results_without_query=True,
                 ),
         ),
@@ -659,7 +687,8 @@ class FileContentExtender(OSHASchemaExtender):
         # from slc.treecategories.widgets.widgets import InlineTreeWidget
 
         # for field in self._fields:
-        #     if field.__name__ in ['subcategory','multilingual_thesaurus','nace']:
+        #     if field.__name__ in ['subcategory','multilingual_thesaurus',
+        #                           'nace']:
         #         vocabulary = NamedVocabulary(field.widget.vocabulary)
         #         widget_args = {}
         #         for arg in ('label', 'description', 'label_msgid',
@@ -706,10 +735,11 @@ class LinkListExtender(OSHASchemaExtender):
 #         For details, please see the description in the LinkListExtender.
 #
 #         NB!!!
-#         The OshaMetadataExtender used to be in use, set via a local site manager.
-#         This made indexing the osha_metadata field impossible, since in the context
-#         of the catalog, no object has this field (= the catalog is outside of
-#         the LSM's context).
+#         The OshaMetadataExtender used to be in use, set via a local site
+#         manager.
+#         This made indexing the osha_metadata field impossible, since in the
+#         context of the catalog, no object has this field (= the catalog is
+#         outside of the LSM's context).
 #         Therefore, this field is being set via o global extender again,
 #         but we use CSS to hide it eveywhery we don't want it
 #     """
@@ -721,7 +751,8 @@ class LinkListExtender(OSHASchemaExtender):
 #         self.context = context
 #         # make sure _generateMethods is also called on derived content types
 #         initialized = True
-#         fields = [field for field in self._fields if field.languageIndependent]
+#         fields = [field for field in self._fields if
+#                    field.languageIndependent]
 #         for field in fields:
 #             if not getattr(context, field.accessor, None):
 #                 initialized = False
@@ -778,7 +809,10 @@ class ProviderModifier(object):
         for name in unwantedFields:
             if schema.get(name):
                 field = schema[name].copy()
-                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+                field.widget.visible = {
+                    'edit': 'invisible',
+                    'view': 'invisible'
+                }
                 schema[name] = field
 
         for name in moveToDefault:
@@ -800,7 +834,6 @@ class ProviderModifier(object):
         for name in ordered_fields:
             position = ordered_fields.index(name)
             schema.moveField(name, pos=position)
-
 
 
 class EventModifier(object):
@@ -877,4 +910,3 @@ class SeminarModifier(object):
         attachment = schema['attachment'].copy()
         attachment.widget.visible['edit'] = 'invisible'
         schema['attachment'] = attachment
-
