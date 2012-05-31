@@ -157,7 +157,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("Subcategory"),
             widget=DynatreeWidget(
                 description="",
-                selectMode=2
+                selectMode=2,
+                rootVisible=False,
+                minExpandLevel=1,
+                flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
             #     label="Subcategory (Site position)",
@@ -184,7 +187,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("MultilingualThesaurus"),
             widget=DynatreeWidget(
                 description="",
-                selectMode=2
+                selectMode=2,
+                rootVisible=False,
+                minExpandLevel=1,
+                flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
             #     label='Multilingual Thesaurus Subject',
@@ -207,7 +213,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("NACE"),
             widget=DynatreeWidget(
                 description="",
-                selectMode=2
+                selectMode=2,
+                rootVisible=False,
+                minExpandLevel=1,
+                flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
             #     label="Sector (NACE Code)",
