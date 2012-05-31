@@ -149,7 +149,7 @@ extended_fields_dict = {
     'subcategory':
         SubcategoryField('subcategory',
             schemata='default',
-            enforceVocabulary=True,
+            enforceVocabulary=False,
             languageIndependent=True,
             multiValued=True,
             mutator='setSubcategory',
