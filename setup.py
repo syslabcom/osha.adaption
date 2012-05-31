@@ -47,6 +47,7 @@ setup(
         'setuptools',
         'Products.ATCountryWidget',
         'archetypes.schemaextender',
+        'collective.dynatree',
         'Products.ATVocabularyManager',
         'Products.DataGridField',
         'Products.LinguaPlone',
@@ -61,4 +62,3 @@ setup(
     setup_requires=["PasteScript"],
     paster_plugins = ["ZopeSkel"],
     )
-

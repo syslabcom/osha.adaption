@@ -2,7 +2,6 @@ import unittest
 import logging
 from zExceptions import Unauthorized
 from zope import component
-from zope.interface import implementedBy, providedBy
 from Products.Archetypes.interfaces._base import IBaseContent
 from Products.ATContentTypes.interface.topic import IATTopicCriterion
 from Products.CMFCore.utils import getToolByName
@@ -56,7 +55,8 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             if "seoDescription" not in fields:
                 not_extended.write("Not extended: %s \n" % type_name)
 
-            elif fields.index('seoDescription') != fields.index('description')+1:
+            elif (fields.index('seoDescription') !=
+                  fields.index('description') + 1):
                 wrong_order.write("Wrong order: %s \n" % type_name)
 
             else:
@@ -66,14 +66,12 @@ class TestSchemaExtender(OshaAdaptationTestCase):
         wrong_order.close()
         extended_properly.close()
 
-
-
     def test_schema_modifications(self):
         """ Test that the extended types have the right fields in the correct
             order.
         """
         for type_name in types_dict:
-            order = None
+            #order = None
             pt = getToolByName(self.portal, 'portal_types')
 
             info = pt.getTypeInfo(type_name)
@@ -87,9 +85,9 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                 set(fields),
                 "%s has the following Default fields: %s but should " \
                 "have %s" % \
-                (   type_name,
-                    set(fields),
-                    set(config_fields),
+                (type_name,
+                 set(fields),
+                 set(config_fields),
                 )
             )
 
@@ -97,15 +95,14 @@ class TestSchemaExtender(OshaAdaptationTestCase):
                 self.assertEquals(
                     field_obs[i].widget.visible,
                     types_dict[type_name][fields[i]],
-                    "%s has field %s with widget visibility: %s but it should " \
-                    "be %s" % \
-                    (   type_name,
-                        fields[i],
-                        field_obs[i].widget.visible,
-                        types_dict[type_name][fields[i]],
+                    "%s has field %s with widget visibility: %s but it "
+                    "should be %s" % \
+                    (type_name,
+                     fields[i],
+                     field_obs[i].widget.visible,
+                     types_dict[type_name][fields[i]],
                     )
                 )
-
 
     def is_subtyped(self, obj):
         subtyper = component.getUtility(ISubtyper)
@@ -114,7 +111,6 @@ class TestSchemaExtender(OshaAdaptationTestCase):
             return type.name == 'annotatedlinks'
         else:
             return False
-
 
     def test_subtyping(self):
         self.portal.invokeFactory('Document', 'Document')
@@ -145,11 +141,10 @@ class TestSchemaExtender(OshaAdaptationTestCase):
         assert('dateToBeConfirmed' in fields)
         self.assertEquals(
                     fields.index('dateToBeConfirmed'),
-                    fields.index('endDate')+1
+                    fields.index('endDate') + 1
                     )
 
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestSchemaExtender))
     return suite
-
