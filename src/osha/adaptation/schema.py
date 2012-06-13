@@ -160,6 +160,7 @@ extended_fields_dict = {
                 selectMode=2,
                 rootVisible=False,
                 minExpandLevel=1,
+                overlay=True,
                 flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
@@ -191,6 +192,7 @@ extended_fields_dict = {
                 showKey=True,
                 rootVisible=False,
                 minExpandLevel=1,
+                overlay=True,
                 flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
@@ -218,6 +220,7 @@ extended_fields_dict = {
                 showKey=True,
                 rootVisible=False,
                 minExpandLevel=1,
+                overlay=True,
                 flatlist=True,
             ),
             # widget=VocabularyPickerWidget(
