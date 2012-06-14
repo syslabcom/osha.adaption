@@ -156,7 +156,11 @@ extended_fields_dict = {
             accessor='getSubcategory',
             vocabulary=NamedVocabulary("Subcategory"),
             widget=DynatreeWidget(
-                description="",
+                label=u"Subcategory",
+                description=u"Pick one or more values by ticking a checkbox in "\
+                "the tree. You can use the quick search field below to find "\
+                "values by typing the first letters. Click 'Close' when you "
+                "are finished picking values.",
                 selectMode=2,
                 rootVisible=False,
                 minExpandLevel=1,
@@ -187,7 +191,11 @@ extended_fields_dict = {
             accessor='getMultilingual_thesaurus',
             vocabulary=NamedVocabulary("MultilingualThesaurus"),
             widget=DynatreeWidget(
-                description="",
+                label=u"Multilingual Thesaurus Subject",
+                description=u"Pick one or more values by ticking a checkbox in "\
+                "the tree. You can use the quick search field below to find "\
+                "values by typing the first letters. Click 'Close' when you "
+                "are finished picking values.",
                 selectMode=2,
                 showKey=True,
                 rootVisible=False,
@@ -215,7 +223,11 @@ extended_fields_dict = {
             accessor='getNace',
             vocabulary=NamedVocabulary("NACE"),
             widget=DynatreeWidget(
-                description="",
+                label=u"Sector (NACE Code)",
+                description=u"Pick one or more values by ticking a checkbox in "\
+                "the tree. You can use the quick search field below to find "\
+                "values by typing the first letters. Click 'Close' when you "
+                "are finished picking values.",
                 selectMode=2,
                 showKey=True,
                 rootVisible=False,
