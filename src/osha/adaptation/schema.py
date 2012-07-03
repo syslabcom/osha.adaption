@@ -23,7 +23,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
-# from Products.LinguaPlone.utils import generateMethods
+from Products.LinguaPlone.utils import generateMethods
 # from Products.VocabularyPickerWidget.VocabularyPickerWidget import VocabularyPickerWidget
 
 from osha.adaptation import config
@@ -66,6 +66,19 @@ class ExtensionFieldMixin:
         method = getattr(instance, methodName, None)
         if method is None:   # Use default setter
             return mutator
+        return method
+
+    def getAccessor(self, instance):
+        def accessor(**kw):
+            self.get(instance, **kw)
+
+        methodName = getattr(self, 'accessor', None)
+        if methodName is None:  # Use default getter
+            return accessor
+
+        method = getattr(instance, methodName, None)
+        if method is None:   # Use default getter
+            return accessor
         return method
 
 
@@ -391,12 +404,11 @@ class OSHASchemaExtender(object):
                           #or not initialized:
 
             fields = [field for field in fields if field.languageIndependent]
-            #generateMethods(klass, fields)
-            log.info("NOT calling generateMethods on %s (%s) for these "
+            generateMethods(klass, fields)
+            log.info("calling generateMethods on %s (%s) for these "
                 "fields: %s " % (klass, self.__class__.__name__,
                                  str([x.getName() for x in fields]))
                  )
-            #log.info('NOT generating any accessors - commented out!')
             setattr(klass, marker, True)
 
     def getOrder(self, original):
