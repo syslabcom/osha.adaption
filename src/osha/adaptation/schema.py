@@ -269,16 +269,18 @@ extended_fields_dict = {
             multiValued=True,
             mutator='setOsha_metadata',
             accessor='getOsha_metadata',
-            vocabulary="OSHAMetadata"
-            # widget=VocabularyPickerWidget(
-            #     label=_(u'OSHAMetadata_label', default=u"OSHA Metadata"),
-            #     description=_(u'OSHAMetadata_description',
-            #              default="Choose the relevant metadata"),
-            #     vocabulary="OSHAMetadata",
-            #     i18n_domain='osha',
-            #     condition="python:len(object.getField(
-            #              'osha_metadata').Vocabulary(object))",
-            #     ),
+            vocabulary=NamedVocabulary("OSHAMetadata"),
+            widget=DynatreeWidget(
+                label=_(u'OSHAMetadata_label', default=u"OSHA Metadata"),
+                description=_(u'OSHAMetadata_description',
+                         default="Choose the relevant metadata"),
+                selectMode=2,
+                showKey=True,
+                rootVisible=False,
+                minExpandLevel=1,
+                overlay=True,
+                flatlist=True,
+                ),
         ),
     'isNews':
         NewsMarkerField('isNews',
