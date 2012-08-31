@@ -677,6 +677,7 @@ class PressReleaseExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
+	extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
 
