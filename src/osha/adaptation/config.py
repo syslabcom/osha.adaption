@@ -162,6 +162,7 @@ fdict['News Item']['multilingual_thesaurus']        = {'edit': 'visible',   'vie
 fdict['News Item']['nace']                          = {'edit': 'visible',   'view': 'visible'}
 fdict['News Item']['reindexTranslations']           = {'edit': 'visible',   'view': 'invisible'}
 fdict['News Item']['osha_metadata']                 = {'edit': 'visible',   'view': 'visible'}
+fdict['News Item']['external_link']                 = {'edit': 'visible',   'view': 'invisible'}
 
 fdict['RALink']['id']                               = {'view': 'invisible'}
 fdict['RALink']['title']                            = {'edit': 'visible',   'view': 'visible'}

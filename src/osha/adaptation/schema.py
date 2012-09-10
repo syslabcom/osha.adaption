@@ -130,6 +130,9 @@ class SEFileField(ExtensionField, atapi.FileField):
 class SETextField(ExtensionFieldMixin, ExtensionField, atapi.TextField):
     """ A schema-extender aware TextField """
 
+class SEStringField(ExtensionFieldMixin, ExtensionField, atapi.StringField):
+    """ A schema-extender aware String field """
+
 description_reindexTranslations = \
     u"Check this box to have all translated versions reindexed. This is " \
     u"useful when you change language-independent fields suchs as dates " \
@@ -382,6 +385,17 @@ extended_fields_dict = {
                 condition="python:object.isCanonical()",
             ),
         ),
+    'external_link':
+        SEStringField('external_link',
+            schemata='default',
+            languageIndependent=True,
+            widget=atapi.StringField._properties['widget'](
+                label=_(u'label_external_link', default=u"External link"),
+                description=_(u'description_external_link',
+                    default=u"Enter a link to which this item should point to."),
+                size=80,
+            ),
+        ),
     }
 
 class OSHASchemaExtender(object):
@@ -486,6 +500,7 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('external_link').copy(),
         extended_fields_dict.get('seoDescription').copy(),
         ]
 
