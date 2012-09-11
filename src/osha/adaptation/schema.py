@@ -388,7 +388,7 @@ extended_fields_dict = {
     'external_link':
         SEStringField('external_link',
             schemata='default',
-            languageIndependent=True,
+            languageIndependent=False,
             widget=atapi.StringField._properties['widget'](
                 label=_(u'label_external_link', default=u"External link"),
                 description=_(u'description_external_link',
