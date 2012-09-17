@@ -34,7 +34,6 @@ setup(
         'Products.ATCountryWidget',
         'archetypes.schemaextender',
         'collective.dynatree',
-        'Products.ATVocabularyManager',
         'Products.DataGridField',
         'Products.LinguaPlone',
         'p4a.subtyper',
