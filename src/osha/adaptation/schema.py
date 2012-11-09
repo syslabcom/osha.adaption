@@ -599,6 +599,8 @@ class FAQExtender(OSHASchemaExtender):
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('seoDescription').copy(),
+        extended_fields_dict.get('country').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
 
         # We don't want the Subject field on FAQs any more. Instead, we use the
         # Subcategory field. #1195

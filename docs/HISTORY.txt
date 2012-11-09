@@ -4,7 +4,7 @@ Changelog
 0.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Bugfix: make FAQs translatable again [thomasw]
 
 
 0.2 (2012-09-17)
