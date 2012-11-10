@@ -494,6 +494,8 @@ class OSHContentExtender(OSHASchemaExtender):
 
 
 class DocumentExtender(OSHASchemaExtender):
+    # Note: suncategory is not explicitly needed on Document. But on FAQ items, that
+    # derived from ATDocument
     _fields = [
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('country').copy(),
@@ -502,6 +504,7 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('external_link').copy(),
         extended_fields_dict.get('seoDescription').copy(),
+        extended_fields_dict.get('subcategory').copy(),
         ]
 
     def __init__(self, context):

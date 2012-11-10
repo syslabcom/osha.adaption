@@ -166,13 +166,16 @@
             />
     </configure>
 
-    <adapter
+   <!-- PloneHelpCenterFAQ is derived from ATDocument. Therefore the document extender
+        already gets applied to FAQ item. I comment out the explicit FAQ extender,
+	and make sure the DocExtender has all fields we need -->
+    <!--adapter
         zcml:condition="installed Products.PloneHelpCenter"
         factory=".schema.FAQExtender"
         for="Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ"
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-        name="osha-faq"
-        />
+        name="osha-document-extended"
+        /-->
 
     <adapter
         zcml:condition="installed Products.PloneHelpCenter"
