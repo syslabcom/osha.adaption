@@ -4,8 +4,9 @@ Changelog
 0.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Taking into account that we now have TWO types of HelpCenterFAQ classes:
+  Products.PloneHelpCenter.content.FAQ.HelpCenterFAQ and
+  Products.PloneHelpCenter.types.FAQ.HelpCenterFAQ [thomasw]
 
 0.2.1 (2012-11-10)
 ------------------
