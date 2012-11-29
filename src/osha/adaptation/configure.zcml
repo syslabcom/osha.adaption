@@ -7,10 +7,10 @@
 
     <include package="archetypes.schemaextender" />
 
-	<utility
-		name="annotatedlinks"
-		factory=".subtyper.AnnotatedLinkListDescriptor"
-		/>
+    <utility
+        name="annotatedlinks"
+        factory=".subtyper.AnnotatedLinkListDescriptor"
+        />
 
     <utility
         component=".vocabulary.AnnotatableLinkListVocabulary"

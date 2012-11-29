@@ -43,6 +43,7 @@ tags_vocab = ['A', 'B', 'C']
 dummy_vocab = ['this', 'is', 'a', 'dummy', 'vocabulary']
 dummy_string = "this is a dummy string"
 
+
 class ExtensionFieldMixin:
     def _Vocabulary(self, content_instance, vocab_name):
         if DUMMY:
@@ -87,51 +88,64 @@ class NACEField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'NACE')
 
+
 class SubcategoryField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
 
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'Subcategory')
+
 
 class CountryField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
 
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'Country')
 
+
 class MTSubjectField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
 
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'MultilingualThesaurus')
+
 
 class OSHAMetadataField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
 
     def Vocabulary(self, content_instance):
         return self._Vocabulary(content_instance, 'OSHAMetadata')
 
+
 class ReferencedContentField(ExtensionFieldMixin, ExtensionField,
                              atapi.ReferenceField):
     """ Possibility to reference content objects, the text of which """
     """ can be used to display inside the current object. """
 
+
 class NewsMarkerField(ExtensionFieldMixin, ExtensionField, atapi.BooleanField):
     """ Marker field to have object appear in news portlet """
+
 
 class SELinesField(ExtensionFieldMixin, ExtensionField, atapi.LinesField):
     """ A schema-extender aware LinesField """
 
+
 class SEBooleanField(ExtensionField, atapi.BooleanField):
     """ A schema-extender aware BooleanField """
+
 
 class SEDataGridField(ExtensionFieldMixin, ExtensionField, DataGridField):
     """ A schema-extender aware DataGridWidget """
 
+
 class SEFileField(ExtensionField, atapi.FileField):
     """ A schema-extender aware FileField """
+
 
 class SETextField(ExtensionFieldMixin, ExtensionField, atapi.TextField):
     """ A schema-extender aware TextField """
 
+
 class SEStringField(ExtensionFieldMixin, ExtensionField, atapi.StringField):
     """ A schema-extender aware String field """
+
 
 description_reindexTranslations = \
     u"Check this box to have all translated versions reindexed. This is " \
@@ -173,10 +187,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("Subcategory"),
             widget=DynatreeWidget(
                 label=u"Subcategory",
-                description=u"Pick one or more values by ticking a checkbox in "\
-                "the tree. You can use the quick search field below to find "\
-                "values by typing the first letters. Click 'Close' when you "
-                "are finished picking values.",
+                description=u"Pick one or more values by ticking a checkbox" \
+                " in the tree. You can use the quick search field below to " \
+                "find values by typing the first letters. Click 'Close' " \
+                "when you are finished picking values.",
                 selectMode=2,
                 rootVisible=False,
                 minExpandLevel=1,
@@ -208,10 +222,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("MultilingualThesaurus"),
             widget=DynatreeWidget(
                 label=u"Multilingual Thesaurus Subject",
-                description=u"Pick one or more values by ticking a checkbox in "\
-                "the tree. You can use the quick search field below to find "\
-                "values by typing the first letters. Click 'Close' when you "
-                "are finished picking values.",
+                description=u"Pick one or more values by ticking a checkbox" \
+                " in the tree. You can use the quick search field below to " \
+                "find values by typing the first letters. Click 'Close' " \
+                "when you are finished picking values.",
                 selectMode=2,
                 showKey=True,
                 rootVisible=False,
@@ -240,10 +254,10 @@ extended_fields_dict = {
             vocabulary=NamedVocabulary("NACE"),
             widget=DynatreeWidget(
                 label=u"Sector (NACE Code)",
-                description=u"Pick one or more values by ticking a checkbox in "\
-                "the tree. You can use the quick search field below to find "\
-                "values by typing the first letters. Click 'Close' when you "
-                "are finished picking values.",
+                description=u"Pick one or more values by ticking a checkbox" \
+                " in the tree. You can use the quick search field below to " \
+                "find values by typing the first letters. Click 'Close' " \
+                "when you are finished picking values.",
                 selectMode=2,
                 showKey=True,
                 rootVisible=False,
@@ -392,16 +406,18 @@ extended_fields_dict = {
             widget=atapi.StringField._properties['widget'](
                 label=_(u'label_external_link', default=u"External link"),
                 description=_(u'description_external_link',
-                    default=u"Enter a link to which this item should point to."),
+                    default=u"Enter a link to which this item should " \
+                              "point to."),
                 size=80,
             ),
         ),
     }
 
+
 class OSHASchemaExtender(object):
-    """ This is the base class for all other schema extenders. It sets the
-        layer, the interfaces being implemented and provides a helper method
-        that generates accessors and mutators for language independent fields.
+    """This is the base class for all other schema extenders. It sets the
+    layer, the interfaces being implemented and provides a helper method
+    that generates accessors and mutators for language independent fields.
     """
     zope.interface.implements(IOrderableSchemaExtender)
 
@@ -416,9 +432,7 @@ class OSHASchemaExtender(object):
             fields on all translations.
         """
         klass = context.__class__
-        if not getattr(klass, marker, False):  # \
-                          #or not initialized:
-
+        if not getattr(klass, marker, False):  # or not initialized:
             fields = [field for field in fields if field.languageIndependent]
             generateMethods(klass, fields)
             log.info("calling generateMethods on %s (%s) for these "
@@ -494,8 +508,8 @@ class OSHContentExtender(OSHASchemaExtender):
 
 
 class DocumentExtender(OSHASchemaExtender):
-    # Note: suncategory is not explicitly needed on Document. But on FAQ items, that
-    # derived from ATDocument
+    # Note: suncategory is not explicitly needed on Document. But on
+    # FAQ items, that derived from ATDocument
     _fields = [
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('country').copy(),
@@ -699,7 +713,7 @@ class PressReleaseExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
-	extended_fields_dict.get('osha_metadata').copy(),
+        extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
 

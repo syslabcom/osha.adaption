@@ -2,8 +2,10 @@ import zope.component
 
 from p4a.subtyper import interfaces
 
-class IAnnotatedLinkList(zope.interface.Interface): 
+
+class IAnnotatedLinkList(zope.interface.Interface):
     """ Marker interface """
+
 
 class AnnotatedLinkListDescriptor(object):
     zope.interface.implements(interfaces.IPortalTypedDescriptor)
@@ -13,4 +15,3 @@ class AnnotatedLinkListDescriptor(object):
         u'information.'
     type_interface = IAnnotatedLinkList
     for_portal_type = 'Document'
-
