@@ -468,7 +468,7 @@ class OSHASchemaExtender(object):
         ordered_fields = ordered_fields_dict.keys()
         original_fields = original['default']
 
-        if len(ordered_fields) != original_fields:
+        if len(ordered_fields) != len(original_fields):
             # The ordered_fields defined in config, contains all the
             # schemaextended fields, not just the ones of the particular
             # extender on which this method is being called. Since the
