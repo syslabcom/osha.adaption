@@ -138,6 +138,12 @@
     </configure>
 
     <configure zcml:condition="installed Products.PressRoom">
+        <adapter
+            factory=".schema.PressRoomExtender"
+            for="Products.PressRoom.interfaces.content.IPressRoom"
+            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
+            name="osha-pressroom-extended"
+            />
         <!-- It's important that we give the same name 'osha-document-extended'
             as the adapter for IATDocument, otherwise both adapters are
             applied.
@@ -148,12 +154,10 @@
             provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
             name="osha-document-extended"
             />
-
         <adapter
-            factory=".schema.SEOExtender"
-            for="Products.PressRoom.interfaces.content.IPressRoom"
-            provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
-            name="osha-pressroom-extended"
+            factory=".schema.PressReleaseModifier"
+            for="Products.PressRoom.interfaces.content.IPressRelease"
+            provides="archetypes.schemaextender.interfaces.ISchemaModifier"
             />
     </configure>
 

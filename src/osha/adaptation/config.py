@@ -11,6 +11,7 @@ fdict = {
     "News Item": OrderedDict(),
     "RALink": OrderedDict(),
     "OSH_Link": OrderedDict(),
+    "PressRoom": OrderedDict(),
     "PressRelease": OrderedDict(),
     "Provider": OrderedDict(),
     'HelpCenterFAQ': OrderedDict(),
@@ -267,6 +268,25 @@ fdict['PressRelease']['referenced_content'] = {
 fdict['PressRelease']['isNews'] = {'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['country'] = {'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['reindexTranslations'] = {
+    'edit': 'visible', 'view': 'invisible'}
+
+fdict['PressRoom']['id'] = {'view': 'invisible'}
+fdict['PressRoom']['title'] = {'view': 'invisible'}
+fdict['PressRoom']['description'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['constrainTypesMode'] = {
+    'edit': 'invisible', 'view': 'invisible'}
+fdict['PressRoom']['locallyAllowedTypes'] = {
+    'edit': 'invisible', 'view': 'invisible'}
+fdict['PressRoom']['immediatelyAddableTypes'] = {
+    'edit': 'invisible', 'view': 'invisible'}
+fdict['PressRoom']['show_releases'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['num_releases'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['show_clips'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['num_clips'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['show_contacts'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['contacts'] = {'edit': 'visible', 'view': 'invisible'}
+fdict['PressRoom']['text'] = {'edit': 'visible', 'view': 'visible'}
+fdict['PressRoom']['seoDescription'] = {
     'edit': 'visible', 'view': 'invisible'}
 
 fdict['Provider']['id'] = {'view': 'invisible'}

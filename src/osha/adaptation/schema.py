@@ -19,6 +19,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.ATVocabularyManager import NamedVocabulary
 from Products.Archetypes import atapi
 from Products.Archetypes.utils import DisplayList
+from Products.ATContentTypes.configuration import zconf
 from Products.CMFCore.utils import getToolByName
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
@@ -740,6 +741,30 @@ class PressReleaseExtender(OSHASchemaExtender):
         ]
 
 
+class PressRoomExtender(OSHASchemaExtender):
+    _fields = [
+        extended_fields_dict.get('seoDescription').copy(),
+
+        SETextField(
+            'contacts',
+            required=False,
+            searchable=True,
+            primary=False,
+            languageIndependent=False,
+            storage=atapi.AnnotationStorage(migrate=True),
+            validators=('isTidyHtmlWithCleanup',),
+            default_output_type='text/x-html-safe',
+            widget=atapi.RichWidget(
+                description=(
+                    u'Global contacts for all Press Releases. They will be'
+                    ' appended at the end of Press Relase page.'),
+                label=_(u'label_contacts', default=u'Contacts'),
+                rows=15,
+                allow_file_upload=zconf.ATDocument.allow_document_upload),
+        )
+    ]
+
+
 class FileContentExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('isNews').copy(),
@@ -987,3 +1012,22 @@ class SeminarModifier(object):
         attachment = schema['attachment'].copy()
         attachment.widget.visible['edit'] = 'invisible'
         schema['attachment'] = attachment
+
+
+class PressReleaseModifier(object):
+    """ This is a schema modifier, not extender.
+    """
+    zope.interface.implements(ISchemaModifier)
+
+    def __init__(self, context):
+        self.context = context
+
+    def fiddle(self, schema):
+        """Fiddle the schema.
+        """
+        if self.context.portal_type != 'PressRelease':
+            return
+
+        subhead = schema['subhead'].copy()
+        subhead.languageIndependent = False
+        schema['subhead'] = subhead
