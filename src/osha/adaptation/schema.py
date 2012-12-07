@@ -718,6 +718,25 @@ class PressReleaseExtender(OSHASchemaExtender):
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
 
+        ReferencedContentField('relatedLinks',
+            languageIndependent=True,
+            multiValued=True,
+            relationship='relatedLinks',
+            mutator='setRelatedLinks',
+            accessor='getRelatedLinks',
+            referencesSortable=True,
+            widget=ReferenceBrowserWidget(
+                label=u"Links",
+                description=(
+                    u"Select related content. Links will be displayed as "
+                    u"part of the press release."),
+                allow_search=True,
+                allow_browse=True,
+                allow_sorting=True,
+                force_close_on_insert=True
+                ),
+        ),
+
         ReferencedContentField('referenced_content',
             languageIndependent=True,
             multiValued=True,
