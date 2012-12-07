@@ -737,6 +737,27 @@ class PressReleaseExtender(OSHASchemaExtender):
                 ),
         ),
 
+        ReferencedContentField('notesToEditors',
+            languageIndependent=True,
+            multiValued=True,
+            relationship='notesToEditors',
+            allowed_types=('Document', 'RichDocument'),
+            mutator='setNotesToEditors',
+            accessor='getNotesToEditors',
+            widget=ReferenceBrowserWidget(
+                label=u"Notes to editors",
+                description=(
+                    u"Select one or more notes to editors. Their body text "
+                    u"will be displayed as part of the press release."),
+                allow_search=True,
+                allow_browse=False,
+                base_query=dict(path=dict(
+                    query='notes-to-editors', level=-1),
+                    Language=['en', '']),
+                show_results_without_query=True,
+                ),
+        ),
+
         ReferencedContentField('referenced_content',
             languageIndependent=True,
             multiValued=True,

@@ -265,6 +265,8 @@ fdict['PressRelease']['releaseContacts'] = {
     'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['relatedLinks'] = {
     'edit': 'visible', 'view': 'visible'}
+fdict['PressRelease']['notesToEditors'] = {
+    'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['referenced_content'] = {
     'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['isNews'] = {'edit': 'visible', 'view': 'visible'}
