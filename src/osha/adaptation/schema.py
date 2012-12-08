@@ -1071,3 +1071,8 @@ class PressReleaseModifier(object):
         subhead = schema['subhead'].copy()
         subhead.languageIndependent = False
         schema['subhead'] = subhead
+
+        release_contacts = schema['releaseContacts'].copy()
+        release_contacts.widget.visible['edit'] = 'invisible'
+        release_contacts.widget.visible['view'] = 'invisible'
+        schema['releaseContacts'] = release_contacts
