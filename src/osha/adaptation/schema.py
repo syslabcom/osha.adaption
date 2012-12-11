@@ -726,10 +726,13 @@ class PressReleaseExtender(OSHASchemaExtender):
             mutator='setReferenced_content',
             accessor='getReferenced_content',
             widget=ReferenceBrowserWidget(
-                label=u"Referenced content",
-                description=(
-                    u"Select one or more content items. Their body text "
-                    u"will be displayed as part of the press release"),
+                label=_(u'referenced_content_label',
+                    default=u'Referenced content'),
+                description=_(
+                    u'referenced_content_description',
+                    default=u'Select one or more content items. Their ' \
+                        u'body text will be displayed as part of the ' \
+                        u'press release.'),
                 allow_search=True,
                 allow_browse=False,
                 base_query=dict(path=dict(
@@ -747,10 +750,11 @@ class PressReleaseExtender(OSHASchemaExtender):
             accessor='getRelatedLinks',
             referencesSortable=True,
             widget=ReferenceBrowserWidget(
-                label=u"Links",
-                description=(
-                    u"Select related content. Links will be displayed as "
-                    u"part of the press release."),
+                label=_(u'relatedLinks_label', default=u'Links'),
+                description=_(
+                    u'relatedLinks_description',
+                    default=u'Select related content. Links will be ' \
+                        u'displayed as part of the press release.'),
                 allow_search=True,
                 allow_browse=True,
                 allow_sorting=True,
@@ -766,10 +770,12 @@ class PressReleaseExtender(OSHASchemaExtender):
             mutator='setNotesToEditors',
             accessor='getNotesToEditors',
             widget=ReferenceBrowserWidget(
-                label=u"Notes to editors",
-                description=(
-                    u"Select one or more notes to editors. Their body text "
-                    u"will be displayed as part of the press release."),
+                label=_(u'notesToEditors_label', default=u'Notes to editors'),
+                description=_(
+                    u'notesToEditors_description',
+                    default=u'Select one or more notes to editors. Their ' \
+                        u'body text will be displayed as part of the ' \
+                        u'press release.'),
                 allow_search=True,
                 allow_browse=False,
                 base_query=dict(path=dict(
@@ -791,6 +797,10 @@ class PressRoomExtender(OSHASchemaExtender):
             searchable=True,
             primary=False,
             languageIndependent=False,
+            # XXX: adding accessor/mutator methods doesn't seem to work
+            # for this field?
+            # mutator='setContacts',
+            # accessor='getContacts',
             storage=atapi.AnnotationStorage(migrate=True),
             validators=('isTidyHtmlWithCleanup',),
             default_output_type='text/x-html-safe',
