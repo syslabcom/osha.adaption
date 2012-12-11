@@ -783,7 +783,23 @@ class PressReleaseExtender(OSHASchemaExtender):
                     Language=['en', '']),
                 show_results_without_query=True,
                 ),
+        ),
+
+        SEBooleanField(
+            'showContacts',
+            default=True,
+            languageIndependent=False,
+            widget=atapi.BooleanWidget(
+                label=_(u'showContacts_label', default=u'Show contacts?'),
+                description=_(u'showContacts_description',
+                    default=u'Select this if you want to show contact info ' \
+                            u'at the end of the press release (you can ' \
+                            u'edit contacts on Press Room edit form)'),
+                visible={'edit': 'visible', 'view': 'invisible'},
+                condition="python:object.isCanonical()",
+            ),
         )
+
     ]
 
 
