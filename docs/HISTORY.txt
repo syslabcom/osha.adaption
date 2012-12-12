@@ -4,8 +4,14 @@ Changelog
 0.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added PressRoomExtender with 'contacts' field #6105 [jcerjak]
+- Added PressRelease schema modifier (instead of patching the schema in
+  osha.policy), also hide 'releaseContacts' field #6105 [jcerjak]
+- Added fields 'relatedLinks', 'notesToEditors' and 'showContacts' to
+  PressReleaseExtender #6105 [jcerjak]
+- Fixed 'if' condition in getOrder - we should compare lengths of lists.
+  #6105 [jcerjak]
+- PEP8 cleanup [jcerjak]
 
 0.2.2 (2012-11-10)
 ------------------
