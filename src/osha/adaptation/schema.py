@@ -746,6 +746,7 @@ class PressReleaseExtender(OSHASchemaExtender):
             languageIndependent=True,
             multiValued=True,
             relationship='relatedLinks',
+            allowed_types=('Document', 'RichDocument'),
             mutator='setRelatedLinks',
             accessor='getRelatedLinks',
             referencesSortable=True,
@@ -756,9 +757,12 @@ class PressReleaseExtender(OSHASchemaExtender):
                     default=u'Select related content. Links will be ' \
                         u'displayed as part of the press release.'),
                 allow_search=True,
-                allow_browse=True,
+                allow_browse=False,
                 allow_sorting=True,
-                force_close_on_insert=True
+                base_query=dict(path=dict(
+                    query='related-links', level=-1),
+                    Language=['en', '']),
+                show_results_without_query=True,
                 ),
         ),
 
@@ -778,6 +782,7 @@ class PressReleaseExtender(OSHASchemaExtender):
                         u'press release.'),
                 allow_search=True,
                 allow_browse=False,
+                allow_sorting=True,
                 base_query=dict(path=dict(
                     query='notes-to-editors', level=-1),
                     Language=['en', '']),
