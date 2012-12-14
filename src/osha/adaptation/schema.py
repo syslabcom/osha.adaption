@@ -739,6 +739,7 @@ class PressReleaseExtender(OSHASchemaExtender):
                     query='textpieces', level=-1),
                     Language=['en', '']),
                 show_results_without_query=True,
+                visible={'edit': 'invisible', 'view': 'invisible'},
                 ),
         ),
 
