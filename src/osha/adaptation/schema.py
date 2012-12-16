@@ -726,13 +726,11 @@ class PressReleaseExtender(OSHASchemaExtender):
             mutator='setReferenced_content',
             accessor='getReferenced_content',
             widget=ReferenceBrowserWidget(
-                label=_(u'referenced_content_label',
+                label=_(u'label_referenced_content',
                     default=u'Referenced content'),
-                description=_(
-                    u'referenced_content_description',
-                    default=u'Select one or more content items. Their ' \
+                description=u'Select one or more content items. Their ' \
                         u'body text will be displayed as part of the ' \
-                        u'press release.'),
+                        u'press release.',
                 allow_search=True,
                 allow_browse=False,
                 base_query=dict(path=dict(
@@ -752,11 +750,9 @@ class PressReleaseExtender(OSHASchemaExtender):
             accessor='getRelatedLinks',
             referencesSortable=True,
             widget=ReferenceBrowserWidget(
-                label=_(u'relatedLinks_label', default=u'Links'),
-                description=_(
-                    u'relatedLinks_description',
-                    default=u'Select related content. Links will be ' \
-                        u'displayed as part of the press release.'),
+                label=_(u'label_related_links', default=u'Links'),
+                description=u'Select related content. Links will be ' \
+                        u'displayed as part of the press release.',
                 allow_search=True,
                 allow_browse=False,
                 allow_sorting=True,
@@ -775,12 +771,10 @@ class PressReleaseExtender(OSHASchemaExtender):
             mutator='setNotesToEditors',
             accessor='getNotesToEditors',
             widget=ReferenceBrowserWidget(
-                label=_(u'notesToEditors_label', default=u'Notes to editors'),
-                description=_(
-                    u'notesToEditors_description',
-                    default=u'Select one or more notes to editors. Their ' \
+                label=_(u'label_notes_to_editors', default=u'Notes to editors'),
+                description=u'Select one or more notes to editors. Their ' \
                         u'body text will be displayed as part of the ' \
-                        u'press release.'),
+                        u'press release.',
                 allow_search=True,
                 allow_browse=False,
                 allow_sorting=True,
