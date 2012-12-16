@@ -750,7 +750,7 @@ class PressReleaseExtender(OSHASchemaExtender):
             accessor='getRelatedLinks',
             referencesSortable=True,
             widget=ReferenceBrowserWidget(
-                label=_(u'label_related_links', default=u'Links'),
+                label=_(u'label_links', default=u'Links'),
                 description=u'Select related content. Links will be ' \
                         u'displayed as part of the press release.',
                 allow_search=True,
@@ -790,11 +790,10 @@ class PressReleaseExtender(OSHASchemaExtender):
             default=True,
             languageIndependent=True,
             widget=atapi.BooleanWidget(
-                label=_(u'showContacts_label', default=u'Show contacts'),
-                description=_(u'showContacts_description',
-                    default=u'Select this if you want to show contact info ' \
+                label=u'Show contacts',
+                description=u'Select this if you want to show contact info ' \
                             u'at the end of the press release (you can ' \
-                            u'edit contacts on Press Room edit form)'),
+                            u'edit contacts on Press Room edit form)',
             ),
         )
 
@@ -822,7 +821,7 @@ class PressRoomExtender(OSHASchemaExtender):
                 description=(
                     u'Global contacts for all Press Releases. They will be'
                     ' appended at the end of Press Relase page.'),
-                label=_(u'label_contacts', default=u'Contacts'),
+                label=_(u'label_press_inquiries', default=u'Contacts'),
                 rows=15,
                 allow_file_upload=zconf.ATDocument.allow_document_upload),
         )
