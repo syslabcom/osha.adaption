@@ -721,6 +721,7 @@ class PressReleaseExtender(OSHASchemaExtender):
         ReferencedContentField('referenced_content',
             languageIndependent=True,
             multiValued=True,
+            referencesSortable=True,
             relationship='referenced_content',
             allowed_types=('Document', 'RichDocument'),
             mutator='setReferenced_content',
@@ -744,11 +745,11 @@ class PressReleaseExtender(OSHASchemaExtender):
         ReferencedContentField('relatedLinks',
             languageIndependent=True,
             multiValued=True,
+            referencesSortable=True,
             relationship='relatedLinks',
             allowed_types=('Document', 'RichDocument'),
             mutator='setRelatedLinks',
             accessor='getRelatedLinks',
-            referencesSortable=True,
             widget=ReferenceBrowserWidget(
                 label=_(u'label_links', default=u'Links'),
                 description=u'Select related content. Links will be ' \
@@ -766,12 +767,14 @@ class PressReleaseExtender(OSHASchemaExtender):
         ReferencedContentField('notesToEditors',
             languageIndependent=True,
             multiValued=True,
+            referencesSortable=True,
             relationship='notesToEditors',
             allowed_types=('Document', 'RichDocument'),
             mutator='setNotesToEditors',
             accessor='getNotesToEditors',
             widget=ReferenceBrowserWidget(
-                label=_(u'label_notes_to_editors', default=u'Notes to editors'),
+                label=_(u'label_notes_to_editors',
+                        default=u'Notes to editors'),
                 description=u'Select one or more notes to editors. Their ' \
                         u'body text will be displayed as part of the ' \
                         u'press release.',
