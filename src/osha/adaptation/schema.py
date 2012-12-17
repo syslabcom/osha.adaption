@@ -789,6 +789,8 @@ class PressReleaseExtender(OSHASchemaExtender):
             'showContacts',
             default=True,
             languageIndependent=True,
+            accessor='getShowContacts',
+            mutator='setShowContacts',
             widget=atapi.BooleanWidget(
                 label=u'Show contacts',
                 description=u'Select this if you want to show contact info ' \
