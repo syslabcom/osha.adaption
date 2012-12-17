@@ -812,10 +812,8 @@ class PressRoomExtender(OSHASchemaExtender):
             searchable=True,
             primary=False,
             languageIndependent=False,
-            # XXX: adding accessor/mutator methods doesn't seem to work
-            # for this field?
-            # mutator='setContacts',
-            # accessor='getContacts',
+            mutator='setContacts',
+            accessor='getContacts',
             storage=atapi.AnnotationStorage(migrate=True),
             validators=('isTidyHtmlWithCleanup',),
             default_output_type='text/x-html-safe',
@@ -829,6 +827,22 @@ class PressRoomExtender(OSHASchemaExtender):
         )
     ]
 
+    def _generateMethods(self, context, fields, initialized=True,
+                         marker=LANGUAGE_INDEPENDENT_INITIALIZED):
+        """ Call LinguaPlone's generateMethods method to generate accessors
+            which automatically update the values of languageIndependent
+            fields on all translations.
+            Overriden here to force the creation of methods for non-languageIndependent
+            contacts.
+        """
+        klass = context.__class__
+        if not getattr(klass, marker, False):  # or not initialized:
+            generateMethods(klass, fields)
+            log.info("calling generateMethods on %s (%s) for these "
+                "fields: %s " % (klass, self.__class__.__name__,
+                                 str([x.getName() for x in fields]))
+                 )
+            setattr(klass, marker, True)
 
 class FileContentExtender(OSHASchemaExtender):
     _fields = [
