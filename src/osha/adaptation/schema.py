@@ -1109,7 +1109,23 @@ class PressReleaseModifier(object):
         subhead.languageIndependent = False
         schema['subhead'] = subhead
 
+        releaseDate = schema['releaseDate'].copy()
+        releaseDate.languageIndependent = True
+        schema['releaseDate'] = releaseDate
+
         release_contacts = schema['releaseContacts'].copy()
         release_contacts.widget.visible['edit'] = 'invisible'
         release_contacts.widget.visible['view'] = 'invisible'
         schema['releaseContacts'] = release_contacts
+
+        klass = self.context.__class__
+        marker = LANGUAGE_INDEPENDENT_INITIALIZED + '_modifier'
+        if not getattr(klass, marker, False):
+            fields = [releaseDate]
+            generateMethods(klass, fields)
+            log.info("calling generateMethods on %s (%s) for these "
+                "fields: %s " % (klass, self.__class__.__name__,
+                                 str([x.getName() for x in fields]))
+                 )
+            setattr(klass, marker, True)
+
