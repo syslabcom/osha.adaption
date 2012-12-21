@@ -1,11 +1,12 @@
 Changelog
 =========
 
-0.2.4 (unreleased)
+0.2.4 (2012-12-20)
 ------------------
 
-- Nothing changed yet.
-
+- bugfix: make sure, _generateMethods for the PressReleaseExtender is always
+  called, even if the NewsItem Extender has been initialized before (NewsItem is
+  the parent class of PressRelease) [thomasw]
 
 0.2.3 (2012-12-18)
 ------------------
