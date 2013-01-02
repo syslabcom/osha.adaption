@@ -568,18 +568,8 @@ class CaseStudyExtender(OSHASchemaExtender):
             if f.getName() in ('country', 'multilingual_thesaurus'):
                 f.required = True
 
-        # Case Study inherits from ATDocument. We might get a false positive,
-        # so check that the accessors are really there
-
-        fields = [field for field in self._fields if field.languageIndependent]
-        not_yet_initialised = list()
-        for field in fields:
-            if not getattr(context, field.accessor, None):
-                not_yet_initialised.append(field)
-
-        if not_yet_initialised:
-            self._generateMethods(context, fields=not_yet_initialised,
-                                  initialized=False)
+        self._generateMethods(context, self._fields,
+            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'casestudy')
 
 
 class EventExtender(OSHASchemaExtender):
@@ -673,18 +663,8 @@ class RALinkExtender(OSHASchemaExtender):
             if f.getName() in ('country',):
                 f.required = True
 
-        # RA Link inherits from ATDocument. We might get a false positive,
-        # so check that the accessors are really there
-
-        fields = [field for field in self._fields if field.languageIndependent]
-        not_yet_initialised = list()
-        for field in fields:
-            if not getattr(context, field.accessor, None):
-                not_yet_initialised.append(field)
-
-        if not_yet_initialised:
-            self._generateMethods(context, fields=not_yet_initialised,
-                                  initialized=False)
+        self._generateMethods(context, self._fields,
+            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'ralink')
 
 
 class WhoswhoExtender(OSHASchemaExtender):
