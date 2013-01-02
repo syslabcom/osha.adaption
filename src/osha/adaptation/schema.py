@@ -518,6 +518,7 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('external_link').copy(),
+        extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
         extended_fields_dict.get('subcategory').copy(),
         ]
@@ -560,6 +561,7 @@ class CaseStudyExtender(OSHASchemaExtender):
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
+        extended_fields_dict.get('external_link').copy(),
         ]
 
     def __init__(self, context):
@@ -655,6 +657,7 @@ class RALinkExtender(OSHASchemaExtender):
         extended_fields_dict.get('osha_metadata').copy(),
         extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
+        extended_fields_dict.get('external_link').copy(),
         ]
 
     def __init__(self, context):
