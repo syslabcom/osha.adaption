@@ -26,6 +26,7 @@ fdict['CaseStudy']['title'] = {'view': 'invisible'}
 fdict['CaseStudy']['description'] = {'edit': False, 'view': True}   # FIXME
 fdict['CaseStudy']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
 fdict['CaseStudy']['isNews'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['CaseStudy']['text']  = {'edit': 'visible', 'view': 'visible'}
 fdict['CaseStudy']['displayImages'] = {
     'edit': 'invisible', 'view': 'invisible'}
@@ -190,6 +191,7 @@ fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['description'] = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
 fdict['RALink']['isNews'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['RALink']['text'] = 0  # FIXME
 fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
