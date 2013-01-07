@@ -4,7 +4,7 @@ Changelog
 0.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- corrected bugfix for #6500 [thomasw]
 
 
 0.2.5 (2013-01-02)
