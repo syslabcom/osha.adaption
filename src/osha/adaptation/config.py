@@ -1,7 +1,7 @@
 from Products.Archetypes.utils import OrderedDict
 
 fdict = {
-    'CaseStudy': OrderedDict(),
+    "PressRelease": OrderedDict(),
     'Event': OrderedDict(),
     'Link': OrderedDict(),
     "ATFile": OrderedDict(),
@@ -10,9 +10,9 @@ fdict = {
     "RichDocument": OrderedDict(),
     "News Item": OrderedDict(),
     "RALink": OrderedDict(),
+    'CaseStudy': OrderedDict(),
     "OSH_Link": OrderedDict(),
     "PressRoom": OrderedDict(),
-    "PressRelease": OrderedDict(),
     "Provider": OrderedDict(),
     'HelpCenterFAQ': OrderedDict(),
     'SPSpeechVenue': OrderedDict(),
@@ -129,6 +129,10 @@ fdict['Document']['nace'] = {'edit': 'visible', 'view': 'visible'}
 fdict['Document']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['Document']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
+fdict['Document']['subcategory']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['Document']['isNews']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['Document']['external_link']  = {'edit': 'invisible', 'view': 'invisible'}
+
 
 fdict['RichDocument']['id'] = {'view': 'invisible'}
 fdict['RichDocument']['title'] = {'view': 'invisible'}
@@ -180,11 +184,13 @@ fdict['News Item']['imageCaption'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['country'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['multilingual_thesaurus'] = {
     'edit': 'visible', 'view': 'visible'}
+fdict['News Item']['isNews'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['News Item']['nace']  = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['News Item']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
-fdict['News Item']['external_link'] = {'edit': 'visible', 'view': 'invisible'}
+fdict['News Item']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['News Item']['subcategory'] = {'edit': 'invisible', 'view': 'invisible'}
 
 fdict['RALink']['id'] = {'view': 'invisible'}
 fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
@@ -266,7 +272,7 @@ fdict['PressRelease']['imageCaption'] = {'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['releaseContacts'] = {
     'edit': 'invisible', 'view': 'invisible'}
 fdict['PressRelease']['referenced_content'] = {
-    'edit': 'visible', 'view': 'visible'}
+    'edit': 'invisible', 'view': 'invisible'}
 fdict['PressRelease']['relatedLinks'] = {
     'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['notesToEditors'] = {
@@ -277,6 +283,7 @@ fdict['PressRelease']['isNews'] = {'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['country'] = {'edit': 'visible', 'view': 'visible'}
 fdict['PressRelease']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
+fdict['PressRelease']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
 
 fdict['PressRoom']['id'] = {'view': 'invisible'}
 fdict['PressRoom']['title'] = {'view': 'invisible'}
@@ -334,6 +341,7 @@ fdict['HelpCenterFAQ']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
 fdict['HelpCenterFAQ']['nace'] = {'edit': 'visible', 'view': 'visible'}
 fdict['HelpCenterFAQ']['multilingual_thesaurus'] = {
     'edit': 'visible', 'view': 'visible'}
+fdict['HelpCenterFAQ']['external_link']  = {'edit': 'visible', 'view': 'visible'}
 
 fdict['SPSpeechVenue']['id'] = {'view': 'invisible'}
 fdict['SPSpeechVenue']['title'] = {'view': 'invisible'}
