@@ -1,7 +1,7 @@
 from setuptools import setup
 import os
 
-version = '0.2.6'
+version = '0.2.7.dev0'
 
 setup(
     name='osha.adaptation',
