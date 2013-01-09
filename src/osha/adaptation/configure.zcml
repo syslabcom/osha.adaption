@@ -99,13 +99,13 @@
         name="osha-whoswho"
         />
 
-    <adapter
+    <!--adapter
         zcml:condition="installed Products.RALink"
         factory=".schema.RALinkExtender"
         for="Products.RALink.content.interfaces.IRALink"
         provides="archetypes.schemaextender.interfaces.IOrderableSchemaExtender"
         name="osha-ralink"
-        />
+        /-->
 
     <!-- adapter
         zcml:condition="installed Products.CaseStudy"

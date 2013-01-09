@@ -9,7 +9,7 @@ fdict = {
     "Document": OrderedDict(),
     "RichDocument": OrderedDict(),
     "News Item": OrderedDict(),
-    "RALink": OrderedDict(),
+    # "RALink": OrderedDict(),
     # 'CaseStudy': OrderedDict(),
     "OSH_Link": OrderedDict(),
     "PressRoom": OrderedDict(),
@@ -192,35 +192,35 @@ fdict['News Item']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['News Item']['subcategory'] = {'edit': 'invisible', 'view': 'invisible'}
 
-fdict['RALink']['id'] = {'view': 'invisible'}
-fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['description'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
-fdict['RALink']['isNews'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['text'] = 0  # FIXME
-fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['country']  = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['remoteProvider'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['multilingual_thesaurus'] = {
-    'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['nace'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['dateOfEditing'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['occupation']  = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['ra_contents'] = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['type_methodology']  = {'edit': 'visible', 'view': 'visible'}
-fdict['RALink']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['allowDiscussion'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['excludeFromNav'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['tableContents'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['presentation']  = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['relatedItems']  = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['location'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['RALink']['reindexTranslations'] = {
-    'edit': 'visible', 'view': 'invisible'}
-fdict['RALink']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['id'] = {'view': 'invisible'}
+# fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['description'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
+# fdict['RALink']['isNews'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['text'] = 0  # FIXME
+# fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['country']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['remoteProvider'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['multilingual_thesaurus'] = {
+#     'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['nace'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['dateOfEditing'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['occupation']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['ra_contents'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['type_methodology']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['RALink']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['allowDiscussion'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['excludeFromNav'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['tableContents'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['presentation']  = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['relatedItems']  = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['location'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['RALink']['reindexTranslations'] = {
+#     'edit': 'visible', 'view': 'invisible'}
+# fdict['RALink']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
 
 fdict['OSH_Link']['id'] = {'view': 'invisible'}
 fdict['OSH_Link']['title']  = {'view': 'invisible'}
