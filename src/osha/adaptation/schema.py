@@ -421,7 +421,6 @@ class OSHASchemaExtender(object):
     that generates accessors and mutators for language independent fields.
     """
     zope.interface.implements(IOrderableSchemaExtender)
-    _hiddenFields = tuple()
 
     def __init__(self, context):
         self.context = context
@@ -519,11 +518,8 @@ class DocumentExtender(OSHASchemaExtender):
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         extended_fields_dict.get('reindexTranslations').copy(),
         extended_fields_dict.get('osha_metadata').copy(),
-        extended_fields_dict.get('external_link').copy(),
-        extended_fields_dict.get('isNews').copy(),
         extended_fields_dict.get('seoDescription').copy(),
         ]
-    _hiddenFields = ('isNews', 'external_link')
 
     def __init__(self, context):
         self.context = context
@@ -531,12 +527,6 @@ class DocumentExtender(OSHASchemaExtender):
             self._fields.append(
                         extended_fields_dict.get('annotatedlinklist').copy()
                         )
-        for f in self._fields:
-            if f.getName() in self._hiddenFields:
-                f.widget.visible = {
-                    'edit': 'invisible',
-                    'view': 'invisible'
-                }
 
         self._generateMethods(context, self._fields)
 
@@ -567,18 +557,12 @@ class CaseStudyExtender(OSHASchemaExtender):
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
         ]
-    _hiddenFields = ('isNews', 'external_link')
 
     def __init__(self, context):
         self.context = context
         for f in self._fields:
             if f.getName() in ('country', 'multilingual_thesaurus'):
                 f.required = True
-            if f.getName() in self._hiddenFields:
-                f.widget.visible = {
-                    'edit': 'invisible',
-                    'view': 'invisible'
-                }
 
         self._generateMethods(context, self._fields,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'casestudy')
@@ -659,24 +643,16 @@ class RALinkExtender(OSHASchemaExtender):
     do not yet have generated methods, _generateMethods is called.
     """
     _fields = [
-        extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
-        extended_fields_dict.get('isNews').copy(),
         ]
-    _hiddenFields = ('external_link',)
 
     def __init__(self, context):
         self.context = context
         for f in self._fields:
             if f.getName() in ('country',):
                 f.required = True
-            if f.getName() in self._hiddenFields:
-                f.widget.visible = {
-                    'edit': 'invisible',
-                    'view': 'invisible'
-                }
 
         self._generateMethods(context, self._fields,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'ralink')
