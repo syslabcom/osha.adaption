@@ -194,6 +194,7 @@ fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['RALink']['text'] = 0  # FIXME
 fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['country']  = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['remoteProvider'] = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
 fdict['RALink']['multilingual_thesaurus'] = {

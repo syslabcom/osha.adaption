@@ -643,6 +643,7 @@ class RALinkExtender(OSHASchemaExtender):
     do not yet have generated methods, _generateMethods is called.
     """
     _fields = [
+        extended_fields_dict.get('country').copy(),
         extended_fields_dict.get('subcategory').copy(),
         extended_fields_dict.get('nace').copy(),
         extended_fields_dict.get('multilingual_thesaurus').copy(),
