@@ -551,43 +551,43 @@ class SEOExtender(OSHASchemaExtender):
         self._generateMethods(context, self._fields)
 
 
-class CaseStudyExtender(OSHASchemaExtender):
-    """ The following assupmtion turned out to be WRONG:
-    <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is
-    already being applied. We add here only CaseStudy specific fields.>>
-
-    Only if the document extender is initialised first does this work.
-    Otherwise we only get the fields defined here explicitly.
-    Therefore ALL required fields are defined now. For those fields which do
-    not yet have generated methods, _generateMethods is called.
-    """
-    _fields = [
-        extended_fields_dict.get('country').copy(),
-        extended_fields_dict.get('subcategory').copy(),
-        extended_fields_dict.get('nace').copy(),
-        extended_fields_dict.get('multilingual_thesaurus').copy(),
-        extended_fields_dict.get('reindexTranslations').copy(),
-        extended_fields_dict.get('osha_metadata').copy(),
-        extended_fields_dict.get('external_link').copy(),
-        extended_fields_dict.get('isNews').copy(),
-        extended_fields_dict.get('seoDescription').copy(),
-        ]
-    _hiddenFields = ('isNews', 'external_link')
-
-    def __init__(self, context):
-        self.context = context
-        for f in self._fields:
-            if f.getName() in ('country', 'multilingual_thesaurus'):
-                f.required = True
-            if f.getName() in self._hiddenFields:
-                f.widget.visible = {
-                    'edit': 'invisible',
-                    'view': 'invisible'
-                }
-
-        self._generateMethods(context, self._fields,
-            marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'casestudy')
-
+# class CaseStudyExtender(OSHASchemaExtender):
+#     """ The following assupmtion turned out to be WRONG:
+#     <<CaseStudy inherits from RichDocument, therefore the DocumentExtender is
+#     already being applied. We add here only CaseStudy specific fields.>>
+# 
+#     Only if the document extender is initialised first does this work.
+#     Otherwise we only get the fields defined here explicitly.
+#     Therefore ALL required fields are defined now. For those fields which do
+#     not yet have generated methods, _generateMethods is called.
+#     """
+#     _fields = [
+#         extended_fields_dict.get('country').copy(),
+#         extended_fields_dict.get('subcategory').copy(),
+#         extended_fields_dict.get('nace').copy(),
+#         extended_fields_dict.get('multilingual_thesaurus').copy(),
+#         extended_fields_dict.get('reindexTranslations').copy(),
+#         extended_fields_dict.get('osha_metadata').copy(),
+#         extended_fields_dict.get('external_link').copy(),
+#         extended_fields_dict.get('isNews').copy(),
+#         extended_fields_dict.get('seoDescription').copy(),
+#         ]
+#     _hiddenFields = ('isNews', 'external_link')
+# 
+#     def __init__(self, context):
+#         self.context = context
+#         for f in self._fields:
+#             if f.getName() in ('country', 'multilingual_thesaurus'):
+#                 f.required = True
+#             if f.getName() in self._hiddenFields:
+#                 f.widget.visible = {
+#                     'edit': 'invisible',
+#                     'view': 'invisible'
+#                 }
+# 
+#         self._generateMethods(context, self._fields,
+#             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'casestudy')
+# 
 
 class EventExtender(OSHASchemaExtender):
     _fields = [

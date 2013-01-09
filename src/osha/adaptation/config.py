@@ -10,7 +10,7 @@ fdict = {
     "RichDocument": OrderedDict(),
     "News Item": OrderedDict(),
     "RALink": OrderedDict(),
-    'CaseStudy': OrderedDict(),
+    # 'CaseStudy': OrderedDict(),
     "OSH_Link": OrderedDict(),
     "PressRoom": OrderedDict(),
     "Provider": OrderedDict(),
@@ -21,34 +21,34 @@ fdict = {
 }
 # See Products/Archetypes/BaseObject.py for default 'id' and 'title'
 
-fdict['CaseStudy']['id']  = {'view': 'invisible'}
-fdict['CaseStudy']['title'] = {'view': 'invisible'}
-fdict['CaseStudy']['description'] = {'edit': False, 'view': True}   # FIXME
-fdict['CaseStudy']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
-fdict['CaseStudy']['isNews'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['CaseStudy']['text']  = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['displayImages'] = {
-    'edit': 'invisible', 'view': 'invisible'}
-fdict['CaseStudy']['action'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['results']  = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['publication_year'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['organisation'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['remoteUrl']  = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['displayAttachments'] = {
-    'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['relatedItems'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['CaseStudy']['location'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['CaseStudy']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
-fdict['CaseStudy']['nace']  = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['country']  = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['multilingual_thesaurus'] = {
-    'edit': 'visible', 'view': 'visible'}
-fdict['CaseStudy']['reindexTranslations'] = {
-    'edit': 'visible', 'view': 'invisible'}
-fdict['CaseStudy']['osha_metadata']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['id']  = {'view': 'invisible'}
+# fdict['CaseStudy']['title'] = {'view': 'invisible'}
+# fdict['CaseStudy']['description'] = {'edit': False, 'view': True}   # FIXME
+# fdict['CaseStudy']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
+# fdict['CaseStudy']['isNews'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['CaseStudy']['text']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['displayImages'] = {
+#     'edit': 'invisible', 'view': 'invisible'}
+# fdict['CaseStudy']['action'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['results']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['publication_year'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['organisation'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['remoteUrl']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['displayAttachments'] = {
+#     'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['relatedItems'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['CaseStudy']['location'] = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['CaseStudy']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
+# fdict['CaseStudy']['nace']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['country']  = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['multilingual_thesaurus'] = {
+#     'edit': 'visible', 'view': 'visible'}
+# fdict['CaseStudy']['reindexTranslations'] = {
+#     'edit': 'visible', 'view': 'invisible'}
+# fdict['CaseStudy']['osha_metadata']  = {'edit': 'visible', 'view': 'visible'}
 
 
 fdict['Event']['id']  = {'view': 'invisible'}
