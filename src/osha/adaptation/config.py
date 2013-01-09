@@ -9,8 +9,8 @@ fdict = {
     "Document": OrderedDict(),
     "RichDocument": OrderedDict(),
     "News Item": OrderedDict(),
-    # "RALink": OrderedDict(),
-    # 'CaseStudy': OrderedDict(),
+    "RALink": OrderedDict(),
+    'CaseStudy': OrderedDict(),
     "OSH_Link": OrderedDict(),
     "PressRoom": OrderedDict(),
     "Provider": OrderedDict(),
@@ -21,34 +21,28 @@ fdict = {
 }
 # See Products/Archetypes/BaseObject.py for default 'id' and 'title'
 
-# fdict['CaseStudy']['id']  = {'view': 'invisible'}
-# fdict['CaseStudy']['title'] = {'view': 'invisible'}
-# fdict['CaseStudy']['description'] = {'edit': False, 'view': True}   # FIXME
-# fdict['CaseStudy']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
-# fdict['CaseStudy']['isNews'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['CaseStudy']['text']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['displayImages'] = {
-#     'edit': 'invisible', 'view': 'invisible'}
-# fdict['CaseStudy']['action'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['results']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['publication_year'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['organisation'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['remoteUrl']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['displayAttachments'] = {
-#     'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['relatedItems'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['CaseStudy']['location'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['CaseStudy']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['CaseStudy']['nace']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['country']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['multilingual_thesaurus'] = {
-#     'edit': 'visible', 'view': 'visible'}
-# fdict['CaseStudy']['reindexTranslations'] = {
-#     'edit': 'visible', 'view': 'invisible'}
-# fdict['CaseStudy']['osha_metadata']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['id']  = {'view': 'invisible'}
+fdict['CaseStudy']['title'] = {'view': 'invisible'}
+fdict['CaseStudy']['description'] = {'edit': False, 'view': True}   # FIXME
+fdict['CaseStudy']['text']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['displayImages'] = {
+    'edit': 'invisible', 'view': 'invisible'}
+fdict['CaseStudy']['action'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['results']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['publication_year'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['organisation'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['remoteUrl']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['displayAttachments'] = {
+    'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['relatedItems'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['CaseStudy']['location'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['CaseStudy']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['CaseStudy']['nace']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['country']  = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
+fdict['CaseStudy']['multilingual_thesaurus'] = {
+    'edit': 'visible', 'view': 'visible'}
 
 
 fdict['Event']['id']  = {'view': 'invisible'}
@@ -129,7 +123,7 @@ fdict['Document']['nace'] = {'edit': 'visible', 'view': 'visible'}
 fdict['Document']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['Document']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
-fdict['Document']['subcategory']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['Document']['subcategory']  = {'edit': 'visible', 'view': 'visible'}
 fdict['Document']['isNews']  = {'edit': 'invisible', 'view': 'invisible'}
 fdict['Document']['external_link']  = {'edit': 'invisible', 'view': 'invisible'}
 
@@ -190,37 +184,34 @@ fdict['News Item']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['News Item']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
-fdict['News Item']['subcategory'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['News Item']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
 
-# fdict['RALink']['id'] = {'view': 'invisible'}
-# fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['description'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
-# fdict['RALink']['isNews'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['text'] = 0  # FIXME
-# fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['country']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['remoteProvider'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['multilingual_thesaurus'] = {
-#     'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['nace'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['dateOfEditing'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['occupation']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['ra_contents'] = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['type_methodology']  = {'edit': 'visible', 'view': 'visible'}
-# fdict['RALink']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['allowDiscussion'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['excludeFromNav'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['tableContents'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['presentation']  = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['relatedItems']  = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['location'] = {'edit': 'invisible', 'view': 'invisible'}
-# fdict['RALink']['reindexTranslations'] = {
-#     'edit': 'visible', 'view': 'invisible'}
-# fdict['RALink']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['id'] = {'view': 'invisible'}
+fdict['RALink']['title']  = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['description'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['seoDescription'] = {'edit': 'visible', 'view': 'invisible'}
+fdict['RALink']['isNews'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['text'] = 0  # FIXME
+fdict['RALink']['remoteUrl'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['remoteLanguage'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['country']  = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['remoteProvider'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['multilingual_thesaurus'] = {
+    'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['nace'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['dateOfEditing'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['occupation']  = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['ra_contents'] = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['type_methodology']  = {'edit': 'visible', 'view': 'visible'}
+fdict['RALink']['subject']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['allowDiscussion'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['excludeFromNav'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['tableContents'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['presentation']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['relatedItems']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['RALink']['location'] = {'edit': 'invisible', 'view': 'invisible'}
 
 fdict['OSH_Link']['id'] = {'view': 'invisible'}
 fdict['OSH_Link']['title']  = {'view': 'invisible'}
