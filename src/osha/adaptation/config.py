@@ -124,8 +124,7 @@ fdict['Document']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['Document']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
 fdict['Document']['subcategory']  = {'edit': 'visible', 'view': 'visible'}
-fdict['Document']['isNews']  = {'edit': 'invisible', 'view': 'invisible'}
-fdict['Document']['external_link']  = {'edit': 'invisible', 'view': 'invisible'}
+fdict['Document']['external_link']  = {'edit': 'visible', 'view': 'visible'}
 
 
 fdict['RichDocument']['id'] = {'view': 'invisible'}
@@ -178,12 +177,11 @@ fdict['News Item']['imageCaption'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['country'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['multilingual_thesaurus'] = {
     'edit': 'visible', 'view': 'visible'}
-fdict['News Item']['isNews'] = {'edit': 'invisible', 'view': 'invisible'}
 fdict['News Item']['nace']  = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['reindexTranslations'] = {
     'edit': 'visible', 'view': 'invisible'}
 fdict['News Item']['osha_metadata'] = {'edit': 'visible', 'view': 'visible'}
-fdict['News Item']['external_link'] = {'edit': 'invisible', 'view': 'invisible'}
+fdict['News Item']['external_link'] = {'edit': 'visible', 'view': 'visible'}
 fdict['News Item']['subcategory'] = {'edit': 'visible', 'view': 'visible'}
 
 fdict['RALink']['id'] = {'view': 'invisible'}
