@@ -1,11 +1,10 @@
 Changelog
 =========
 
-0.2.8 (unreleased)
-------------------
+0.2.8. (2013-01-11)
+-------------------
 
-- Nothing changed yet.
-
+- Restore the "External Link" field for Documents / News items, fixes #6553 [thomasw]
 
 0.2.7 (2013-01-09)
 ------------------
