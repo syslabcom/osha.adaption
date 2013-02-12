@@ -389,13 +389,13 @@ extended_fields_dict = {
             default=False,
             languageIndependent=False,
             widget=atapi.BooleanWidget(
-                label=_(u'Date to be confirmed'),
-                description=_(
-                    u'label_date_to_be_confirmed',
-                    default=(
-                        u"Check this box if the date has not yet been "
-                        "confirmed.")
-                    ),
+                label=_(
+                u'label_date_to_be_confirmed',
+                default =u'Date to be confirmed'),
+                description=(
+                    u"Check this box if the date has not yet been "
+                    "confirmed."),
+                    # Don't translate, it is not visible to anonymous visitors
                 visible={'edit': 'visible', 'view': 'invisible'},
                 condition="python:object.isCanonical()",
             ),
