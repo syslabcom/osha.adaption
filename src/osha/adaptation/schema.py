@@ -774,7 +774,7 @@ class PressReleaseExtender(OSHASchemaExtender):
     ]
 
     def __init__(self, context):
-        super(PressReleaseExtender, self).__init__(context)
+        self.context = context
         self._generateMethods(context, self._fields,
             marker=LANGUAGE_INDEPENDENT_INITIALIZED + 'pressrelease')
 
