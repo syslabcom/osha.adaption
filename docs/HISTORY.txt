@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.9 (unreleased)
+0.2.9 (2013-07-08)
 ------------------
 
 - Bugfix for the PressRelease adapter, prevent infinite recursion
