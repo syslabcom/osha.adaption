@@ -502,11 +502,6 @@ class OSHContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('seoDescription').copy(),
         ]
 
-    def __init__(self, context):
-        self.context = context
-        #_myfields = list()
-        self._generateMethods(context, self._fields)
-
 
 class DocumentExtender(OSHASchemaExtender):
     # Note: suncategory is not explicitly needed on Document. But on
@@ -536,10 +531,6 @@ class SEOExtender(OSHASchemaExtender):
     _fields = [
         extended_fields_dict.get('seoDescription').copy(),
         ]
-
-    def __init__(self, context):
-        self.context = context
-        self._generateMethods(context, self._fields)
 
 
 class CaseStudyExtender(OSHASchemaExtender):
@@ -608,29 +599,7 @@ class FAQExtender(OSHASchemaExtender):
         extended_fields_dict.get('external_link').copy(),
         extended_fields_dict.get('seoDescription').copy(),
         extended_fields_dict.get('subcategory').copy(),
-
-        # We don't want the Subject field on FAQs any more. Instead, we use the
-        # Subcategory field. #1195
-        #
-        #SELinesField(
-        #     name='subject',
-        #     multiValued=1,
-        #     searchable=True,
-        #     languageIndependent=True,
-        #     mutator="setSubject",
-        #     accessor="Subject",
-        #     widget=atapi.KeywordWidget(
-        #         label=_(u'label_categories', default=u'Categories'),
-        #         description=_(u'help_categories',
-        #                default=(u'Also known as keywords, tags or labels, '
-        #                         u'these help you categorize your content.')),
-        #         ),
-        #     ),
         ]
-
-    def __init__(self, context):
-        self.context = context
-        self._generateMethods(context, self._fields)
 
 
 class RALinkExtender(OSHASchemaExtender):
@@ -834,31 +803,6 @@ class FileContentExtender(OSHASchemaExtender):
         extended_fields_dict.get('seoDescription').copy(),
         ]
 
-    def __init__(self, context):
-        super(FileContentExtender, self).__init__(context)
-
-        # NOTE!
-        # The inline tree widget for FileContent is disabled for the moment.
-        # Gorka requires the quick-search function, which this widget does
-        # not have. See https://syslab.com/proj/issues/show/1293
-
-        # from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
-        # from slc.treecategories.widgets.widgets import InlineTreeWidget
-
-        # for field in self._fields:
-        #     if field.__name__ in ['subcategory','multilingual_thesaurus',
-        #                           'nace']:
-        #         vocabulary = NamedVocabulary(field.widget.vocabulary)
-        #         widget_args = {}
-        #         for arg in ('label', 'description', 'label_msgid',
-        #                     'description_msgid, i18n_domain'):
-        #             widget_args[arg] = getattr(field.widget, arg, '')
-        #         widget_args['vocabulary'] = field.widget.vocabulary
-        #         field.vocabulary = vocabulary
-        #         if InlineTreeWidget:
-        #             field.widget = InlineTreeWidget(**widget_args)
-
-        self._generateMethods(context, self._fields)
 
 
 class LinkListExtender(OSHASchemaExtender):
